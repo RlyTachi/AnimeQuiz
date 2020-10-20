@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AnimeQuiz</string>
+    <string name="main_text">Anime Quiz</string>
+    <string name="logo">logo</string>
+    <string name="settings">settings</string>
+    <string name="game">game</string>
+    <string name="share">share</string>
+</resources>

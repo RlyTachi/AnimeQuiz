@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">AnimeQuiz</string>
     <string name="main_text">Anime Quiz</string>
-    <string name="logo">logo</string>
-    <string name="settings">settings</string>
-    <string name="game">game</string>
-    <string name="share">share</string>
+    <string name="logo">Логотип</string>
+    <string name="settings">Настройки</string>
+    <string name="game">Игра</string>
+    <string name="share">Поделиться</string>
+    <string name="back">Назад</string>
+    <string name="unlock">Разблокировать</string>
+
+    <string name="characters">Персонажи</string>
+    <string name="locations">Локации</string>
+    <string name="titles">Тайтлы</string>
+    <string name="unlocked">Доступно:</string>
+    <string name="items">Предметы</string>
+    <string name="events">События</string>
 </resources>

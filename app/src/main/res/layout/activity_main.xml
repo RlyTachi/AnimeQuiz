@@ -31,7 +31,7 @@
             android:layout_marginTop="50dp"
             android:textSize="52sp"
             android:textColor="@color/text"
-            android:fontFamily="@font/yoster"/>
+            android:fontFamily="@font/pixel"/>
 
         <LinearLayout
             android:id="@+id/menuLayout"

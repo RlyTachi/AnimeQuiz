@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Game"></activity>
+        <activity android:name=".Unlock"></activity>
+        <activity android:name=".Game" />
         <activity android:name=".Share" />
         <activity android:name=".Settings" />
         <activity android:name=".MainActivity">

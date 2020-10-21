@@ -14,4 +14,6 @@
     <string name="unlocked">Доступно:</string>
     <string name="items">Предметы</string>
     <string name="events">События</string>
+    <string name="chAnswer">Откуда этот персонаж?</string>
+    <string name="heart">Жизни</string>
 </resources>

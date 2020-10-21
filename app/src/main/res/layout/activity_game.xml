@@ -307,7 +307,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/pixel"
                             android:gravity="bottom|center"
-                            android:text="@string/test"
+                            android:text="string/test"
                             android:textColor="@color/text"
                             android:textSize="26sp" />
 
@@ -339,7 +339,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="start|bottom"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:contentDescription="@string/back"
                 android:src="@drawable/back" />
@@ -349,7 +349,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="end|bottom"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:contentDescription="@string/unlock"
                 android:src="@drawable/unlock" />

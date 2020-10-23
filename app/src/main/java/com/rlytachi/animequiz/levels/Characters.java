@@ -9,14 +9,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.rlytachi.animequiz.Game;
 import com.rlytachi.animequiz.R;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class Characters extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,7 +30,7 @@ public class Characters extends AppCompatActivity implements View.OnClickListene
     boolean correctAnswer = false;
     Integer[] imageArrCount;
     int image = 0;
-    Dialog winDialog = new Dialog(Characters.this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,8 @@ public class Characters extends AppCompatActivity implements View.OnClickListene
         final Button btn2 = (Button) findViewById(R.id.btnCh2);
         final Button btn3 = (Button) findViewById(R.id.btnCh3);
         final Button btn4 = (Button) findViewById(R.id.btnCh4);
+        final TextView info = (TextView) findViewById(R.id.informationText);
+
 
         //Click listener
         backView.setOnClickListener(this);
@@ -51,10 +57,10 @@ public class Characters extends AppCompatActivity implements View.OnClickListene
         btn4.setOnClickListener(this);
 
         //HashMap
-        questions.put(0, "Baka");
-        questions.put(1, "Baka2");
-        questions.put(2, "Phos");
-        questions.put(3, "Phos2");
+        questions.put(0, "Бака");
+        questions.put(1, "Не бака");
+        questions.put(2, "Фосфофиллит");
+        questions.put(3, "Фосссс");
 
         //Linked list
         images.add(getDrawable(R.drawable.ch1));
@@ -62,8 +68,6 @@ public class Characters extends AppCompatActivity implements View.OnClickListene
         images.add(getDrawable(R.drawable.ch3));
         images.add(getDrawable(R.drawable.ch4));
 
-        //Dialog window
-        
 
     }
 
@@ -88,8 +92,7 @@ public class Characters extends AppCompatActivity implements View.OnClickListene
                 startActivity(new Intent(this, Game.class));
                 break;
             case R.id.helpView:
-                //TODO: Help activity
-                //startActivity(new Intent(this, Help.class));
+                winDialog();
                 break;
 
             case R.id.btnCh1:
@@ -125,6 +128,21 @@ public class Characters extends AppCompatActivity implements View.OnClickListene
         imageArrCount = getRandomArray();
     }
 
+    public void winDialog() {
+        //Dialog window
+        Dialog winDialog = new Dialog(Characters.this);
+        winDialog.setContentView(R.layout.activity_win_action);
+        winDialog.show();
+        final Button okButton = (Button) winDialog.findViewById(R.id.ok);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                winDialog.hide();
+                startActivity(new Intent(Characters.this, Game.class));
+            }
+        });
+    }
+
     public void nextQuestion() {
         final ImageView characterView = (ImageView) findViewById(R.id.characterView);
         final Button btn1 = (Button) findViewById(R.id.btnCh1);
@@ -145,15 +163,32 @@ public class Characters extends AppCompatActivity implements View.OnClickListene
         } catch (IndexOutOfBoundsException e) {
             e.getStackTrace();
             System.out.println("Done");
+            winDialog();
         }
     }
 
     public boolean getAnswer(String imageChoice) {
-        if (imageChoice.equals(questions.get(0))) {
-            correctAnswer = true;
-            return true;
+        final ImageView characterView = (ImageView) findViewById(R.id.characterView);
+        final TextView info = (TextView) findViewById(R.id.informationText);
+        Integer[] keys = questions.keySet().toArray(new Integer[imageArrCount.length]);
+        String[] values = questions.values().toArray(new String[imageArrCount.length]);
+        try {
+            int i = 0;
+            for (; i < values.length; i++) {
+                if (imageChoice.equals(values[i])) break;
+            }
+            if (characterView.getDrawable().getCurrent() == images.get(keys[i])) {
+                correctAnswer = true;
+                info.setText("true!");
+                return true;
+            } else {
+                info.setText("false");
+                correctAnswer = false;
+                return false;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            e.getStackTrace();
         }
-        correctAnswer = false;
         return false;
     }
 

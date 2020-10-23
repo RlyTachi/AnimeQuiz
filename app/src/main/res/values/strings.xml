@@ -16,4 +16,8 @@
     <string name="events">События</string>
     <string name="chAnswer">Откуда этот персонаж?</string>
     <string name="heart">Жизни</string>
+
+    <string name="win">Уровень пройден!</string>
+    <string name="lose">Попробуйте ещё раз</string>
+
 </resources>

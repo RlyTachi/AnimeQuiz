@@ -138,7 +138,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_margin="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_gravity="center"
             android:gravity="center">
 
@@ -179,7 +180,6 @@
                     android:id="@+id/btnCh3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:text=""
@@ -201,5 +201,17 @@
             </TableRow>
 
         </TableLayout>
+
+        <TextView
+            android:id="@+id/informationText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:fontFamily="@font/pixel"
+            android:gravity="center"
+            android:text="@string/chAnswer"
+            android:textSize="28sp"
+            android:layout_marginBottom="30dp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

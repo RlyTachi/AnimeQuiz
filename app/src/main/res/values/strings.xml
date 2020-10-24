@@ -18,6 +18,9 @@
     <string name="heart">Жизни</string>
 
     <string name="win">Уровень пройден!</string>
-    <string name="lose">Попробуйте ещё раз</string>
+    <string name="loss">Попробуйте ещё раз</string>
+    <string name="correct">Верно!</string>
+    <string name="wrong">Неверно</string>
+    <string name="again">Заново</string>
 
 </resources>

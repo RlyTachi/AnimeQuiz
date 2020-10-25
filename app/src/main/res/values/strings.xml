@@ -22,5 +22,7 @@
     <string name="correct">Верно!</string>
     <string name="wrong">Неверно</string>
     <string name="again">Заново</string>
+    <string name="seconds">сек.</string>
+    <string name="timesUp">Время вышло!</string>
 
 </resources>

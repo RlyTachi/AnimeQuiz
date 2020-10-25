@@ -158,7 +158,8 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="@color/background"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:fontFamily="@font/pixel"/>
 
                 <Button
                     android:id="@+id/btnCh2"
@@ -169,7 +170,8 @@
                     android:textSize="20sp"
                     android:textColor="@color/background"
                     android:background="@drawable/btn_1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:fontFamily="@font/pixel"/>
             </TableRow>
 
             <TableRow
@@ -186,7 +188,8 @@
                     android:textSize="20sp"
                     android:textColor="@color/background"
                     android:background="@drawable/btn_1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:fontFamily="@font/pixel"/>
 
                 <Button
                     android:id="@+id/btnCh4"
@@ -197,7 +200,8 @@
                     android:textSize="20sp"
                     android:textColor="@color/background"
                     android:background="@drawable/btn_1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:fontFamily="@font/pixel"/>
             </TableRow>
 
         </TableLayout>
@@ -211,7 +215,18 @@
             android:fontFamily="@font/pixel"
             android:gravity="center"
             android:text=""
-            android:textSize="28sp"
-            android:layout_marginBottom="30dp"/>
+            android:textSize="28sp" />
+        <TextView
+            android:id="@+id/timerTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:fontFamily="@font/pixel"
+            android:gravity="center"
+            android:text=""
+            android:textSize="20sp"
+            android:layout_marginBottom="30dp"
+            android:textColor="@color/secondText"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

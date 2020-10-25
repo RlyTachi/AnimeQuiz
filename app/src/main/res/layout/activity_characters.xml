@@ -81,8 +81,9 @@
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
+                android:layout_height="5dp"
+                android:layout_gravity="center"
+                android:progressDrawable="@drawable/progress_style"/>
 
             <LinearLayout
                 android:id="@+id/hearts"

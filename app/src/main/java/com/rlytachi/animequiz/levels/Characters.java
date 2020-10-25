@@ -9,6 +9,7 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,31 +28,23 @@ public class Characters extends AppCompatActivity {
     int image = 0;
     int heartCount = 3;
     int id;
-    int seconds;
+    int seconds = -1;
     boolean finished = false;
+    boolean timesUp = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_characters);
 
-        //Images
-        final ImageView backView = findViewById(R.id.backView);
-        final ImageView helpView = findViewById(R.id.helpView);
-        //Buttons
-        final Button btn1 = findViewById(R.id.btnCh1);
-        final Button btn2 = findViewById(R.id.btnCh2);
-        final Button btn3 = findViewById(R.id.btnCh3);
-        final Button btn4 = findViewById(R.id.btnCh4);
-
         //Linked list
-        questions.add("Первый");
-        questions.add("Второй");
-        questions.add("Третий");
-        questions.add("Четвертый");
-        questions.add("Пятый");
-        questions.add("Шестой");
-        questions.add("Седьмой");
+        questions.add("Kanna");
+        questions.add("Rabbit");
+        questions.add("Phosphophyllite");
+        questions.add("Phos broken");
+        questions.add("Heart");
+        questions.add("Play");
+        questions.add("Emilia");
         images.add(getDrawable(R.drawable.ch1));
         images.add(getDrawable(R.drawable.ch2));
         images.add(getDrawable(R.drawable.ch3));
@@ -145,7 +138,6 @@ public class Characters extends AppCompatActivity {
     }
 
     public void nextQuestion() {
-        //Elements
         final ImageView characterView = findViewById(R.id.characterView);
         final Button btn1 = findViewById(R.id.btnCh1);
         final Button btn2 = findViewById(R.id.btnCh2);
@@ -210,7 +202,6 @@ public class Characters extends AppCompatActivity {
         else if (arrForButtons[3] == getId()) return arrForButtons;
         else arrForButtons[0] = getId();
 
-
         Collections.shuffle(Arrays.asList(arrForButtons));
         return arrForButtons;
     }
@@ -246,20 +237,21 @@ public class Characters extends AppCompatActivity {
                 minusHeart();
                 info.setText(R.string.timesUp);
                 nextQuestion();
+                timesUp = true;
             }
         }
     }
 
     //Обработчик кнопок
     public class ButtonsEvent extends Thread implements View.OnClickListener {
-
         //Buttons
         final Button btn1 = findViewById(R.id.btnCh1);
         final Button btn2 = findViewById(R.id.btnCh2);
         final Button btn3 = findViewById(R.id.btnCh3);
         final Button btn4 = findViewById(R.id.btnCh4);
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
         //Threads
-        myTimer myTimer = new myTimer(21000, 1000);
+        myTimer myTimer = new myTimer(16000, 1000);
 
         @Override
         public void run() {
@@ -274,15 +266,28 @@ public class Characters extends AppCompatActivity {
             //Запуск потока таймера
             myTimer.start();
 
-            //Завершить, если finished = true
+            //Полоса времени
+            progressBar.setMax(15);
+
+            //Проверка статусов
             while (true) {
-                if (finished) {
+                progressBar.setProgress(seconds);
+                if (finished ) {
                     this.interrupt();
                     myTimer.onFinish();
                     break;
                 }
+                if (heartCount == 0) {
+                    this.interrupt();
+                    break;
+                }
+                if (timesUp) {
+                    myTimer.start();
+                    timesUp = false;
+                }
             }
         }
+
 
         //Обработчик нажатий
         @SuppressLint("NonConstantResourceId")

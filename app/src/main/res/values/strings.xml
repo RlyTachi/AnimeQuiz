@@ -17,6 +17,10 @@
     <string name="chAnswer">Как зовут персонажа?</string>
     <string name="heart">Жизни</string>
 
+    <string name="help">Помощь</string>
+    <string name="takeHelp">Взять подсказку</string>
+    <string name="takeHeath">Восполнить жизни</string>
+    <string name="takeScore">Добавить очки</string>
     <string name="availableLevels">Доступные уровни</string>
     <string name="win">Уровень пройден!</string>
     <string name="loss">Попробуйте ещё раз</string>

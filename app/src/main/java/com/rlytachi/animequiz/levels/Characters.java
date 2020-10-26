@@ -2,7 +2,9 @@ package com.rlytachi.animequiz.levels;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -23,8 +25,14 @@ import com.rlytachi.animequiz.Score;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Characters extends AppCompatActivity {
+
+    //Shared Preferences
+    public static final String APP_PREFERENCES = "mySettings";
+    public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS = "FirstSessionCharacters";
 
     LinkedList<String> questions = new LinkedList<>();
     LinkedList<Drawable> images = new LinkedList<>();
@@ -34,7 +42,7 @@ public class Characters extends AppCompatActivity {
     int id;
     int seconds = -1;
     int scoreEarnedSession = 0;
-    boolean firstSession = true;
+    boolean firstSessionCh;
     boolean finished = false;
     boolean timesUp = false;
 
@@ -92,8 +100,7 @@ public class Characters extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        finished = false;
+        loadAction();
         imageArrCount = getRandomArray();
         nextQuestion();
     }
@@ -101,10 +108,27 @@ public class Characters extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        saveAction();
         image = 0;
         setId(-1);
         heartCount = 3;
         imageArrCount = getRandomArray();
+    }
+
+    public void saveAction() {
+        SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = mShared.edit();
+        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS, firstSessionCh);
+        editor.putInt(Game.APP_PREFERENCES_GLOBAL_SCORE, Score.getScore());
+
+        editor.apply();
+    }
+
+    public void loadAction() {
+        SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS)) {
+            firstSessionCh = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS, firstSessionCh);
+        } else firstSessionCh = true;
     }
 
     //Победа
@@ -117,11 +141,11 @@ public class Characters extends AppCompatActivity {
         finished = true;
         final Button okButton = winDialog.findViewById(R.id.ok);
         final TextView earnedView = winDialog.findViewById(R.id.earned);
+        if (!firstSessionCh) scoreEarnedSession = 2;
         earnedView.setText(getString(R.string.earned) + " " + scoreEarnedSession + " " + getString(R.string.scores));
-
-        if (!firstSession) scoreEarnedSession = 2;
         Score.addScore(scoreEarnedSession);
-        firstSession = false;
+        firstSessionCh = false;
+        saveAction();
         okButton.setOnClickListener(v -> {
             winDialog.hide();
             startActivity(new Intent(Characters.this, Game.class));
@@ -140,6 +164,29 @@ public class Characters extends AppCompatActivity {
         okButton.setOnClickListener(v -> {
             lossDialog.hide();
             startActivity(new Intent(Characters.this, Game.class));
+        });
+    }
+
+    //Помощь
+    public void helpDialog() {
+        Dialog helpDialog = new Dialog(Characters.this);
+        helpDialog.setContentView(R.layout.activity_help);
+        helpDialog.show();
+
+        final Button getHelpBtn = helpDialog.findViewById(R.id.takeHelpBtn);
+        final Button getHeartBtn = helpDialog.findViewById(R.id.takeHeartBtn);
+        final Button getScoreBtn = helpDialog.findViewById(R.id.takeScoreBtn);
+
+        getHelpBtn.setOnClickListener(v -> {
+
+        });
+
+        getHeartBtn.setOnClickListener(v -> {
+
+        });
+
+        getScoreBtn.setOnClickListener(v -> {
+
         });
     }
 
@@ -357,10 +404,7 @@ public class Characters extends AppCompatActivity {
 
                 //Помощь
                 case R.id.helpView:
-                    //TODO help
-                    //заглушка
-                    winDialog();
-                    myTimer.onFinish();
+                    helpDialog();
                     break;
 
                 //Кнопки
@@ -373,7 +417,7 @@ public class Characters extends AppCompatActivity {
                         btn2.startAnimation(animation);
                         btn2.clearAnimation();
                     } else {
-                        if (firstSession) scoreEarnedSession++;
+                        if (firstSessionCh) scoreEarnedSession++;
                         myTimer.onFinish();
                         nextQuestion();
                         myTimer.start();
@@ -392,7 +436,7 @@ public class Characters extends AppCompatActivity {
                         btn1.startAnimation(animation);
                         btn1.clearAnimation();
                     } else {
-                        if (firstSession) scoreEarnedSession++;
+                        if (firstSessionCh) scoreEarnedSession++;
                         myTimer.onFinish();
                         nextQuestion();
                         myTimer.start();
@@ -411,7 +455,7 @@ public class Characters extends AppCompatActivity {
                         btn4.startAnimation(animation);
                         btn4.clearAnimation();
                     } else {
-                        if (firstSession) scoreEarnedSession++;
+                        if (firstSessionCh) scoreEarnedSession++;
                         myTimer.onFinish();
                         nextQuestion();
                         myTimer.start();
@@ -430,7 +474,7 @@ public class Characters extends AppCompatActivity {
                         btn3.startAnimation(animation);
                         btn3.clearAnimation();
                     } else {
-                        if (firstSession) scoreEarnedSession++;
+                        if (firstSessionCh) scoreEarnedSession++;
                         myTimer.onFinish();
                         nextQuestion();
                         myTimer.start();

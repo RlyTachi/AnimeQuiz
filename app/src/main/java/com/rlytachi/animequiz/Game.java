@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +18,10 @@ import com.rlytachi.animequiz.levels.Characters;
 
 public class Game extends AppCompatActivity implements View.OnClickListener {
 
+    public static final String APP_PREFERENCES = "mySettings";
+    public static final String APP_PREFERENCES_GLOBAL_SCORE = "GlobalScore";
     final int BUTTON_COUNT = 5;
+    int score = Score.getScore();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -44,10 +49,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         final ImageView back = findViewById(R.id.backView);
         final ImageView unlock = findViewById(R.id.unlockView);
 
-        //View
-        final TextView scoreCountView = findViewById(R.id.scoreCountView);
-        scoreCountView.setText(Score.getScore() + " " + getString(R.string.scores));
-
         //Listeners
         characters.setOnClickListener(this);
         locations.setOnClickListener(this);
@@ -61,9 +62,40 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onStart() {
         super.onStart();
+        loadAction();
+        refreshScore();
         dialog(false, R.layout.activity_characters_levels, R.id.chLevel1, R.id.chLevel2, R.id.chLevel3, R.id.chLevel4, R.id.chLevel5, R.id.chScoreTextView);
         dialog(false, R.layout.activity_locations_levels, R.id.locLevel1, R.id.locLevel2, R.id.locLevel3, R.id.locLevel4, R.id.locLevel5, R.id.locScoreTextView);
         dialog(false, R.layout.activity_titles_levels, R.id.tiLevel1, R.id.tiLevel2, R.id.tiLevel3, R.id.tiLevel4, R.id.tiLevel5, R.id.tiScoreTextView);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        saveAction();
+    }
+
+    public void saveAction() {
+        SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = mShared.edit();
+
+        editor.apply();
+    }
+
+
+    public void loadAction() {
+        SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        if (mShared.contains(APP_PREFERENCES_GLOBAL_SCORE)){
+            score = mShared.getInt(APP_PREFERENCES_GLOBAL_SCORE, Score.getScore());
+            Score.setScore(score);
+        }
+        refreshScore();
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void refreshScore (){
+        final TextView scoreCountView = findViewById(R.id.scoreCountView);
+        scoreCountView.setText(score + " " + getString(R.string.scores));
     }
 
     @SuppressLint("NonConstantResourceId")

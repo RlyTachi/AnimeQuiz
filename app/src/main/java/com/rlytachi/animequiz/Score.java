@@ -8,6 +8,10 @@ public class Score {
         return score;
     }
 
+    public static void setScore(int score) {
+        Score.score = score;
+    }
+
     public static void addScore(int score) {
         Score.score += score;
     }

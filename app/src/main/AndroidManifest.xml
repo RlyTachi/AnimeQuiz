@@ -16,7 +16,7 @@
         <activity
             android:name=".levels.WinAction"
             tools:ignore="MissingClass" />
-        <activity android:name=".levels.Characters" />
+        <activity android:name=".Characters" />
         <activity android:name=".Unlock" />
         <activity android:name=".Game" />
         <activity android:name=".Share" />

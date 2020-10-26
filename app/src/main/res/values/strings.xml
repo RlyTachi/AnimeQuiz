@@ -11,7 +11,7 @@
     <string name="characters">Персонажи</string>
     <string name="locations">Локации</string>
     <string name="titles">Тайтлы</string>
-    <string name="unlocked">Доступно:</string>
+    <string name="unlocked">Доступно: </string>
     <string name="items">Предметы</string>
     <string name="events">События</string>
     <string name="chAnswer">Откуда этот персонаж?</string>
@@ -22,7 +22,7 @@
     <string name="correct">Верно!</string>
     <string name="wrong">Неверно</string>
     <string name="again">Заново</string>
-    <string name="seconds">сек.</string>
+    <string name="seconds"> сек.</string>
     <string name="timesUp">Время вышло!</string>
 
 </resources>

@@ -1,20 +1,22 @@
-package com.rlytachi.animequiz.levels;
+package com.rlytachi.animequiz;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.rlytachi.animequiz.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -78,7 +80,6 @@ public class Characters extends AppCompatActivity {
 
     //Победа
     public void winDialog() {
-        //Dialog window
         Dialog winDialog = new Dialog(Characters.this);
         winDialog.setContentView(R.layout.activity_win_action);
         winDialog.show();
@@ -107,9 +108,12 @@ public class Characters extends AppCompatActivity {
 
     //Возвращает True, если ID текста кнопки совпадает с ID изображения
     public boolean getAnswer(String str) {
+        Animation animEnd = AnimationUtils.loadAnimation(this, R.anim.anim_end);
         final TextView info = findViewById(R.id.informationText);
         boolean answer = questions.get(getId()).equals(str);
         info.setText(answer ? R.string.correct : R.string.wrong);
+        info.startAnimation(animEnd);
+        info.setVisibility(View.INVISIBLE);
         return questions.get(getId()).equals(str);
     }
 
@@ -118,10 +122,13 @@ public class Characters extends AppCompatActivity {
         final ImageView heart1 = findViewById(R.id.heart1);
         final ImageView heart2 = findViewById(R.id.heart2);
         final ImageView heart3 = findViewById(R.id.heart3);
-
         heartCount--;
-        if (heart3.getVisibility() == View.VISIBLE) heart3.setVisibility(View.INVISIBLE);
-        else if (heart2.getVisibility() == View.VISIBLE) heart2.setVisibility(View.INVISIBLE);
+        if (heart3.getVisibility() == View.VISIBLE) {
+            heart3.setVisibility(View.INVISIBLE);
+        }
+        else if (heart2.getVisibility() == View.VISIBLE){
+            heart2.setVisibility(View.INVISIBLE);
+        }
         else if (heart1.getVisibility() == View.VISIBLE) {
             heart1.setVisibility(View.INVISIBLE);
             lossDialog();
@@ -144,7 +151,7 @@ public class Characters extends AppCompatActivity {
         final Button btn3 = findViewById(R.id.btnCh3);
         final Button btn4 = findViewById(R.id.btnCh4);
 
-        if (image == images.size()) winDialog();
+        if (image == images.size() && heartCount > 0) winDialog();
 
         try {
             //Свайп изображения
@@ -206,14 +213,16 @@ public class Characters extends AppCompatActivity {
         return arrForButtons;
     }
 
-    //Таймер 20000млс 1000млс
+    //Таймер 16000млс 1000млс
     public class myTimer extends CountDownTimer {
         final TextView timer = findViewById(R.id.timerTextView);
         final TextView info = findViewById(R.id.informationText);
+        Animation animEnd = AnimationUtils.loadAnimation(Characters.this, R.anim.anim_end);
 
         //Конструктор таймера
         public myTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
+            info.setAnimation(animEnd);
         }
 
         //Действие каждый тик
@@ -225,7 +234,7 @@ public class Characters extends AppCompatActivity {
                 info.setText("");
             } else {
                 seconds = (int) (millisUntilFinished / 1000);
-                timer.setText(seconds + " " + getString(R.string.seconds));
+                timer.setText(seconds + getString(R.string.seconds));
             }
 
         }
@@ -236,8 +245,10 @@ public class Characters extends AppCompatActivity {
             if (seconds == 0) {
                 minusHeart();
                 info.setText(R.string.timesUp);
-                nextQuestion();
+                info.startAnimation(animEnd);
+                info.setVisibility(View.INVISIBLE);
                 timesUp = true;
+                nextQuestion();
             }
         }
     }
@@ -245,6 +256,8 @@ public class Characters extends AppCompatActivity {
     //Обработчик кнопок
     public class ButtonsEvent extends Thread implements View.OnClickListener {
         //Buttons
+        final ImageView backView = findViewById(R.id.backView);
+        final ImageView helpView = findViewById(R.id.helpView);
         final Button btn1 = findViewById(R.id.btnCh1);
         final Button btn2 = findViewById(R.id.btnCh2);
         final Button btn3 = findViewById(R.id.btnCh3);
@@ -258,6 +271,8 @@ public class Characters extends AppCompatActivity {
             super.run();
 
             //Click listener
+            backView.setOnClickListener(this);
+            helpView.setOnClickListener(this);
             btn1.setOnClickListener(this);
             btn2.setOnClickListener(this);
             btn3.setOnClickListener(this);

@@ -11,12 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".levels.Loss"
-            tools:ignore="MissingClass" />
-        <activity
-            android:name=".levels.WinAction"
-            tools:ignore="MissingClass" />
-        <activity android:name=".Characters" />
+        <!--        <activity android:name=".levels.CharactersLevels"-->
+        <!--            tools:ignore="MissingClass"></activity>-->
+        <!--        <activity-->
+        <!--            android:name=".levels.Loss"-->
+        <!--            tools:ignore="MissingClass" />-->
+        <!--        <activity-->
+        <!--            android:name=".levels.WinAction"-->
+        <!--            tools:ignore="MissingClass" />-->
+        <activity android:name=".levels.Characters" />
         <activity android:name=".Unlock" />
         <activity android:name=".Game" />
         <activity android:name=".Share" />

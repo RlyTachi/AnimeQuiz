@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Characters"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".levels.Characters">
 
     <LinearLayout
         android:id="@+id/mainCharactersLayout"
@@ -49,7 +49,7 @@
                 android:layout_margin="3dp"
                 android:layout_weight="0"
                 android:contentDescription="@string/back"
-                android:src="@drawable/help"/>
+                android:src="@drawable/help" />
 
         </LinearLayout>
 
@@ -83,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:layout_gravity="center"
-                android:progressDrawable="@drawable/progress_style"/>
+                android:progressDrawable="@drawable/progress_style" />
 
             <LinearLayout
                 android:id="@+id/hearts"
@@ -138,10 +138,10 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_gravity="center"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_gravity="center"
+            android:layout_weight="1"
             android:gravity="center">
 
             <TableRow
@@ -156,23 +156,23 @@
                     android:layout_marginBottom="40dp"
                     android:layout_weight="1"
                     android:background="@drawable/btn_1"
+                    android:fontFamily="@font/pixel"
                     android:gravity="center"
                     android:text=""
                     android:textColor="@color/background"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/pixel"/>
+                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/btnCh2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text=""
-                    android:textSize="20sp"
-                    android:textColor="@color/background"
                     android:background="@drawable/btn_1"
+                    android:fontFamily="@font/pixel"
                     android:gravity="center"
-                    android:fontFamily="@font/pixel"/>
+                    android:text=""
+                    android:textColor="@color/background"
+                    android:textSize="20sp" />
             </TableRow>
 
             <TableRow
@@ -185,24 +185,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
-                    android:text=""
-                    android:textSize="20sp"
-                    android:textColor="@color/background"
                     android:background="@drawable/btn_1"
+                    android:fontFamily="@font/pixel"
                     android:gravity="center"
-                    android:fontFamily="@font/pixel"/>
+                    android:text=""
+                    android:textColor="@color/background"
+                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/btnCh4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text=""
-                    android:textSize="20sp"
-                    android:textColor="@color/background"
                     android:background="@drawable/btn_1"
+                    android:fontFamily="@font/pixel"
                     android:gravity="center"
-                    android:fontFamily="@font/pixel"/>
+                    android:text=""
+                    android:textColor="@color/background"
+                    android:textSize="20sp" />
             </TableRow>
 
         </TableLayout>
@@ -217,17 +217,18 @@
             android:gravity="center"
             android:text=""
             android:textSize="28sp" />
+
         <TextView
             android:id="@+id/timerTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
             android:layout_weight="0"
             android:fontFamily="@font/pixel"
             android:gravity="center"
             android:text=""
-            android:textSize="20sp"
-            android:layout_marginBottom="30dp"
-            android:textColor="@color/secondText"/>
+            android:textColor="@color/secondText"
+            android:textSize="20sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

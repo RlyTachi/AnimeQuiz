@@ -14,9 +14,10 @@
     <string name="unlocked">Доступно: </string>
     <string name="items">Предметы</string>
     <string name="events">События</string>
-    <string name="chAnswer">Откуда этот персонаж?</string>
+    <string name="chAnswer">Как зовут персонажа?</string>
     <string name="heart">Жизни</string>
 
+    <string name="availableLevels">Доступные уровни</string>
     <string name="win">Уровень пройден!</string>
     <string name="loss">Попробуйте ещё раз</string>
     <string name="correct">Верно!</string>
@@ -24,5 +25,14 @@
     <string name="again">Заново</string>
     <string name="seconds"> сек.</string>
     <string name="timesUp">Время вышло!</string>
+    <string name="earned">Заработано: </string>
+    <string name="scores"> очков.</string>
+
+    <string name="level1">Уровень 1</string>
+    <string name="level2">Уровень 2</string>
+    <string name="level3">Уровень 3</string>
+    <string name="level4">Уровень 4</string>
+    <string name="level5">Уровень 5</string>
+
 
 </resources>

@@ -1,10 +1,8 @@
-package com.rlytachi.animequiz;
+package com.rlytachi.animequiz.levels;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -17,6 +15,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.rlytachi.animequiz.Game;
+import com.rlytachi.animequiz.R;
+import com.rlytachi.animequiz.Score;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,6 +33,8 @@ public class Characters extends AppCompatActivity {
     int heartCount = 3;
     int id;
     int seconds = -1;
+    int scoreEarnedSession = 0;
+    boolean firstSession = true;
     boolean finished = false;
     boolean timesUp = false;
 
@@ -58,6 +62,31 @@ public class Characters extends AppCompatActivity {
         ButtonsEvent buttonsEvent = new ButtonsEvent();
         if (buttonsEvent.isInterrupted()) buttonsEvent.interrupt();
         else buttonsEvent.start();
+
+        Animation animHeart = AnimationUtils.loadAnimation(Characters.this, R.anim.anim_btn);
+        final ImageView heart1 = findViewById(R.id.heart1);
+        final ImageView heart2 = findViewById(R.id.heart2);
+        final ImageView heart3 = findViewById(R.id.heart3);
+        heart1.setAnimation(animHeart);
+        heart2.setAnimation(animHeart);
+        heart3.setAnimation(animHeart);
+
+        new CountDownTimer(320000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                if (heart3.getVisibility() == View.VISIBLE) {
+                    heart3.startAnimation(animHeart);
+                } else if (heart2.getVisibility() == View.VISIBLE) {
+                    heart2.startAnimation(animHeart);
+                } else if (heart1.getVisibility() == View.VISIBLE) {
+                    heart1.startAnimation(animHeart);
+                }
+            }
+
+            @Override
+            public void onFinish() {
+            }
+        }.start();
     }
 
     @Override
@@ -79,6 +108,7 @@ public class Characters extends AppCompatActivity {
     }
 
     //Победа
+    @SuppressLint("SetTextI18n")
     public void winDialog() {
         Dialog winDialog = new Dialog(Characters.this);
         winDialog.setContentView(R.layout.activity_win_action);
@@ -86,6 +116,12 @@ public class Characters extends AppCompatActivity {
         winDialog.setCancelable(false);
         finished = true;
         final Button okButton = winDialog.findViewById(R.id.ok);
+        final TextView earnedView = winDialog.findViewById(R.id.earned);
+        earnedView.setText(getString(R.string.earned) + " " + scoreEarnedSession + " " + getString(R.string.scores));
+
+        if (!firstSession) scoreEarnedSession = 2;
+        Score.addScore(scoreEarnedSession);
+        firstSession = false;
         okButton.setOnClickListener(v -> {
             winDialog.hide();
             startActivity(new Intent(Characters.this, Game.class));
@@ -99,6 +135,7 @@ public class Characters extends AppCompatActivity {
         finished = true;
         lossDialog.show();
         lossDialog.setCancelable(false);
+        scoreEarnedSession = 0;
         final Button okButton = lossDialog.findViewById(R.id.ok);
         okButton.setOnClickListener(v -> {
             lossDialog.hide();
@@ -125,11 +162,9 @@ public class Characters extends AppCompatActivity {
         heartCount--;
         if (heart3.getVisibility() == View.VISIBLE) {
             heart3.setVisibility(View.INVISIBLE);
-        }
-        else if (heart2.getVisibility() == View.VISIBLE){
+        } else if (heart2.getVisibility() == View.VISIBLE) {
             heart2.setVisibility(View.INVISIBLE);
-        }
-        else if (heart1.getVisibility() == View.VISIBLE) {
+        } else if (heart1.getVisibility() == View.VISIBLE) {
             heart1.setVisibility(View.INVISIBLE);
             lossDialog();
         }
@@ -229,7 +264,6 @@ public class Characters extends AppCompatActivity {
         @SuppressLint("SetTextI18n")
         @Override
         public void onTick(long millisUntilFinished) {
-
             if (finished) {
                 info.setText("");
             } else {
@@ -287,7 +321,7 @@ public class Characters extends AppCompatActivity {
             //Проверка статусов
             while (true) {
                 progressBar.setProgress(seconds);
-                if (finished ) {
+                if (finished) {
                     this.interrupt();
                     myTimer.onFinish();
                     break;
@@ -308,6 +342,11 @@ public class Characters extends AppCompatActivity {
         @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(View v) {
+            Animation animation = AnimationUtils.loadAnimation(Characters.this, R.anim.anim_btn);
+            btn1.setAnimation(animation);
+            btn2.setAnimation(animation);
+            btn3.setAnimation(animation);
+            btn4.setAnimation(animation);
 
             switch (v.getId()) {
                 //Назад
@@ -328,31 +367,79 @@ public class Characters extends AppCompatActivity {
                 //Если ответ не совпадает, минус сердце
                 //Финиш таймера, следующий вопрос и запуск таймера
                 case R.id.btnCh1:
-                    if (!getAnswer(btn1.getText().toString())) minusHeart();
-                    myTimer.onFinish();
-                    nextQuestion();
-                    myTimer.start();
+
+                    if (!getAnswer(btn1.getText().toString())) {
+                        minusHeart();
+                        btn2.startAnimation(animation);
+                        btn2.clearAnimation();
+                    } else {
+                        if (firstSession) scoreEarnedSession++;
+                        myTimer.onFinish();
+                        nextQuestion();
+                        myTimer.start();
+                        btn1.startAnimation(animation);
+                        btn2.startAnimation(animation);
+                        btn3.startAnimation(animation);
+                        btn4.startAnimation(animation);
+                    }
+
                     break;
 
                 case R.id.btnCh2:
-                    if (!getAnswer(btn2.getText().toString())) minusHeart();
-                    myTimer.onFinish();
-                    nextQuestion();
-                    myTimer.start();
+
+                    if (!getAnswer(btn2.getText().toString())) {
+                        minusHeart();
+                        btn1.startAnimation(animation);
+                        btn1.clearAnimation();
+                    } else {
+                        if (firstSession) scoreEarnedSession++;
+                        myTimer.onFinish();
+                        nextQuestion();
+                        myTimer.start();
+                        btn1.startAnimation(animation);
+                        btn2.startAnimation(animation);
+                        btn3.startAnimation(animation);
+                        btn4.startAnimation(animation);
+                    }
+
                     break;
 
                 case R.id.btnCh3:
-                    if (!getAnswer(btn3.getText().toString())) minusHeart();
-                    myTimer.onFinish();
-                    nextQuestion();
-                    myTimer.start();
+
+                    if (!getAnswer(btn3.getText().toString())) {
+                        minusHeart();
+                        btn4.startAnimation(animation);
+                        btn4.clearAnimation();
+                    } else {
+                        if (firstSession) scoreEarnedSession++;
+                        myTimer.onFinish();
+                        nextQuestion();
+                        myTimer.start();
+                        btn1.startAnimation(animation);
+                        btn2.startAnimation(animation);
+                        btn3.startAnimation(animation);
+                        btn4.startAnimation(animation);
+                    }
+
                     break;
 
                 case R.id.btnCh4:
-                    if (!getAnswer(btn4.getText().toString())) minusHeart();
-                    myTimer.onFinish();
-                    nextQuestion();
-                    myTimer.start();
+
+                    if (!getAnswer(btn4.getText().toString())) {
+                        minusHeart();
+                        btn3.startAnimation(animation);
+                        btn3.clearAnimation();
+                    } else {
+                        if (firstSession) scoreEarnedSession++;
+                        myTimer.onFinish();
+                        nextQuestion();
+                        myTimer.start();
+                        btn1.startAnimation(animation);
+                        btn2.startAnimation(animation);
+                        btn3.startAnimation(animation);
+                        btn4.startAnimation(animation);
+                    }
+
                     break;
             }
         }

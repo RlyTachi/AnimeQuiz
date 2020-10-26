@@ -336,18 +336,29 @@
 
             <ImageView
                 android:id="@+id/backView"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="start|bottom"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:contentDescription="@string/back"
                 android:src="@drawable/back" />
 
+            <TextView
+                android:id="@+id/scoreCountView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/pixel"
+                android:gravity="center"
+                android:text="@string/scores"
+                android:textSize="28sp" />
+
             <ImageView
                 android:id="@+id/unlockView"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="end|bottom"
                 android:layout_margin="3dp"
                 android:layout_weight="1"

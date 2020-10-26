@@ -19,9 +19,23 @@
             android:text="@string/win"
             android:textSize="28sp"
             android:textColor="@color/text"
-            android:layout_margin="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="30dp"
             android:layout_gravity="center"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:fontFamily="@font/pixel"/>
+        <TextView
+            android:id="@+id/earned"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/earned"
+            android:textSize="24sp"
+            android:textColor="@color/text"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="@font/pixel" />
 
         <Button
             android:id="@+id/ok"
@@ -31,6 +45,7 @@
             android:background="@color/text"
             android:textColor="@color/secondText"
             android:gravity="center"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:fontFamily="@font/pixel"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -31,8 +32,11 @@ public class Characters extends AppCompatActivity {
 
     //Shared Preferences
     public static final String APP_PREFERENCES = "mySettings";
-    public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS = "FirstSessionCharacters";
+    public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS = "firstSessionCharacters";
+    public static final String[] APP_PREFERENCES_PROMO_CODES = {"promoCode1", "promoCode2", "promoCode3", "promoCode4"};
+    public static final int PROMO_VIEW_TARGET = 3;
 
+    String[] promoStorage = new String[]{"promocode1", "promocode2", "promocode3", "promocode4"};
     LinkedList<String> questions = new LinkedList<>();
     LinkedList<Drawable> images = new LinkedList<>();
     Integer[] imageArrCount;
@@ -41,6 +45,7 @@ public class Characters extends AppCompatActivity {
     int id;
     int seconds = -1;
     int scoreEarnedSession = 0;
+    int promoViewCount = 0;
     boolean firstSessionCh;
     boolean finished = false;
     boolean timesUp = false;
@@ -94,6 +99,15 @@ public class Characters extends AppCompatActivity {
             public void onFinish() {
             }
         }.start();
+
+        final TextView mainTextView = findViewById(R.id.mainTextView);
+        mainTextView.setOnClickListener(v -> {
+            promoViewCount++;
+            if (promoViewCount == PROMO_VIEW_TARGET) {
+                promoDialog();
+                promoViewCount = 0;
+            }
+        });
     }
 
     @Override
@@ -120,6 +134,10 @@ public class Characters extends AppCompatActivity {
         editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS, firstSessionCh);
         editor.putInt(Game.APP_PREFERENCES_GLOBAL_SCORE, Score.getScore());
 
+        for (int i = 0; i < promoStorage.length; i++) {
+            editor.putString(APP_PREFERENCES_PROMO_CODES[i], promoStorage[i]);
+        }
+
         editor.apply();
     }
 
@@ -128,12 +146,52 @@ public class Characters extends AppCompatActivity {
         if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS)) {
             firstSessionCh = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS, firstSessionCh);
         } else firstSessionCh = true;
+        for (int i = 0; i < promoStorage.length; i++) {
+            promoStorage[i] = mShared.getString(APP_PREFERENCES_PROMO_CODES[i], null);
+        }
+    }
+
+
+    //todo fix save promo codes
+    @SuppressLint("SetTextI18n")
+    public void promoDialog() {
+        Dialog promoDialog = new Dialog(Characters.this);
+        promoDialog.setContentView(R.layout.activity_promo);
+        promoDialog.show();
+        Animation animEnd = AnimationUtils.loadAnimation(this, R.anim.anim_end);
+        final EditText input = promoDialog.findViewById(R.id.editTextPromoCode);
+        final Button promoUse = promoDialog.findViewById(R.id.promoUse);
+        final TextView scoreLeft = promoDialog.findViewById(R.id.promoScoreLeftView);
+        final TextView promoWrongView = promoDialog.findViewById(R.id.promoWrongView);
+        scoreLeft.setText(getString(R.string.scoreLeft) + " " + Score.getScore());
+
+        promoUse.setOnClickListener(v -> {
+            if (promoStorage(input.getText().toString().toLowerCase())) {
+                Score.addScore(10);
+                saveAction();
+            } else {
+                promoWrongView.setAnimation(animEnd);
+                promoWrongView.startAnimation(animEnd);
+                promoWrongView.setVisibility(View.INVISIBLE);
+            }
+            scoreLeft.setText(getString(R.string.scoreLeft) + " " + Score.getScore());
+        });
+    }
+
+    public boolean promoStorage(String promoCode) {
+        for (int i = 0; i < promoStorage.length; i++) {
+            if (promoStorage[i] == null) continue;
+            if (promoCode.equals(promoStorage[i].toLowerCase())) {
+                promoStorage[i] = null;
+                return true;
+            }
+        }
+        return false;
     }
 
     //Победа
     @SuppressLint("SetTextI18n")
     public void winDialog() {
-        //TODO runtime exception
         try {
             Dialog winDialog = new Dialog(Characters.this);
             winDialog.setContentView(R.layout.activity_win_action);
@@ -151,8 +209,7 @@ public class Characters extends AppCompatActivity {
                 winDialog.hide();
                 startActivity(new Intent(Characters.this, Game.class));
             });
-        } catch (RuntimeException exception) {
-
+        } catch (RuntimeException ignore) {
         }
     }
 
@@ -405,18 +462,20 @@ public class Characters extends AppCompatActivity {
                 seconds = (int) (millisUntilFinished / 1000);
                 timer.setText(seconds + getString(R.string.seconds));
             }
-
+            saveAction();
         }
 
         //Метод после завершения таймера. Действие требуется только в случае истечения времени.
         @Override
         public void onFinish() {
-            if (heartCount > 0 && seconds == 0) {
+            if (heartCount > 1 && seconds == 0) {
                 info.setText(R.string.timesUp);
                 info.startAnimation(animEnd);
                 info.setVisibility(View.INVISIBLE);
                 timesUp = true;
                 nextQuestion();
+            } else if (heartCount == 1) {
+                lossDialog();
             }
         }
     }
@@ -456,7 +515,6 @@ public class Characters extends AppCompatActivity {
                 progressBar.setProgress(seconds);
                 if (finished) {
                     this.interrupt();
-                    myTimer.onFinish();
                     break;
                 }
                 if (heartCount == 0) {
@@ -468,8 +526,6 @@ public class Characters extends AppCompatActivity {
                     minusHeart();
                     myTimer.start();
                     timesUp = false;
-                    //Looper.loop();
-                    //TODO looper
                 }
             }
         }

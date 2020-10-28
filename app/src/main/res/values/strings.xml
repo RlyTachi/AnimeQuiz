@@ -1,45 +1,56 @@
 <resources>
     <string name="app_name">AnimeQuiz</string>
     <string name="main_text">Anime Quiz</string>
-    <string name="logo">Логотип</string>
-    <string name="settings">Настройки</string>
-    <string name="game">Игра</string>
-    <string name="share">Поделиться</string>
-    <string name="back">Назад</string>
-    <string name="unlock">Разблокировать</string>
+    <string name="logo">Logo</string>
+    <string name="settings">Settings</string>
+    <string name="game">Game</string>
+    <string name="share">Share</string>
+    <string name="back">Back</string>
+    <string name="unlock">Unlock</string>
+    <string name="lang">Language</string>
+    <string name="rus">Russian</string>
+    <string name="eng">English</string>
+    <string name="sounds">Sounds</string>
+    <string name="music">Music</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="saved">Saved</string>
 
-    <string name="characters">Персонажи</string>
-    <string name="locations">Локации</string>
-    <string name="titles">Тайтлы</string>
-    <string name="unlocked">Доступно: </string>
-    <string name="items">Предметы</string>
-    <string name="events">События</string>
-    <string name="chAnswer">Как зовут персонажа?</string>
-    <string name="heart">Жизни</string>
 
-    <string name="help">Помощь</string>
-    <string name="costHelp">Стоимость: 5 очков</string>
-    <string name="scoreLeft">Осталось:</string>
-    <string name="takeHelp">Взять подсказку</string>
-    <string name="takeHeath">Восполнить жизни</string>
-    <string name="takeScore">Добавить очки</string>
-    <string name="notEnough">Недостаточно</string>
-    <string name="availableLevels">Доступные уровни</string>
-    <string name="win">Уровень пройден!</string>
-    <string name="loss">Попробуйте ещё раз</string>
-    <string name="correct">Верно!</string>
-    <string name="wrong">Неверно</string>
-    <string name="again">Заново</string>
-    <string name="seconds"> сек.</string>
-    <string name="timesUp">Время вышло!</string>
-    <string name="earned">Заработано: </string>
-    <string name="scores"> очков.</string>
+    <string name="characters">Characters</string>
+    <string name="locations">Locations</string>
+    <string name="titles">Titles</string>
+    <string name="unlocked">Unlocked: </string>
+    <string name="items">Items</string>
+    <string name="events">Events</string>
+    <string name="chAnswer">What is the character\'s name?</string>
+    <string name="heart">Hearts</string>
 
-    <string name="level1">Уровень 1</string>
-    <string name="level2">Уровень 2</string>
-    <string name="level3">Уровень 3</string>
-    <string name="level4">Уровень 4</string>
-    <string name="level5">Уровень 5</string>
+    <string name="use">Use</string>
+    <string name="typePromo">Enter promo code</string>
+    <string name="help">Help</string>
+    <string name="costHelp">Cost: 5 scores</string>
+    <string name="scoreLeft">Score left:</string>
+    <string name="takeHelp">Get help</string>
+    <string name="takeHeath">Replenish health</string>
+    <string name="takeScore">Add score</string>
+    <string name="notEnough">Not enough</string>
+    <string name="availableLevels">Available levels</string>
+    <string name="win">Level passed!</string>
+    <string name="loss">Try again</string>
+    <string name="correct">Correct!</string>
+    <string name="wrong">Wrong</string>
+    <string name="again">Again</string>
+    <string name="seconds"> sec.</string>
+    <string name="timesUp">Time\'s up!</string>
+    <string name="earned">Earned: </string>
+    <string name="scores"> scores.</string>
+
+    <string name="level1">Level 1</string>
+    <string name="level2">Level 2</string>
+    <string name="level3">Level 3</string>
+    <string name="level4">Level 4</string>
+    <string name="level5">Level 5</string>
 
 
 </resources>

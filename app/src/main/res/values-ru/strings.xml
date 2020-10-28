@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">Аниме викторина</string>
+    <string name="main_text">Anime Quiz</string>
+    <string name="logo">Логотип</string>
+    <string name="settings">Настройки</string>
+    <string name="game">Игра</string>
+    <string name="share">Поделиться</string>
+    <string name="back">Назад</string>
+    <string name="unlock">Разблокировать</string>
+    <string name="lang">Язык</string>
+    <string name="rus">Русский</string>
+    <string name="eng">Английский</string>
+    <string name="sounds">Звуки</string>
+    <string name="music">Музыка</string>
+    <string name="on">Включить</string>
+    <string name="off">Выключить</string>
+    <string name="saved">Сохранено</string>
+
+
+    <string name="characters">Персонажи</string>
+    <string name="locations">Локации</string>
+    <string name="titles">Тайтлы</string>
+    <string name="unlocked">Доступно: </string>
+    <string name="items">Предметы</string>
+    <string name="events">События</string>
+    <string name="chAnswer">Как зовут персонажа?</string>
+    <string name="heart">Жизни</string>
+
+    <string name="promo">Введите промокод</string>
+    <string name="use">Использовать</string>
+    <string name="typePromo">Введите промокод</string>
+    <string name="help">Помощь</string>
+    <string name="costHelp">Стоимость: 5 очков</string>
+    <string name="scoreLeft">Осталось:</string>
+    <string name="takeHelp">Взять подсказку</string>
+    <string name="takeHeath">Восполнить жизни</string>
+    <string name="takeScore">Добавить очки</string>
+    <string name="notEnough">Недостаточно</string>
+    <string name="availableLevels">Доступные уровни</string>
+    <string name="win">Уровень пройден!</string>
+    <string name="loss">Попробуйте ещё раз</string>
+    <string name="correct">Верно!</string>
+    <string name="wrong">Неверно</string>
+    <string name="again">Заново</string>
+    <string name="seconds"> сек.</string>
+    <string name="timesUp">Время вышло!</string>
+    <string name="earned">Заработано: </string>
+    <string name="scores"> очков.</string>
+
+    <string name="level1">Уровень 1</string>
+    <string name="level2">Уровень 2</string>
+    <string name="level3">Уровень 3</string>
+    <string name="level4">Уровень 4</string>
+    <string name="level5">Уровень 5</string>
+
+
+</resources>

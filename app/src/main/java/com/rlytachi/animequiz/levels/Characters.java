@@ -22,11 +22,10 @@ import com.rlytachi.animequiz.Game;
 import com.rlytachi.animequiz.R;
 import com.rlytachi.animequiz.Score;
 
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Characters extends AppCompatActivity {
 
@@ -134,22 +133,27 @@ public class Characters extends AppCompatActivity {
     //Победа
     @SuppressLint("SetTextI18n")
     public void winDialog() {
-        Dialog winDialog = new Dialog(Characters.this);
-        winDialog.setContentView(R.layout.activity_win_action);
-        winDialog.show();
-        winDialog.setCancelable(false);
-        finished = true;
-        final Button okButton = winDialog.findViewById(R.id.ok);
-        final TextView earnedView = winDialog.findViewById(R.id.earned);
-        if (!firstSessionCh) scoreEarnedSession = 2;
-        earnedView.setText(getString(R.string.earned) + " " + scoreEarnedSession + " " + getString(R.string.scores));
-        Score.addScore(scoreEarnedSession);
-        firstSessionCh = false;
-        saveAction();
-        okButton.setOnClickListener(v -> {
-            winDialog.hide();
-            startActivity(new Intent(Characters.this, Game.class));
-        });
+        //TODO runtime exception
+        try {
+            Dialog winDialog = new Dialog(Characters.this);
+            winDialog.setContentView(R.layout.activity_win_action);
+            winDialog.show();
+            winDialog.setCancelable(false);
+            finished = true;
+            final Button okButton = winDialog.findViewById(R.id.ok);
+            final TextView earnedView = winDialog.findViewById(R.id.earned);
+            if (!firstSessionCh) scoreEarnedSession = 2;
+            earnedView.setText(getString(R.string.earned) + " " + scoreEarnedSession + " " + getString(R.string.scores));
+            Score.addScore(scoreEarnedSession);
+            firstSessionCh = false;
+            saveAction();
+            okButton.setOnClickListener(v -> {
+                winDialog.hide();
+                startActivity(new Intent(Characters.this, Game.class));
+            });
+        } catch (RuntimeException exception) {
+
+        }
     }
 
     //Проигрыш
@@ -168,26 +172,99 @@ public class Characters extends AppCompatActivity {
     }
 
     //Помощь
+    @SuppressLint("SetTextI18n")
     public void helpDialog() {
         Dialog helpDialog = new Dialog(Characters.this);
         helpDialog.setContentView(R.layout.activity_help);
         helpDialog.show();
 
+        Animation animButton = AnimationUtils.loadAnimation(Characters.this, R.anim.anim_btn);
+        Animation animEnd = AnimationUtils.loadAnimation(this, R.anim.anim_end);
         final Button getHelpBtn = helpDialog.findViewById(R.id.takeHelpBtn);
         final Button getHeartBtn = helpDialog.findViewById(R.id.takeHeartBtn);
-        final Button getScoreBtn = helpDialog.findViewById(R.id.takeScoreBtn);
+        final TextView scoreLeftView = helpDialog.findViewById(R.id.scoreLeftView);
+        final TextView notEnoughView = helpDialog.findViewById(R.id.notEnoughView);
 
+        scoreLeftView.setText(getString(R.string.scoreLeft) + " " + Score.getScore());
         getHelpBtn.setOnClickListener(v -> {
-
+            getHelpBtn.setAnimation(animButton);
+            getHelpBtn.startAnimation(animButton);
+            if (Score.minusScore(5)) {
+                getHelpAction();
+            } else {
+                notEnoughView.setAnimation(animEnd);
+                notEnoughView.setText(getString(R.string.notEnough));
+                notEnoughView.startAnimation(animEnd);
+                notEnoughView.setVisibility(View.INVISIBLE);
+            }
+            scoreLeftView.setText(getString(R.string.scoreLeft) + " " + Score.getScore());
+            saveAction();
         });
 
         getHeartBtn.setOnClickListener(v -> {
-
+            getHeartBtn.setAnimation(animButton);
+            getHeartBtn.startAnimation(animButton);
+            if (Score.minusScore(5)) {
+                getHeartAction();
+            } else {
+                notEnoughView.setAnimation(animEnd);
+                notEnoughView.setText(getString(R.string.notEnough));
+                notEnoughView.startAnimation(animEnd);
+                notEnoughView.setVisibility(View.INVISIBLE);
+            }
+            scoreLeftView.setText(getString(R.string.scoreLeft) + " " + Score.getScore());
+            saveAction();
         });
+    }
 
-        getScoreBtn.setOnClickListener(v -> {
+    public void getHelpAction() {
+        final Button btn1 = findViewById(R.id.btnCh1);
+        final Button btn2 = findViewById(R.id.btnCh2);
+        final Button btn3 = findViewById(R.id.btnCh3);
+        final Button btn4 = findViewById(R.id.btnCh4);
 
-        });
+        String answer = questions.get(getId());
+
+        if (btn1.getText().equals(answer)) {
+            btn2.setEnabled(false);
+            btn3.setEnabled(false);
+            btn4.setEnabled(false);
+            btn2.setBackgroundResource(R.drawable.btn_1_locked);
+            btn3.setBackgroundResource(R.drawable.btn_1_locked);
+            btn4.setBackgroundResource(R.drawable.btn_1_locked);
+        } else if (btn2.getText().equals(answer)) {
+            btn1.setEnabled(false);
+            btn3.setEnabled(false);
+            btn4.setEnabled(false);
+            btn1.setBackgroundResource(R.drawable.btn_1_locked);
+            btn3.setBackgroundResource(R.drawable.btn_1_locked);
+            btn4.setBackgroundResource(R.drawable.btn_1_locked);
+        } else if (btn3.getText().equals(answer)) {
+            btn1.setEnabled(false);
+            btn2.setEnabled(false);
+            btn4.setEnabled(false);
+            btn1.setBackgroundResource(R.drawable.btn_1_locked);
+            btn2.setBackgroundResource(R.drawable.btn_1_locked);
+            btn4.setBackgroundResource(R.drawable.btn_1_locked);
+        } else if (btn4.getText().equals(answer)) {
+            btn1.setEnabled(false);
+            btn2.setEnabled(false);
+            btn3.setEnabled(false);
+            btn1.setBackgroundResource(R.drawable.btn_1_locked);
+            btn2.setBackgroundResource(R.drawable.btn_1_locked);
+            btn3.setBackgroundResource(R.drawable.btn_1_locked);
+        }
+    }
+
+    public void getHeartAction() {
+        final ImageView heart1 = findViewById(R.id.heart1);
+        final ImageView heart2 = findViewById(R.id.heart2);
+        final ImageView heart3 = findViewById(R.id.heart3);
+
+        heartCount = 3;
+        heart1.setVisibility(View.VISIBLE);
+        heart2.setVisibility(View.VISIBLE);
+        heart3.setVisibility(View.VISIBLE);
     }
 
     //Возвращает True, если ID текста кнопки совпадает с ID изображения
@@ -233,7 +310,18 @@ public class Characters extends AppCompatActivity {
         final Button btn3 = findViewById(R.id.btnCh3);
         final Button btn4 = findViewById(R.id.btnCh4);
 
+        btn1.setEnabled(true);
+        btn2.setEnabled(true);
+        btn3.setEnabled(true);
+        btn4.setEnabled(true);
+
+        btn1.setBackgroundResource(R.drawable.btn_1);
+        btn2.setBackgroundResource(R.drawable.btn_1);
+        btn3.setBackgroundResource(R.drawable.btn_1);
+        btn4.setBackgroundResource(R.drawable.btn_1);
+
         if (image == images.size() && heartCount > 0) winDialog();
+        if (seconds == 0 && heartCount == 0) lossDialog();
 
         try {
             //Свайп изображения
@@ -323,8 +411,7 @@ public class Characters extends AppCompatActivity {
         //Метод после завершения таймера. Действие требуется только в случае истечения времени.
         @Override
         public void onFinish() {
-            if (seconds == 0) {
-                minusHeart();
+            if (heartCount > 0 && seconds == 0) {
                 info.setText(R.string.timesUp);
                 info.startAnimation(animEnd);
                 info.setVisibility(View.INVISIBLE);
@@ -350,7 +437,6 @@ public class Characters extends AppCompatActivity {
         @Override
         public void run() {
             super.run();
-
             //Click listener
             backView.setOnClickListener(this);
             helpView.setOnClickListener(this);
@@ -374,12 +460,16 @@ public class Characters extends AppCompatActivity {
                     break;
                 }
                 if (heartCount == 0) {
+                    myTimer.onFinish();
                     this.interrupt();
                     break;
                 }
                 if (timesUp) {
+                    minusHeart();
                     myTimer.start();
                     timesUp = false;
+                    //Looper.loop();
+                    //TODO looper
                 }
             }
         }

@@ -10,21 +10,42 @@
         android:id="@+id/main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center"
-        android:padding="25dp">
+        android:orientation="vertical"
+        android:padding="25dp"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/helpTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
             android:fontFamily="@font/pixel"
             android:gravity="center"
             android:text="@string/help"
             android:textColor="@color/text"
             android:textSize="28sp" />
+
+        <TextView
+            android:id="@+id/costHelpView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pixel"
+            android:gravity="center"
+            android:text="@string/costHelp"
+            android:textColor="@color/secondText"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/scoreLeftView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/pixel"
+            android:gravity="center"
+            android:text="@string/scoreLeft"
+            android:textColor="@color/secondText"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/takeHelpBtn"
@@ -43,23 +64,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/btn_1"
             android:fontFamily="@font/pixel"
             android:gravity="center"
             android:text="@string/takeHeath"
             android:textColor="@color/text" />
 
-        <Button
-            android:id="@+id/takeScoreBtn"
+        <TextView
+            android:id="@+id/notEnoughView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/btn_1"
+            android:layout_marginBottom="5dp"
             android:fontFamily="@font/pixel"
             android:gravity="center"
-            android:text="@string/takeScore"
-            android:textColor="@color/text" />
+            android:text="@string/notEnough"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            android:visibility="invisible"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,17 +16,16 @@
     <string name="off">Выключить</string>
     <string name="saved">Сохранено</string>
 
-
     <string name="characters">Персонажи</string>
     <string name="locations">Локации</string>
     <string name="titles">Тайтлы</string>
     <string name="unlocked">Доступно: </string>
+    <string name="unlockLevel">Разблокировать уровень за 20 очков</string>
     <string name="items">Предметы</string>
     <string name="events">События</string>
     <string name="chAnswer">Как зовут персонажа?</string>
     <string name="heart">Жизни</string>
 
-    <string name="promo">Введите промокод</string>
     <string name="use">Использовать</string>
     <string name="typePromo">Введите промокод</string>
     <string name="help">Помощь</string>

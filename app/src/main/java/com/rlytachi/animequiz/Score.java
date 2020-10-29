@@ -1,8 +1,6 @@
 package com.rlytachi.animequiz;
 
-import java.util.Scanner;
-
-public class Score extends Thread {
+public class Score {
 
     public static int score;
 
@@ -23,12 +21,5 @@ public class Score extends Thread {
             Score.score -= score;
             return true;
         }else return false;
-    }
-
-    @Override
-    public void run() {
-        super.run();
-
-
     }
 }

@@ -21,6 +21,7 @@
     <string name="locations">Locations</string>
     <string name="titles">Titles</string>
     <string name="unlocked">Unlocked: </string>
+    <string name="unlockLevel">Unlock the level for 20 scores</string>
     <string name="items">Items</string>
     <string name="events">Events</string>
     <string name="chAnswer">What is the character\'s name?</string>

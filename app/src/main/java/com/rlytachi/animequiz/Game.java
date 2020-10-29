@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,8 +22,24 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
     public static final String APP_PREFERENCES = "mySettings";
     public static final String APP_PREFERENCES_GLOBAL_SCORE = "GlobalScore";
+    public static final String APP_PREFERENCES_CHARACTERS_LEVELS = "CharactersLevels";
+    public static final String APP_PREFERENCES_LOCATIONS_LEVELS = "LocationsLevels";
+    public static final String APP_PREFERENCES_TITLES_LEVELS = "TitlesLevels";
+    public static final String APP_PREFERENCES_ITEMS_LEVELS = "ItemsLevels";
+    public static final String APP_PREFERENCES_EVENTS_LEVELS = "EventsLevels";
     final int BUTTON_COUNT = 5;
     int score = Score.getScore();
+    LevelChoice ch = new LevelChoice("ch");
+    LevelChoice loc = new LevelChoice("loc");
+    LevelChoice ti = new LevelChoice("ti");
+    LevelChoice it = new LevelChoice("it");
+    LevelChoice ev = new LevelChoice("ev");
+    Boolean[] chLevels = ch.getLevels();
+    Boolean[] locLevels = loc.getLevels();
+    Boolean[] tiLevels = ti.getLevels();
+    Boolean[] itLevels = it.getLevels();
+    Boolean[] evLevels = ev.getLevels();
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -64,9 +82,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         super.onStart();
         loadAction();
         refreshScore();
-        dialog(false, R.layout.activity_characters_levels, R.id.chLevel1, R.id.chLevel2, R.id.chLevel3, R.id.chLevel4, R.id.chLevel5, R.id.chScoreTextView);
-        dialog(false, R.layout.activity_locations_levels, R.id.locLevel1, R.id.locLevel2, R.id.locLevel3, R.id.locLevel4, R.id.locLevel5, R.id.locScoreTextView);
-        dialog(false, R.layout.activity_titles_levels, R.id.tiLevel1, R.id.tiLevel2, R.id.tiLevel3, R.id.tiLevel4, R.id.tiLevel5, R.id.tiScoreTextView);
+        dialog(false, R.layout.activity_characters_levels, R.id.chLevel1, R.id.chLevel2, R.id.chLevel3, R.id.chLevel4, R.id.chLevel5, R.id.chScoreTextView, ch);
+        dialog(false, R.layout.activity_locations_levels, R.id.locLevel1, R.id.locLevel2, R.id.locLevel3, R.id.locLevel4, R.id.locLevel5, R.id.locScoreTextView, loc);
+        dialog(false, R.layout.activity_titles_levels, R.id.tiLevel1, R.id.tiLevel2, R.id.tiLevel3, R.id.tiLevel4, R.id.tiLevel5, R.id.tiScoreTextView, ti);
     }
 
     @Override
@@ -79,21 +97,59 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = mShared.edit();
 
+        for (int i = 0; i < chLevels.length; i++) {
+            editor.putBoolean(APP_PREFERENCES_CHARACTERS_LEVELS + i, chLevels[i]);
+        }
+        for (int i = 0; i < locLevels.length; i++) {
+            editor.putBoolean(APP_PREFERENCES_LOCATIONS_LEVELS + i, locLevels[i]);
+        }
+        for (int i = 0; i < tiLevels.length; i++) {
+            editor.putBoolean(APP_PREFERENCES_TITLES_LEVELS + i, tiLevels[i]);
+        }
+        for (int i = 0; i < itLevels.length; i++) {
+            editor.putBoolean(APP_PREFERENCES_ITEMS_LEVELS + i, itLevels[i]);
+        }
+        for (int i = 0; i < evLevels.length; i++) {
+            editor.putBoolean(APP_PREFERENCES_EVENTS_LEVELS + i, evLevels[i]);
+        }
+
         editor.apply();
     }
 
 
     public void loadAction() {
         SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        if (mShared.contains(APP_PREFERENCES_GLOBAL_SCORE)){
+        if (mShared.contains(APP_PREFERENCES_GLOBAL_SCORE)) {
             score = mShared.getInt(APP_PREFERENCES_GLOBAL_SCORE, Score.getScore());
             Score.setScore(score);
         }
+        for (int i = 0; i < chLevels.length; i++) {
+            chLevels[i] = mShared.getBoolean(APP_PREFERENCES_CHARACTERS_LEVELS + i, chLevels[i]);
+            ch.setLevels(chLevels);
+        }
+        for (int i = 0; i < locLevels.length; i++) {
+            locLevels[i] = mShared.getBoolean(APP_PREFERENCES_LOCATIONS_LEVELS + i, locLevels[i]);
+            loc.setLevels(locLevels);
+        }
+        for (int i = 0; i < tiLevels.length; i++) {
+            tiLevels[i] = mShared.getBoolean(APP_PREFERENCES_TITLES_LEVELS + i, tiLevels[i]);
+            ti.setLevels(tiLevels);
+        }
+        for (int i = 0; i < itLevels.length; i++) {
+            itLevels[i] = mShared.getBoolean(APP_PREFERENCES_ITEMS_LEVELS + i, itLevels[i]);
+            it.setLevels(itLevels);
+        }
+        for (int i = 0; i < evLevels.length; i++) {
+            evLevels[i] = mShared.getBoolean(APP_PREFERENCES_EVENTS_LEVELS + i, evLevels[i]);
+            ev.setLevels(evLevels);
+        }
+
+        saveAction();
         refreshScore();
     }
 
     @SuppressLint("SetTextI18n")
-    public void refreshScore (){
+    public void refreshScore() {
         final TextView scoreCountView = findViewById(R.id.scoreCountView);
         scoreCountView.setText(score + " " + getString(R.string.scores));
     }
@@ -109,13 +165,13 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 startActivity(new Intent(this, Unlock.class));
                 break;
             case R.id.charactersLayout:
-                dialog(true, R.layout.activity_characters_levels, R.id.chLevel1, R.id.chLevel2, R.id.chLevel3, R.id.chLevel4, R.id.chLevel5, R.id.chScoreTextView);
+                dialog(true, R.layout.activity_characters_levels, R.id.chLevel1, R.id.chLevel2, R.id.chLevel3, R.id.chLevel4, R.id.chLevel5, R.id.chScoreTextView, ch);
                 break;
             case R.id.locationsLayout:
-                dialog(true, R.layout.activity_locations_levels, R.id.locLevel1, R.id.locLevel2, R.id.locLevel3, R.id.locLevel4, R.id.locLevel5, R.id.locScoreTextView);
+                dialog(true, R.layout.activity_locations_levels, R.id.locLevel1, R.id.locLevel2, R.id.locLevel3, R.id.locLevel4, R.id.locLevel5, R.id.locScoreTextView, loc);
                 break;
             case R.id.titlesLayout:
-                dialog(true, R.layout.activity_titles_levels, R.id.tiLevel1, R.id.tiLevel2, R.id.tiLevel3, R.id.tiLevel4, R.id.tiLevel5, R.id.tiScoreTextView);
+                dialog(true, R.layout.activity_titles_levels, R.id.tiLevel1, R.id.tiLevel2, R.id.tiLevel3, R.id.tiLevel4, R.id.tiLevel5, R.id.tiScoreTextView, it);
                 break;
             case R.id.itTextLayout:
 
@@ -127,42 +183,128 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             //Characters levels
             case R.id.chLevel1:
                 startActivity(new Intent(this, Characters.class));
+                LevelChoice.setLevel(1);
+
+                saveAction();
                 break;
             case R.id.chLevel2:
-                //startActivity(new Intent(this, Characters.class));
+                if (!chLevels[1]) {
+                    unlockDialog(chLevels, 1, 1);
+                } else {
+                    startActivity(new Intent(this, Characters.class));
+                    LevelChoice.setLevel(2);
+                }
+                saveAction();
                 break;
             case R.id.chLevel3:
-                //startActivity(new Intent(this, Characters.class));
+                if (!chLevels[2]) {
+                    unlockDialog(chLevels, 2, 1);
+                } else {
+                    startActivity(new Intent(this, Characters.class));
+                    LevelChoice.setLevel(3);
+                }
                 break;
             case R.id.chLevel4:
-                //startActivity(new Intent(this, Characters.class));
+                if (!chLevels[3]) {
+                    unlockDialog(chLevels, 3, 1);
+                } else {
+                    startActivity(new Intent(this, Characters.class));
+                    LevelChoice.setLevel(4);
+                }
                 break;
             case R.id.chLevel5:
-                // startActivity(new Intent(this, Characters.class));
+                if (!chLevels[4]) {
+                    unlockDialog(chLevels, 4, 1);
+                } else {
+                    startActivity(new Intent(this, Characters.class));
+                    LevelChoice.setLevel(5);
+                }
                 break;
 
             //Locations levels
-            case R.id.tiLevel1:
-                //startActivity(new Intent(this, Characters.class));
+            case R.id.locLevel1:
+                LevelChoice.setLevel(1);
                 break;
-            case R.id.tiLevel2:
-                //startActivity(new Intent(this, Characters.class));
+            case R.id.locLevel2:
+                if (!locLevels[4]) {
+                    unlockDialog(locLevels, 1, 2);
+                } else {
+                    startActivity(new Intent(this, Characters.class));
+                    LevelChoice.setLevel(2);
+                }
                 break;
-            case R.id.tiLevel3:
-                //startActivity(new Intent(this, Characters.class));
+            case R.id.locLevel3:
+                if (!locLevels[4]) {
+                    unlockDialog(locLevels, 2, 2);
+                } else {
+                    startActivity(new Intent(this, Characters.class));
+                    LevelChoice.setLevel(3);
+                }
                 break;
-            case R.id.tiLevel4:
-                //startActivity(new Intent(this, Characters.class));
+            case R.id.locLevel4:
+                if (!locLevels[4]) {
+                    unlockDialog(locLevels, 3, 2);
+                } else {
+                    startActivity(new Intent(this, Characters.class));
+                    LevelChoice.setLevel(4);
+                }
                 break;
-            case R.id.tiLevel5:
-                // startActivity(new Intent(this, Characters.class));
+            case R.id.locLevel5:
+                if (!locLevels[4]) {
+                    unlockDialog(locLevels, 4, 2);
+                } else {
+                    startActivity(new Intent(this, Characters.class));
+                    LevelChoice.setLevel(5);
+                }
                 break;
 
         }
+        refreshScore();
+        saveAction();
     }
 
     @SuppressLint("SetTextI18n")
-    public void dialog(Boolean show, Integer resDialog, Integer resButton1, Integer resButton2, Integer resButton3, Integer resButton4, Integer resButton5, Integer resTextScore) {
+    public boolean unlockDialog(Boolean[] levels, int index, int type) {
+        Dialog unlockDialog = new Dialog(Game.this);
+        unlockDialog.setContentView(R.layout.activity_unlock_action);
+        unlockDialog.show();
+        Animation animButton = AnimationUtils.loadAnimation(Game.this, R.anim.anim_btn);
+        Animation animEnd = AnimationUtils.loadAnimation(this, R.anim.anim_end);
+        final Button okButton = unlockDialog.findViewById(R.id.unlockBtn);
+        final TextView unlockScoreLeftView = unlockDialog.findViewById(R.id.unlockScoreLeftView);
+        final TextView unlockWarning = unlockDialog.findViewById(R.id.unlockNotEnoughView);
+
+        unlockScoreLeftView.setText(getString(R.string.scoreLeft) + " " + Score.getScore());
+        okButton.setOnClickListener(v -> {
+            okButton.setAnimation(animButton);
+            okButton.startAnimation(animButton);
+            if (Score.minusScore(20)) {
+                unlockDialog.hide();
+                levels[index] = true;
+                refreshScore();
+                saveAction();
+
+                finish();
+                startActivity(new Intent(this, Game.class));
+
+                if (type == 1)
+                    dialog(true, R.layout.activity_characters_levels, R.id.chLevel1, R.id.chLevel2, R.id.chLevel3, R.id.chLevel4, R.id.chLevel5, R.id.chScoreTextView, ch);
+                if (type == 2)
+                    dialog(true, R.layout.activity_locations_levels, R.id.locLevel1, R.id.locLevel2, R.id.locLevel3, R.id.locLevel4, R.id.locLevel5, R.id.locScoreTextView, loc);
+                if (type == 3)
+                    dialog(true, R.layout.activity_titles_levels, R.id.tiLevel1, R.id.tiLevel2, R.id.tiLevel3, R.id.tiLevel4, R.id.tiLevel5, R.id.tiScoreTextView, ti);
+
+            } else {
+                unlockWarning.setAnimation(animEnd);
+                unlockWarning.startAnimation(animEnd);
+                unlockWarning.setVisibility(View.INVISIBLE);
+            }
+        });
+        return true;
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void dialog(Boolean show, Integer resDialog, Integer resButton1, Integer resButton2, Integer resButton3, Integer resButton4, Integer resButton5, Integer resTextScore, LevelChoice obj) {
         Dialog dialog = new Dialog(Game.this);
         dialog.setContentView(resDialog);
         if (show) dialog.show();
@@ -185,16 +327,17 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         level5.setOnClickListener(this);
 
         //Lock
-        level2.setEnabled(false);
-        level3.setEnabled(false);
-        level4.setEnabled(false);
-        level5.setEnabled(false);
+        if (obj.getLevels()[0]) level1.setBackgroundResource(R.drawable.btn_1);
+        if (obj.getLevels()[1]) level2.setBackgroundResource(R.drawable.btn_1);
+        if (obj.getLevels()[2]) level3.setBackgroundResource(R.drawable.btn_1);
+        if (obj.getLevels()[3]) level4.setBackgroundResource(R.drawable.btn_1);
+        if (obj.getLevels()[4]) level5.setBackgroundResource(R.drawable.btn_1);
 
-        if (level1.isEnabled()) unlockedButton++;
-        if (level2.isEnabled()) unlockedButton++;
-        if (level3.isEnabled()) unlockedButton++;
-        if (level4.isEnabled()) unlockedButton++;
-        if (level5.isEnabled()) unlockedButton++;
+        if (obj.getLevels()[0]) unlockedButton++;
+        if (obj.getLevels()[1]) unlockedButton++;
+        if (obj.getLevels()[2]) unlockedButton++;
+        if (obj.getLevels()[3]) unlockedButton++;
+        if (obj.getLevels()[4]) unlockedButton++;
 
         score.setText(getString(R.string.unlocked) + " " + unlockedButton + "/" + BUTTON_COUNT);
     }

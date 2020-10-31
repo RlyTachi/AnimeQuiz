@@ -27,6 +27,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.rlytachi.animequiz.Game;
 import com.rlytachi.animequiz.Language;
 import com.rlytachi.animequiz.LevelChoice;
+import com.rlytachi.animequiz.PromoStorage;
 import com.rlytachi.animequiz.R;
 import com.rlytachi.animequiz.Score;
 
@@ -35,6 +36,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Locale;
 
+import static com.rlytachi.animequiz.PromoStorage.APP_PREFERENCES_PROMO_CODES;
+import static com.rlytachi.animequiz.PromoStorage.promoStorage;
 import static com.rlytachi.animequiz.Settings.in;
 import static com.rlytachi.animequiz.Settings.out;
 import static com.rlytachi.animequiz.Settings.playSound;
@@ -49,11 +52,9 @@ public class Characters extends AppCompatActivity {
     public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3 = "firstSessionCharacters3";
     public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4 = "firstSessionCharacters4";
     public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5 = "firstSessionCharacters5";
-    public static final String[] APP_PREFERENCES_PROMO_CODES = {"promoCode1", "promoCode2", "promoCode3", "promoCode4"};
     public static final int PROMO_VIEW_TARGET = 3;
     public InterstitialAd interstitialAd;
 
-    String[] promoStorage = new String[]{"promocode1", "promocode2", "promocode3", "promocode4"};
     LinkedList<String> questions = new LinkedList<>();
     LinkedList<Drawable> images = new LinkedList<>();
     Integer[] imageArrCount;
@@ -198,8 +199,8 @@ public class Characters extends AppCompatActivity {
         editor.putInt(Game.APP_PREFERENCES_GLOBAL_SCORE, Score.getScore());
         editor.putString(APP_PREFERENCES_LANG, Language.getLang());
 
-        for (int i = 0; i < promoStorage.length; i++) {
-            editor.putString(APP_PREFERENCES_PROMO_CODES[i], promoStorage[i]);
+        for (int i = 0; i < PromoStorage.getPromoStorage().length; i++) {
+            editor.putString(APP_PREFERENCES_PROMO_CODES[i], PromoStorage.getPromoStorage()[i]);
         }
 
         editor.apply();
@@ -223,15 +224,15 @@ public class Characters extends AppCompatActivity {
             firstSessionChLvl5 = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5, false);
         } else firstSessionChLvl5 = true;
 
-        for (int i = 0; i < promoStorage.length; i++) {
-            promoStorage[i] = mShared.getString(APP_PREFERENCES_PROMO_CODES[i], null);
+        String[] temp = new String[PromoStorage.getPromoStorage().length];
+        for (int i = 0; i < PromoStorage.getPromoStorage().length; i++) {
+            temp[i] = mShared.getString(APP_PREFERENCES_PROMO_CODES[i], null);
         }
-
+        PromoStorage.setPromoStorage(temp);
         Language.setLang(mShared.getString(APP_PREFERENCES_LANG, Locale.getDefault().getLanguage()));
     }
 
 
-    //todo fix save promo codes
     @SuppressLint("SetTextI18n")
     public void promoDialog() {
         Dialog promoDialog = new Dialog(Characters.this);
@@ -255,17 +256,6 @@ public class Characters extends AppCompatActivity {
             }
             scoreLeft.setText(getString(R.string.scoreLeft) + " " + Score.getScore());
         });
-    }
-
-    public boolean promoStorage(String promoCode) {
-        for (int i = 0; i < promoStorage.length; i++) {
-            if (promoStorage[i] == null) continue;
-            if (promoCode.equals(promoStorage[i].toLowerCase())) {
-                promoStorage[i] = null;
-                return true;
-            }
-        }
-        return false;
     }
 
     //Победа

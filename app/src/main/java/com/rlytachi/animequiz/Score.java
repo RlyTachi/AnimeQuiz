@@ -16,10 +16,14 @@ public class Score {
         Score.score += score;
     }
 
+    public static void reset() {
+       Score.setScore(0);
+    }
+
     public static boolean minusScore(int score) {
         if (score <= Score.score) {
             Score.score -= score;
             return true;
-        }else return false;
+        } else return false;
     }
 }

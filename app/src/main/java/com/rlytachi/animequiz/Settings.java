@@ -3,6 +3,7 @@ package com.rlytachi.animequiz;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,8 +23,11 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.rlytachi.animequiz.levels.Characters;
 
 import java.util.Locale;
+
+import static com.rlytachi.animequiz.PromoStorage.APP_PREFERENCES_PROMO_CODES;
 
 public class Settings extends AppCompatActivity implements View.OnClickListener {
 
@@ -183,9 +187,8 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
                 break;
 
             case R.id.clearSaveBtn:
-                clearSave();
                 playSound(out);
-                if (interstitialAd.isLoaded()) interstitialAd.show();
+                dialogConfirm();
                 break;
 
         }
@@ -205,6 +208,11 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         editor.putBoolean(APP_PREFERENCES_SOUNDS, getSounds());
         editor.putBoolean(APP_PREFERENCES_MUSIC, getMusic());
 
+        for (int i = 0; i < PromoStorage.getPromoStorage().length; i++) {
+            editor.putString(APP_PREFERENCES_PROMO_CODES[i], PromoStorage.getPromoStorage()[i]);
+        }
+
+
         editor.apply();
     }
 
@@ -213,6 +221,15 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         Language.setLang(mShared.getString(APP_PREFERENCES_LANG, Locale.getDefault().getLanguage()));
         Settings.setSounds(mShared.getBoolean(APP_PREFERENCES_SOUNDS, Settings.getSounds()));
         Settings.setMusic(mShared.getBoolean(APP_PREFERENCES_MUSIC, Settings.getMusic()));
+
+        for (int i = 0; i < PromoStorage.getPromoStorage().length; i++) {
+            if (mShared.contains(APP_PREFERENCES_PROMO_CODES[i])) {
+                String[] temp = new String[PromoStorage.getPromoStorage().length];
+                temp[i] = mShared.getString(APP_PREFERENCES_PROMO_CODES[i], null);
+
+                PromoStorage.setPromoStorage(temp);
+            }
+        }
     }
 
     public void clearSave() {
@@ -221,7 +238,37 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         editor.clear();
         editor.remove(APP_PREFERENCES);
         editor.apply();
+        Score.reset();
+        PromoStorage.reset();
         saveAction();
+    }
+
+    public void dialogConfirm() {
+        Dialog confirmDialog = new Dialog(Settings.this);
+        confirmDialog.setContentView(R.layout.activity_confirm);
+        if (!this.isFinishing()) {
+            confirmDialog.show();
+        }
+        confirmDialog.setCancelable(false);
+
+        final Button confirmButton = confirmDialog.findViewById(R.id.confirmResetBtn);
+        final Button cancelButton = confirmDialog.findViewById(R.id.cancelResetBtn);
+        confirmButton.setOnClickListener(v -> {
+            if (interstitialAd.isLoaded()) {
+                clearSave();
+                interstitialAd.show();
+            } else {
+                playSound(out);
+                clearSave();
+                confirmDialog.dismiss();
+            }
+        });
+
+        cancelButton.setOnClickListener(v -> {
+            playSound(out);
+            confirmDialog.dismiss();
+        });
+
     }
 
     public static boolean getSounds() {
@@ -243,6 +290,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
     public static void playSound(MediaPlayer player) {
         if (Settings.getSounds()) {
             player.start();
+            if (!player.isPlaying()) player.stop();
         }
     }
 }

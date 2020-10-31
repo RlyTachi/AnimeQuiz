@@ -16,6 +16,9 @@
     <string name="off">Выключить</string>
     <string name="saved">Сохранено</string>
     <string name="clearSave">Сбросить прогресс</string>
+    <string name="confirm">Подтвердить</string>
+    <string name="cancel">Отменить</string>
+    <string name="confirmQuestion">Вы уверены?</string>
 
     <string name="characters">Персонажи</string>
     <string name="locations">Локации</string>

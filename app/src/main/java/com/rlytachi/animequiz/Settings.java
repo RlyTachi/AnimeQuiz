@@ -240,8 +240,8 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         Settings.music = music;
     }
 
-    public static void playSound (MediaPlayer player){
-        if (Settings.getSounds()){
+    public static void playSound(MediaPlayer player) {
+        if (Settings.getSounds()) {
             player.start();
         }
     }

@@ -274,7 +274,10 @@ public class Characters extends AppCompatActivity {
         try {
             Dialog winDialog = new Dialog(Characters.this);
             winDialog.setContentView(R.layout.activity_win_action);
-            winDialog.show();
+            if (!this.isFinishing()) {
+                winDialog.show();
+            }
+
             winDialog.setCancelable(false);
             finished = true;
             final Button okButton = winDialog.findViewById(R.id.ok);
@@ -309,7 +312,7 @@ public class Characters extends AppCompatActivity {
                 if (interstitialAd.isLoaded()) interstitialAd.show();
                 else {
                     playSound(out);
-                    winDialog.hide();
+                    winDialog.dismiss();
                     finish();
                     startActivity(new Intent(Characters.this, Game.class));
                 }
@@ -323,7 +326,10 @@ public class Characters extends AppCompatActivity {
         Dialog lossDialog = new Dialog(Characters.this);
         lossDialog.setContentView(R.layout.activity_loss);
         finished = true;
-        lossDialog.show();
+        if (!this.isFinishing()) {
+            lossDialog.show();
+        }
+
         lossDialog.setCancelable(false);
         scoreEarnedSession = 0;
         final Button okButton = lossDialog.findViewById(R.id.ok);
@@ -331,7 +337,7 @@ public class Characters extends AppCompatActivity {
             if (interstitialAd.isLoaded()) interstitialAd.show();
             else {
                 playSound(out);
-                lossDialog.hide();
+                lossDialog.dismiss();
                 finish();
                 startActivity(new Intent(Characters.this, Game.class));
             }
@@ -343,7 +349,10 @@ public class Characters extends AppCompatActivity {
     public void helpDialog() {
         Dialog helpDialog = new Dialog(Characters.this);
         helpDialog.setContentView(R.layout.activity_help);
-        helpDialog.show();
+        if (!this.isFinishing()) {
+            helpDialog.show();
+        }
+
 
         Animation animButton = AnimationUtils.loadAnimation(Characters.this, R.anim.anim_btn);
         Animation animEnd = AnimationUtils.loadAnimation(this, R.anim.anim_end);
@@ -359,6 +368,7 @@ public class Characters extends AppCompatActivity {
             getHelpBtn.startAnimation(animButton);
             if (Score.minusScore(5)) {
                 getHelpAction();
+                helpDialog.dismiss();
             } else {
                 notEnoughView.setAnimation(animEnd);
                 notEnoughView.setText(getString(R.string.notEnough));
@@ -375,6 +385,7 @@ public class Characters extends AppCompatActivity {
             getHeartBtn.startAnimation(animButton);
             if (Score.minusScore(5)) {
                 getHeartAction();
+                helpDialog.dismiss();
             } else {
                 notEnoughView.setAnimation(animEnd);
                 notEnoughView.setText(getString(R.string.notEnough));
@@ -503,11 +514,15 @@ public class Characters extends AppCompatActivity {
 
         Integer[] buttonArrCount = getRandomArrayButton(getRandomArray());
         //Обновление кнопок
-        btn1.setText(questions.get(buttonArrCount[0]));
-        btn2.setText(questions.get(buttonArrCount[1]));
-        btn3.setText(questions.get(buttonArrCount[2]));
-        btn4.setText(questions.get(buttonArrCount[3]));
 
+        try {
+            btn1.setText(questions.get(buttonArrCount[0]));
+            btn2.setText(questions.get(buttonArrCount[1]));
+            btn3.setText(questions.get(buttonArrCount[2]));
+            btn4.setText(questions.get(buttonArrCount[3]));
+        } catch (NullPointerException exception) {
+            exception.getStackTrace();
+        }
     }
 
     //Сгенерировать рандомный массив с индексами
@@ -515,42 +530,51 @@ public class Characters extends AppCompatActivity {
         //если для изображения, то нужно все значения в произвольном порядке
         Integer[] arr = new Integer[questions.size()];
 
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = i;
+        try {
+            for (int i = 0; i < arr.length; i++) {
+                arr[i] = i;
+            }
+            Collections.shuffle(Arrays.asList(arr));
+            return arr;
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            return arr;
         }
-        Collections.shuffle(Arrays.asList(arr));
-
-        return arr;
     }
 
     //Сгенерировать рандомный массив с индексами
     public Integer[] getRandomArrayButton(Integer[] arr) {
         //если для кнопок, то нужно 4 значения с 1 верным
-
         Integer[] arrForButtons = new Integer[4];
-        //Заполнение массива рандомными числами
-        for (int i = 0; i < arrForButtons.length; i++) {
-            if (arr[i] == getId()) continue;
-            arrForButtons[i] = arr[i];
-        }
+        try {
 
-        //Если есть null, то заменить на верный ID
-        for (int i = 0; i < arrForButtons.length; i++) {
-            if (arrForButtons[i] == null) {
-                arrForButtons[i] = getId();
-                break;
+            //Заполнение массива рандомными числами
+            for (int i = 0; i < arrForButtons.length; i++) {
+                if (arr[i] == getId()) continue;
+                arrForButtons[i] = arr[i];
             }
+
+            //Если есть null, то заменить на верный ID
+            for (int i = 0; i < arrForButtons.length; i++) {
+                if (arrForButtons[i] == null) {
+                    arrForButtons[i] = getId();
+                    break;
+                }
+            }
+
+            //Если нет верного ID - добавить
+            if (arrForButtons[0] == getId()) return arrForButtons;
+            else if (arrForButtons[1] == getId()) return arrForButtons;
+            else if (arrForButtons[2] == getId()) return arrForButtons;
+            else if (arrForButtons[3] == getId()) return arrForButtons;
+            else arrForButtons[0] = getId();
+
+            Collections.shuffle(Arrays.asList(arrForButtons));
+
+            return arrForButtons;
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException exception) {
+            exception.getStackTrace();
+            return arrForButtons;
         }
-
-        //Если нет верного ID - добавить
-        if (arrForButtons[0] == getId()) return arrForButtons;
-        else if (arrForButtons[1] == getId()) return arrForButtons;
-        else if (arrForButtons[2] == getId()) return arrForButtons;
-        else if (arrForButtons[3] == getId()) return arrForButtons;
-        else arrForButtons[0] = getId();
-
-        Collections.shuffle(Arrays.asList(arrForButtons));
-        return arrForButtons;
     }
 
     //Таймер 16000млс 1000млс

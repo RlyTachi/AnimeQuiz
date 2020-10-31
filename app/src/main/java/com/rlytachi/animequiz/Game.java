@@ -47,7 +47,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     Boolean[] tiLevels = ti.getLevels();
     Boolean[] itLevels = it.getLevels();
     Boolean[] evLevels = ev.getLevels();
-
+    Dialog dialog;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -57,6 +57,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
         in = MediaPlayer.create(this, R.raw.in);
         out = MediaPlayer.create(this, R.raw.out);
+        dialog = new Dialog(Game.this);
 
         //Layouts
         final LinearLayout characters = findViewById(R.id.charactersLayout);
@@ -122,6 +123,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         } catch (Exception ignore) {
         }
         saveAction();
+        dialog.dismiss();
         super.onDestroy();
     }
 
@@ -212,22 +214,33 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.charactersLayout:
                 playSound(in);
-                dialog(true, R.layout.activity_characters_levels, R.id.chLevel1, R.id.chLevel2, R.id.chLevel3, R.id.chLevel4, R.id.chLevel5, R.id.chScoreTextView, ch);
+                if (!this.isFinishing()) {
+                    dialog(true, R.layout.activity_characters_levels, R.id.chLevel1, R.id.chLevel2, R.id.chLevel3, R.id.chLevel4, R.id.chLevel5, R.id.chScoreTextView, ch);
+                }
                 break;
             case R.id.locationsLayout:
                 playSound(in);
-                dialog(true, R.layout.activity_locations_levels, R.id.locLevel1, R.id.locLevel2, R.id.locLevel3, R.id.locLevel4, R.id.locLevel5, R.id.locScoreTextView, loc);
+                if (!this.isFinishing()) {
+                    dialog(true, R.layout.activity_locations_levels, R.id.locLevel1, R.id.locLevel2, R.id.locLevel3, R.id.locLevel4, R.id.locLevel5, R.id.locScoreTextView, loc);
+                }
                 break;
             case R.id.titlesLayout:
                 playSound(in);
-                dialog(true, R.layout.activity_titles_levels, R.id.tiLevel1, R.id.tiLevel2, R.id.tiLevel3, R.id.tiLevel4, R.id.tiLevel5, R.id.tiScoreTextView, it);
+                if (!this.isFinishing()) {
+                    dialog(true, R.layout.activity_titles_levels, R.id.tiLevel1, R.id.tiLevel2, R.id.tiLevel3, R.id.tiLevel4, R.id.tiLevel5, R.id.tiScoreTextView, it);
+                }
                 break;
             case R.id.itTextLayout:
                 playSound(in);
+                if (!this.isFinishing()) {
 
+                }
                 break;
             case R.id.eventsLayout:
                 playSound(in);
+                if (!this.isFinishing()) {
+
+                }
 
                 break;
 
@@ -350,7 +363,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             okButton.startAnimation(animButton);
             if (Score.minusScore(20)) {
                 playSound(out);
-                unlockDialog.hide();
+                unlockDialog.dismiss();
                 levels[index] = true;
                 refreshScore();
                 saveAction();
@@ -377,7 +390,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
     @SuppressLint("SetTextI18n")
     public void dialog(Boolean show, Integer resDialog, Integer resButton1, Integer resButton2, Integer resButton3, Integer resButton4, Integer resButton5, Integer resTextScore, LevelChoice obj) {
-        Dialog dialog = new Dialog(Game.this);
+
         dialog.setContentView(resDialog);
         if (show) dialog.show();
 

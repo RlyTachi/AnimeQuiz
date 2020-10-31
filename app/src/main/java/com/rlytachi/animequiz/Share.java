@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
-import com.rlytachi.animequiz.levels.Characters;
-
 import static com.rlytachi.animequiz.Settings.in;
 import static com.rlytachi.animequiz.Settings.out;
 import static com.rlytachi.animequiz.Settings.playSound;

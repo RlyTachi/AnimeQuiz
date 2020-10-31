@@ -15,7 +15,7 @@
     <string name="on">On</string>
     <string name="off">Off</string>
     <string name="saved">Saved</string>
-
+    <string name="clearSave">Reset progress</string>
 
     <string name="characters">Characters</string>
     <string name="locations">Locations</string>

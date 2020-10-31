@@ -17,7 +17,7 @@ public class Score {
     }
 
     public static boolean minusScore(int score) {
-        if (score < Score.score) {
+        if (score <= Score.score) {
             Score.score -= score;
             return true;
         }else return false;

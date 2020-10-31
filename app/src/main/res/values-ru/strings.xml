@@ -15,6 +15,7 @@
     <string name="on">Включить</string>
     <string name="off">Выключить</string>
     <string name="saved">Сохранено</string>
+    <string name="clearSave">Сбросить прогресс</string>
 
     <string name="characters">Персонажи</string>
     <string name="locations">Локации</string>

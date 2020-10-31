@@ -62,9 +62,9 @@
             android:textSize="28sp" />
 
         <RadioGroup
+            android:id="@+id/langGroup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/langGroup">
+            android:layout_height="wrap_content">
 
             <RadioButton
                 android:id="@+id/langRadio1"
@@ -100,9 +100,9 @@
             android:textSize="28sp" />
 
         <RadioGroup
+            android:id="@+id/soundsGroup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/soundsGroup">
+            android:layout_height="wrap_content">
 
             <RadioButton
                 android:id="@+id/soundsRadio1"
@@ -138,9 +138,9 @@
             android:textSize="28sp" />
 
         <RadioGroup
+            android:id="@+id/musicGroup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/musicGroup">
+            android:layout_height="wrap_content">
 
             <RadioButton
                 android:id="@+id/musicRadio1"
@@ -162,6 +162,18 @@
                 android:textSize="26sp" />
         </RadioGroup>
 
+        <Button
+            android:id="@+id/clearSaveBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="0"
+            android:background="@drawable/btn_2"
+            android:fontFamily="@font/pixel"
+            android:text="@string/clearSave"
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/settingsStatusView"
             android:layout_width="wrap_content"
@@ -173,6 +185,19 @@
             android:text="@string/saved"
             android:textSize="28sp"
             android:visibility="invisible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ads:adSize="BANNER"
+                ads:adUnitId="ca-app-pub-7217958397153183/7940526044"
+                android:layout_marginBottom="1dp"/>
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

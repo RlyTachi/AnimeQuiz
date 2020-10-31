@@ -6,12 +6,22 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.Locale;
 
@@ -19,12 +29,37 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
 
     public static final String APP_PREFERENCES = "mySettings";
     public static final String APP_PREFERENCES_LANG = "myLanguage";
-    public String lang;
+    public static final String APP_PREFERENCES_SOUNDS = "Sounds";
+    public static final String APP_PREFERENCES_MUSIC = "Music";
+    public InterstitialAd interstitialAd;
+    private static boolean sounds = true;
+    private static boolean music = true;
+    public static MediaPlayer in, out;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        MobileAds.initialize(this, "ca-app-pub-7217958397153183~4133073169");
+        AdView adView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId("ca-app-pub-7217958397153183/4052170352");
+        interstitialAd.loadAd(adRequest);
+
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                startActivity(new Intent(Settings.this, MainActivity.class));
+            }
+        });
+
+        in = MediaPlayer.create(this, R.raw.in);
+        out = MediaPlayer.create(this, R.raw.out);
 
         final ImageView back = findViewById(R.id.settingsBackView);
         final RadioGroup langGroup = findViewById(R.id.langGroup);
@@ -39,45 +74,64 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         final RadioButton musicBtn1 = findViewById(R.id.musicRadio1);
         final RadioButton musicBtn2 = findViewById(R.id.musicRadio2);
 
+        final Button clearSaveBtn = findViewById(R.id.clearSaveBtn);
+
         langBtn1.setOnClickListener(this);
         langBtn2.setOnClickListener(this);
         soundsBtn1.setOnClickListener(this);
         soundsBtn2.setOnClickListener(this);
         musicBtn1.setOnClickListener(this);
         musicBtn2.setOnClickListener(this);
-
         back.setOnClickListener(this);
+        clearSaveBtn.setOnClickListener(this);
 
         loadAction();
-        System.out.println();
-        if (lang == null) {
-            if (Locale.getDefault().getLanguage().equals("ru")) {
-                langBtn1.setChecked(true);
-                setLocationRu();
-            } else {
-                langBtn2.setChecked(true);
-                setLocationEn();
-            }
-        } else if (lang.equals("ru")) {
+        if (Language.getLang().equals("ru")) {
             langBtn1.setChecked(true);
-            setLocationRu();
+            getBaseContext().getResources().updateConfiguration(Language.setLocationRu(), null);
         } else {
             langBtn2.setChecked(true);
-            setLocationEn();
+            getBaseContext().getResources().updateConfiguration(Language.setLocationEn(), null);
         }
-
+        if (Settings.getSounds()) {
+            soundsBtn1.setChecked(true);
+        } else {
+            soundsBtn2.setChecked(true);
+        }
+        if (Settings.getMusic()) {
+            musicBtn1.setChecked(true);
+        } else {
+            musicBtn2.setChecked(true);
+        }
+        saveAction();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        loadAction();
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+        try {
+            System.out.println(Language.getLang());
+            if (Language.getLang().equals("ru")) {
+                getBaseContext().getResources().updateConfiguration(Language.setLocationRu(), null);
+            } else {
+                getBaseContext().getResources().updateConfiguration(Language.setLocationEn(), null);
+            }
+        } catch (Exception ignore) {
+        }
         saveAction();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        playSound(out);
+        finish();
+        startActivity(new Intent(Settings.this, MainActivity.class));
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -86,65 +140,109 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
 
         switch (v.getId()) {
             case R.id.settingsBackView:
+                playSound(out);
+                finish();
                 startActivity(new Intent(Settings.this, MainActivity.class));
+
                 break;
 
             case R.id.langRadio1:
-                setLocationRu();
+                playSound(in);
+                getBaseContext().getResources().updateConfiguration(Language.setLocationRu(), null);
                 saveAction();
                 finish();
                 startActivity(new Intent(Settings.this, Settings.class));
                 break;
             case R.id.langRadio2:
-                setLocationEn();
+                playSound(out);
+                getBaseContext().getResources().updateConfiguration(Language.setLocationEn(), null);
                 saveAction();
                 finish();
                 startActivity(new Intent(Settings.this, Settings.class));
                 break;
             case R.id.soundsRadio1:
-
+                playSound(in);
+                Settings.setSounds(true);
+                Score.addScore(20);
+                saveAction();
                 break;
             case R.id.soundsRadio2:
-
+                playSound(out);
+                Settings.setSounds(false);
+                saveAction();
                 break;
             case R.id.musicRadio1:
-
+                playSound(in);
+                Settings.setMusic(true);
+                saveAction();
                 break;
             case R.id.musicRadio2:
+                playSound(out);
+                Settings.setMusic(false);
+                saveAction();
+                break;
 
+            case R.id.clearSaveBtn:
+                clearSave();
+                playSound(out);
+                if (interstitialAd.isLoaded()) interstitialAd.show();
                 break;
 
         }
     }
 
-    public void setLocationRu() {
-        Locale localeRu = new Locale("ru");
-        Locale.setDefault(localeRu);
-        Configuration configuration = new Configuration();
-        configuration.locale = localeRu;
-        getBaseContext().getResources().updateConfiguration(configuration, null);
-        lang = "ru";
-    }
-
-    public void setLocationEn() {
-        Locale localeEn = new Locale("en");
-        Locale.setDefault(localeEn);
-        Configuration configuration = new Configuration();
-        configuration.locale = localeEn;
-        getBaseContext().getResources().updateConfiguration(configuration, null);
-        lang = "en";
-    }
-
     public void saveAction() {
+        Animation animEnd = AnimationUtils.loadAnimation(this, R.anim.anim_end);
+        final TextView settingsStatusView = findViewById(R.id.settingsStatusView);
+        settingsStatusView.setAnimation(animEnd);
+        settingsStatusView.startAnimation(animEnd);
+        settingsStatusView.setVisibility(View.INVISIBLE);
+
         SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = mShared.edit();
-        editor.putString(APP_PREFERENCES_LANG, lang);
+        editor.putString(APP_PREFERENCES_LANG, Language.getLang());
+        editor.putInt(Game.APP_PREFERENCES_GLOBAL_SCORE, Score.getScore());
+        editor.putBoolean(APP_PREFERENCES_SOUNDS, getSounds());
+        editor.putBoolean(APP_PREFERENCES_MUSIC, getMusic());
 
         editor.apply();
     }
 
     public void loadAction() {
         SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        lang = mShared.getString(APP_PREFERENCES_LANG, Locale.getDefault().getLanguage());
+        Language.setLang(mShared.getString(APP_PREFERENCES_LANG, Locale.getDefault().getLanguage()));
+        Settings.setSounds(mShared.getBoolean(APP_PREFERENCES_SOUNDS, Settings.getSounds()));
+        Settings.setMusic(mShared.getBoolean(APP_PREFERENCES_MUSIC, Settings.getMusic()));
+    }
+
+    public void clearSave() {
+        SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = mShared.edit();
+        editor.clear();
+        editor.remove(APP_PREFERENCES);
+        editor.apply();
+        saveAction();
+    }
+
+    public static boolean getSounds() {
+        return sounds;
+    }
+
+    public static void setSounds(boolean sounds) {
+        Settings.sounds = sounds;
+    }
+
+    public static boolean getMusic() {
+        return music;
+    }
+
+    public static void setMusic(boolean music) {
+        Settings.music = music;
+    }
+
+    public static void playSound (MediaPlayer player){
+        if (Settings.getSounds()){
+            player.start();
+        }
     }
 }

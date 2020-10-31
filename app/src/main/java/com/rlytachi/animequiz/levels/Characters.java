@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -24,19 +25,25 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.rlytachi.animequiz.Game;
+import com.rlytachi.animequiz.Language;
 import com.rlytachi.animequiz.LevelChoice;
 import com.rlytachi.animequiz.R;
 import com.rlytachi.animequiz.Score;
 
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.Locale;
+
+import static com.rlytachi.animequiz.Settings.in;
+import static com.rlytachi.animequiz.Settings.out;
+import static com.rlytachi.animequiz.Settings.playSound;
 
 public class Characters extends AppCompatActivity {
 
     //Shared Preferences
     public static final String APP_PREFERENCES = "mySettings";
+    public static final String APP_PREFERENCES_LANG = "myLanguage";
     public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS_1 = "firstSessionCharacters1";
     public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS_2 = "firstSessionCharacters2";
     public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3 = "firstSessionCharacters3";
@@ -80,10 +87,15 @@ public class Characters extends AppCompatActivity {
             @Override
             public void onAdClosed() {
                 super.onAdClosed();
+                playSound(out);
                 startActivity(new Intent(Characters.this, Game.class));
             }
         });
 
+        in = MediaPlayer.create(this, R.raw.in);
+        out = MediaPlayer.create(this, R.raw.out);
+
+        loadAction();
         ButtonsEvent buttonsEvent = new ButtonsEvent();
         if (buttonsEvent.isInterrupted()) buttonsEvent.interrupt();
         else buttonsEvent.start();
@@ -127,6 +139,16 @@ public class Characters extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        try {
+            System.out.println(Language.getLang());
+            if (Language.getLang().equals("ru")) {
+                getBaseContext().getResources().updateConfiguration(Language.setLocationRu(), null);
+            } else {
+                getBaseContext().getResources().updateConfiguration(Language.setLocationEn(), null);
+            }
+        } catch (Exception ignore) {
+        }
+
         if (LevelChoice.getLevel() == 1) level1Load();
         if (LevelChoice.getLevel() == 2) level2Load();
         if (LevelChoice.getLevel() == 3) level3Load();
@@ -140,12 +162,29 @@ public class Characters extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+        try {
+            System.out.println(Language.getLang());
+            if (Language.getLang().equals("ru")) {
+                getBaseContext().getResources().updateConfiguration(Language.setLocationRu(), null);
+            } else {
+                getBaseContext().getResources().updateConfiguration(Language.setLocationEn(), null);
+            }
+        } catch (Exception ignore) {
+        }
         saveAction();
         image = 0;
         setId(-1);
         heartCount = 3;
         imageArrCount = getRandomArray();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        playSound(out);
+        finish();
+        startActivity(new Intent(Characters.this, Game.class));
     }
 
     public void saveAction() {
@@ -157,6 +196,7 @@ public class Characters extends AppCompatActivity {
         editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4, firstSessionChLvl4);
         editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5, firstSessionChLvl5);
         editor.putInt(Game.APP_PREFERENCES_GLOBAL_SCORE, Score.getScore());
+        editor.putString(APP_PREFERENCES_LANG, Language.getLang());
 
         for (int i = 0; i < promoStorage.length; i++) {
             editor.putString(APP_PREFERENCES_PROMO_CODES[i], promoStorage[i]);
@@ -186,6 +226,8 @@ public class Characters extends AppCompatActivity {
         for (int i = 0; i < promoStorage.length; i++) {
             promoStorage[i] = mShared.getString(APP_PREFERENCES_PROMO_CODES[i], null);
         }
+
+        Language.setLang(mShared.getString(APP_PREFERENCES_LANG, Locale.getDefault().getLanguage()));
     }
 
 
@@ -266,7 +308,9 @@ public class Characters extends AppCompatActivity {
             okButton.setOnClickListener(v -> {
                 if (interstitialAd.isLoaded()) interstitialAd.show();
                 else {
+                    playSound(out);
                     winDialog.hide();
+                    finish();
                     startActivity(new Intent(Characters.this, Game.class));
                 }
             });
@@ -286,7 +330,9 @@ public class Characters extends AppCompatActivity {
         okButton.setOnClickListener(v -> {
             if (interstitialAd.isLoaded()) interstitialAd.show();
             else {
+                playSound(out);
                 lossDialog.hide();
+                finish();
                 startActivity(new Intent(Characters.this, Game.class));
             }
         });
@@ -308,6 +354,7 @@ public class Characters extends AppCompatActivity {
 
         scoreLeftView.setText(getString(R.string.scoreLeft) + " " + Score.getScore());
         getHelpBtn.setOnClickListener(v -> {
+            playSound(in);
             getHelpBtn.setAnimation(animButton);
             getHelpBtn.startAnimation(animButton);
             if (Score.minusScore(5)) {
@@ -323,6 +370,7 @@ public class Characters extends AppCompatActivity {
         });
 
         getHeartBtn.setOnClickListener(v -> {
+            playSound(in);
             getHeartBtn.setAnimation(animButton);
             getHeartBtn.startAnimation(animButton);
             if (Score.minusScore(5)) {
@@ -405,6 +453,7 @@ public class Characters extends AppCompatActivity {
         final ImageView heart2 = findViewById(R.id.heart2);
         final ImageView heart3 = findViewById(R.id.heart3);
         heartCount--;
+        playSound(out);
         if (heart3.getVisibility() == View.VISIBLE) {
             heart3.setVisibility(View.INVISIBLE);
         } else if (heart2.getVisibility() == View.VISIBLE) {
@@ -622,12 +671,14 @@ public class Characters extends AppCompatActivity {
             switch (v.getId()) {
                 //Назад
                 case R.id.backView:
+                    playSound(out);
                     startActivity(new Intent(Characters.this, Game.class));
                     myTimer.onFinish();
                     break;
 
                 //Помощь
                 case R.id.helpView:
+                    playSound(in);
                     helpDialog();
                     break;
 
@@ -635,7 +686,7 @@ public class Characters extends AppCompatActivity {
                 //Если ответ не совпадает, минус сердце
                 //Финиш таймера, следующий вопрос и запуск таймера
                 case R.id.btnCh1:
-
+                    playSound(in);
                     if (!getAnswer(btn1.getText().toString())) {
                         minusHeart();
                         btn2.startAnimation(animation);
@@ -655,7 +706,7 @@ public class Characters extends AppCompatActivity {
                     break;
 
                 case R.id.btnCh2:
-
+                    playSound(in);
                     if (!getAnswer(btn2.getText().toString())) {
                         minusHeart();
                         btn1.startAnimation(animation);
@@ -675,7 +726,7 @@ public class Characters extends AppCompatActivity {
                     break;
 
                 case R.id.btnCh3:
-
+                    playSound(in);
                     if (!getAnswer(btn3.getText().toString())) {
                         minusHeart();
                         btn4.startAnimation(animation);
@@ -695,7 +746,7 @@ public class Characters extends AppCompatActivity {
                     break;
 
                 case R.id.btnCh4:
-
+                    playSound(in);
                     if (!getAnswer(btn4.getText().toString())) {
                         minusHeart();
                         btn3.startAnimation(animation);

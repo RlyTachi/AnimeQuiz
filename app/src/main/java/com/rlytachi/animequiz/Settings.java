@@ -141,6 +141,8 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
+        Animation animButton = AnimationUtils.loadAnimation(Settings.this, R.anim.anim_btn);
+        final Button clearSaveBtn = findViewById(R.id.clearSaveBtn);
 
         switch (v.getId()) {
             case R.id.settingsBackView:
@@ -187,6 +189,8 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
                 break;
 
             case R.id.clearSaveBtn:
+                clearSaveBtn.setAnimation(animButton);
+                clearSaveBtn.startAnimation(animButton);
                 playSound(out);
                 dialogConfirm();
                 break;
@@ -251,9 +255,12 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         }
         confirmDialog.setCancelable(false);
 
+        Animation animButton = AnimationUtils.loadAnimation(Settings.this, R.anim.anim_btn);
         final Button confirmButton = confirmDialog.findViewById(R.id.confirmResetBtn);
         final Button cancelButton = confirmDialog.findViewById(R.id.cancelResetBtn);
         confirmButton.setOnClickListener(v -> {
+            confirmButton.setAnimation(animButton);
+            confirmButton.startAnimation(animButton);
             if (interstitialAd.isLoaded()) {
                 clearSave();
                 interstitialAd.show();
@@ -265,6 +272,8 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         });
 
         cancelButton.setOnClickListener(v -> {
+            cancelButton.setAnimation(animButton);
+            cancelButton.startAnimation(animButton);
             playSound(out);
             confirmDialog.dismiss();
         });

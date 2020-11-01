@@ -61,19 +61,19 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
         //Layouts
         final LinearLayout characters = findViewById(R.id.charactersLayout);
-        final TextView chScore = findViewById(R.id.chScoreTextView);
+//        final TextView chScore = findViewById(R.id.chScoreTextView);
 
         final LinearLayout locations = findViewById(R.id.locationsLayout);
-        final TextView locScore = findViewById(R.id.locScoreTextView);
+//        final TextView locScore = findViewById(R.id.locScoreTextView);
 
         final LinearLayout titles = findViewById(R.id.titlesLayout);
-        final TextView tiScore = findViewById(R.id.tiScoreTextView);
+//        final TextView tiScore = findViewById(R.id.tiScoreTextView);
 
         final LinearLayout items = findViewById(R.id.itemsLayout);
-        final TextView itScore = findViewById(R.id.itScoreTextView);
+//        final TextView itScore = findViewById(R.id.itScoreTextView);
 
         final LinearLayout events = findViewById(R.id.eventsLayout);
-        final TextView evScore = findViewById(R.id.evScoreTextView);
+//        final TextView evScore = findViewById(R.id.evScoreTextView);
 
         //Bottom buttons
         final ImageView back = findViewById(R.id.backView);
@@ -109,6 +109,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         dialog(false, R.layout.activity_characters_levels, R.id.chLevel1, R.id.chLevel2, R.id.chLevel3, R.id.chLevel4, R.id.chLevel5, R.id.chScoreTextView, ch);
         dialog(false, R.layout.activity_locations_levels, R.id.locLevel1, R.id.locLevel2, R.id.locLevel3, R.id.locLevel4, R.id.locLevel5, R.id.locScoreTextView, loc);
         dialog(false, R.layout.activity_titles_levels, R.id.tiLevel1, R.id.tiLevel2, R.id.tiLevel3, R.id.tiLevel4, R.id.tiLevel5, R.id.tiScoreTextView, ti);
+        dialog(false, R.layout.activity_items_levels, R.id.itLevel1, R.id.itLevel2, R.id.itLevel3, R.id.itLevel4, R.id.itLevel5, R.id.itScoreTextView, it);
+        dialog(false, R.layout.activity_events_levels, R.id.evLevel1, R.id.evLevel2, R.id.evLevel3, R.id.evLevel4, R.id.evLevel5, R.id.evScoreTextView, ev);
     }
 
     @Override
@@ -201,6 +203,14 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
+        Animation animButton = AnimationUtils.loadAnimation(Game.this, R.anim.anim_btn);
+        final LinearLayout characters = findViewById(R.id.charactersLayout);
+        final LinearLayout locations = findViewById(R.id.locationsLayout);
+        final LinearLayout titles = findViewById(R.id.titlesLayout);
+        final LinearLayout items = findViewById(R.id.itemsLayout);
+        final LinearLayout events = findViewById(R.id.eventsLayout);
+
+        //Levels dialogs
         switch (v.getId()) {
             case R.id.backView:
                 playSound(out);
@@ -213,35 +223,44 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 startActivity(new Intent(this, Unlock.class));
                 break;
             case R.id.charactersLayout:
+                characters.setAnimation(animButton);
+                characters.startAnimation(animButton);
                 playSound(in);
                 if (!this.isFinishing()) {
                     dialog(true, R.layout.activity_characters_levels, R.id.chLevel1, R.id.chLevel2, R.id.chLevel3, R.id.chLevel4, R.id.chLevel5, R.id.chScoreTextView, ch);
                 }
                 break;
             case R.id.locationsLayout:
+                locations.setAnimation(animButton);
+                locations.startAnimation(animButton);
                 playSound(in);
                 if (!this.isFinishing()) {
                     dialog(true, R.layout.activity_locations_levels, R.id.locLevel1, R.id.locLevel2, R.id.locLevel3, R.id.locLevel4, R.id.locLevel5, R.id.locScoreTextView, loc);
                 }
                 break;
             case R.id.titlesLayout:
+                titles.setAnimation(animButton);
+                titles.startAnimation(animButton);
                 playSound(in);
                 if (!this.isFinishing()) {
-                    dialog(true, R.layout.activity_titles_levels, R.id.tiLevel1, R.id.tiLevel2, R.id.tiLevel3, R.id.tiLevel4, R.id.tiLevel5, R.id.tiScoreTextView, it);
+                    dialog(true, R.layout.activity_titles_levels, R.id.tiLevel1, R.id.tiLevel2, R.id.tiLevel3, R.id.tiLevel4, R.id.tiLevel5, R.id.tiScoreTextView, ti);
                 }
                 break;
-            case R.id.itTextLayout:
+            case R.id.itemsLayout:
+                items.setAnimation(animButton);
+                items.startAnimation(animButton);
                 playSound(in);
                 if (!this.isFinishing()) {
-
+                    dialog(true, R.layout.activity_items_levels, R.id.itLevel1, R.id.itLevel2, R.id.itLevel3, R.id.itLevel4, R.id.itLevel5, R.id.itScoreTextView, it);
                 }
                 break;
             case R.id.eventsLayout:
+                events.setAnimation(animButton);
+                events.startAnimation(animButton);
                 playSound(in);
                 if (!this.isFinishing()) {
-
+                    dialog(true, R.layout.activity_events_levels, R.id.evLevel1, R.id.evLevel2, R.id.evLevel3, R.id.evLevel4, R.id.evLevel5, R.id.evScoreTextView, ev);
                 }
-
                 break;
 
             //Characters levels
@@ -299,34 +318,35 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             case R.id.locLevel1:
                 playSound(in);
                 LevelChoice.setLevel(1);
+                //todo level 1 locations
                 break;
             case R.id.locLevel2:
                 playSound(in);
-                if (!locLevels[4]) {
+                if (!locLevels[1]) {
                     unlockDialog(locLevels, 1, 2);
                 } else {
                     finish();
-                    startActivity(new Intent(this, Characters.class));
+                    //todo level 2 locations
                     LevelChoice.setLevel(2);
                 }
                 break;
             case R.id.locLevel3:
                 playSound(in);
-                if (!locLevels[4]) {
+                if (!locLevels[2]) {
                     unlockDialog(locLevels, 2, 2);
                 } else {
                     finish();
-                    startActivity(new Intent(this, Characters.class));
+                    //todo level 3 locations
                     LevelChoice.setLevel(3);
                 }
                 break;
             case R.id.locLevel4:
                 playSound(in);
-                if (!locLevels[4]) {
+                if (!locLevels[3]) {
                     unlockDialog(locLevels, 3, 2);
                 } else {
                     finish();
-                    startActivity(new Intent(this, Characters.class));
+                    //todo level 4 locations
                     LevelChoice.setLevel(4);
                 }
                 break;
@@ -336,7 +356,148 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     unlockDialog(locLevels, 4, 2);
                 } else {
                     finish();
-                    startActivity(new Intent(this, Characters.class));
+                    //todo level 5 locations
+                    LevelChoice.setLevel(5);
+                }
+                break;
+
+            //Titles levels
+            case R.id.tiLevel1:
+                playSound(in);
+                LevelChoice.setLevel(1);
+                //todo level 1 titles
+                break;
+            case R.id.tiLevel2:
+                playSound(in);
+                if (!tiLevels[1]) {
+                    unlockDialog(tiLevels, 1, 3);
+                } else {
+                    finish();
+                    //todo level 2 titles
+                    LevelChoice.setLevel(2);
+                }
+                break;
+            case R.id.tiLevel3:
+                playSound(in);
+                if (!tiLevels[2]) {
+                    unlockDialog(tiLevels, 2, 3);
+                } else {
+                    finish();
+                    //todo level 3 titles
+                    LevelChoice.setLevel(3);
+                }
+                break;
+            case R.id.tiLevel4:
+                playSound(in);
+                if (!tiLevels[3]) {
+                    unlockDialog(tiLevels, 3, 3);
+                } else {
+                    finish();
+                    //todo level 4 titles
+                    LevelChoice.setLevel(4);
+                }
+                break;
+            case R.id.tiLevel5:
+                playSound(in);
+                if (!tiLevels[4]) {
+                    unlockDialog(tiLevels, 4, 3);
+                } else {
+                    finish();
+                    //todo level 5 titles
+                    LevelChoice.setLevel(5);
+                }
+                break;
+
+            //Items levels
+            case R.id.itLevel1:
+                playSound(in);
+                LevelChoice.setLevel(1);
+                //todo level 1 items
+                break;
+            case R.id.itLevel2:
+                playSound(in);
+                if (!itLevels[1]) {
+                    unlockDialog(itLevels, 1, 4);
+                } else {
+                    finish();
+                    //todo level 2 items
+                    LevelChoice.setLevel(2);
+                }
+                break;
+            case R.id.itLevel3:
+                playSound(in);
+                if (!itLevels[2]) {
+                    unlockDialog(itLevels, 2, 4);
+                } else {
+                    finish();
+                    //todo level 3 items
+                    LevelChoice.setLevel(3);
+                }
+                break;
+            case R.id.itLevel4:
+                playSound(in);
+                if (!itLevels[3]) {
+                    unlockDialog(itLevels, 3, 4);
+                } else {
+                    finish();
+                    //todo level 4 items
+                    LevelChoice.setLevel(4);
+                }
+                break;
+            case R.id.itLevel5:
+                playSound(in);
+                if (!itLevels[4]) {
+                    unlockDialog(itLevels, 4, 4);
+                } else {
+                    finish();
+                    //todo level 5 items
+                    LevelChoice.setLevel(5);
+                }
+                break;
+
+            //Events levels
+            case R.id.evLevel1:
+                playSound(in);
+                LevelChoice.setLevel(1);
+                //todo level 1 events
+                break;
+            case R.id.evLevel2:
+                playSound(in);
+                if (!evLevels[1]) {
+                    unlockDialog(evLevels, 1, 5);
+                } else {
+                    finish();
+                    //todo level 2 events
+                    LevelChoice.setLevel(2);
+                }
+                break;
+            case R.id.evLevel3:
+                playSound(in);
+                if (!evLevels[2]) {
+                    unlockDialog(evLevels, 2, 5);
+                } else {
+                    finish();
+                    //todo level 3 events
+                    LevelChoice.setLevel(3);
+                }
+                break;
+            case R.id.evLevel4:
+                playSound(in);
+                if (!evLevels[3]) {
+                    unlockDialog(evLevels, 3, 5);
+                } else {
+                    finish();
+                    //todo level 4 events
+                    LevelChoice.setLevel(4);
+                }
+                break;
+            case R.id.evLevel5:
+                playSound(in);
+                if (!evLevels[4]) {
+                    unlockDialog(evLevels, 4, 5);
+                } else {
+                    finish();
+                    //todo level 5 events
                     LevelChoice.setLevel(5);
                 }
                 break;
@@ -377,6 +538,10 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     dialog(true, R.layout.activity_locations_levels, R.id.locLevel1, R.id.locLevel2, R.id.locLevel3, R.id.locLevel4, R.id.locLevel5, R.id.locScoreTextView, loc);
                 if (type == 3)
                     dialog(true, R.layout.activity_titles_levels, R.id.tiLevel1, R.id.tiLevel2, R.id.tiLevel3, R.id.tiLevel4, R.id.tiLevel5, R.id.tiScoreTextView, ti);
+                if (type == 4)
+                    dialog(true, R.layout.activity_items_levels, R.id.itLevel1, R.id.itLevel2, R.id.itLevel3, R.id.itLevel4, R.id.itLevel5, R.id.itScoreTextView, it);
+                if (type == 5)
+                    dialog(true, R.layout.activity_events_levels, R.id.evLevel1, R.id.evLevel2, R.id.evLevel3, R.id.evLevel4, R.id.evLevel5, R.id.evScoreTextView, ev);
 
             } else {
                 playSound(in);

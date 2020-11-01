@@ -32,11 +32,11 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="20dp"
-            android:background="@color/text"
+            android:background="@drawable/btn_2"
             android:fontFamily="@font/pixel"
             android:gravity="center"
             android:text="@string/confirm"
-            android:textColor="@color/secondText" />
+            android:textColor="@color/text" />
 
         <Button
             android:id="@+id/cancelResetBtn"
@@ -46,10 +46,10 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="20dp"
-            android:background="@color/text"
+            android:background="@drawable/btn_2"
             android:fontFamily="@font/pixel"
             android:gravity="center"
             android:text="@string/cancel"
-            android:textColor="@color/secondText" />
+            android:textColor="@color/text" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

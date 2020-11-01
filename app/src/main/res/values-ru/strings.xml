@@ -19,6 +19,15 @@
     <string name="confirm">Подтвердить</string>
     <string name="cancel">Отменить</string>
     <string name="confirmQuestion">Вы уверены?</string>
+    <string name="unlockText">Разблокировать все уровни, в том числе и уровни будущих обновлений</string>
+    <string name="buy">Купить</string>
+    <string name="share1">Спасибо за установку этой игры и за поддержку!</string>
+    <string name="share2">Рассказывайте друзьям и подписывайтесь, следите за обновлениями и новостями!</string>
+    <string name="share3">Там вы найдете актуальные промокоды, которые сможете активировать внутри игры.</string>
+    <string name="vk">Перейти в Вк</string>
+    <string name="twitter">Перейти в Твиттер</string>
+    <string name="shop">Магазин</string>
+
 
     <string name="characters">Персонажи</string>
     <string name="locations">Локации</string>

@@ -1,10 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Unlock"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".Unlock">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/topMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="0"
+        android:gravity="start"
+        android:orientation="horizontal"
+        tools:ignore="ExtraText">
+
+        <ImageView
+            android:id="@+id/unlockBackView"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="start|bottom"
+            android:layout_margin="3dp"
+            android:contentDescription="@string/back"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/unlockTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/pixel"
+            android:gravity="center"
+            android:text="@string/shop"
+            android:textSize="28sp" />
+        />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:fontFamily="@font/pixel"
+        android:text="@string/unlockText"
+        android:textSize="28sp" />
+
+    <Button
+        android:id="@+id/buttonBuy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_weight="0"
+        android:background="@drawable/btn_2"
+        android:fontFamily="@font/pixel"
+        android:text="@string/buy" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="1dp"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-7217958397153183/7940526044" />
+    </LinearLayout>
+</LinearLayout>

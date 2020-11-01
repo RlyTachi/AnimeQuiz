@@ -19,6 +19,14 @@
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
     <string name="confirmQuestion">Are you sure?</string>
+    <string name="unlockText">Unlock all levels, including the levels of future updates</string>
+    <string name="buy">Buy</string>
+    <string name="share1">Thanks for installing this game and for your support!</string>
+    <string name="share2">Tell your friends and subscribe, stay tuned for updates and news!</string>
+    <string name="share3">There you will find the current promotional codes that can be activated in the game.</string>
+    <string name="vk">Go to VK</string>
+    <string name="twitter">Go to Twitter</string>
+    <string name="shop">Shop</string>
 
     <string name="characters">Characters</string>
     <string name="locations">Locations</string>

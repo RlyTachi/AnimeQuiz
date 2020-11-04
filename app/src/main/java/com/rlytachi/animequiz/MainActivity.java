@@ -13,6 +13,10 @@ import android.widget.ImageView;
 
 import java.util.Locale;
 
+import static com.rlytachi.animequiz.Settings.APP_PREFERENCES_MUSIC;
+import static com.rlytachi.animequiz.Settings.APP_PREFERENCES_SOUNDS;
+import static com.rlytachi.animequiz.Settings.getMusic;
+import static com.rlytachi.animequiz.Settings.getSounds;
 import static com.rlytachi.animequiz.Settings.in;
 import static com.rlytachi.animequiz.Settings.out;
 
@@ -82,6 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = mShared.edit();
         editor.putString(APP_PREFERENCES_LANG, Language.getLang());
+        editor.putBoolean(APP_PREFERENCES_SOUNDS, getSounds());
+        editor.putBoolean(APP_PREFERENCES_MUSIC, getMusic());
 
         editor.apply();
     }
@@ -89,6 +95,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void loadAction() {
         SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         Language.setLang(mShared.getString(APP_PREFERENCES_LANG, Locale.getDefault().getLanguage()));
+        Settings.setSounds(mShared.getBoolean(APP_PREFERENCES_SOUNDS, Settings.getSounds()));
+        Settings.setMusic(mShared.getBoolean(APP_PREFERENCES_MUSIC, Settings.getMusic()));
+
     }
 
 }

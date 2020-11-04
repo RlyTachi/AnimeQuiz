@@ -45,7 +45,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        MobileAds.initialize(this, "ca-app-pub-7217958397153183~4133073169");
+        MobileAds.initialize(this);
         AdView adView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
@@ -66,15 +66,12 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         out = MediaPlayer.create(this, R.raw.out);
 
         final ImageView back = findViewById(R.id.settingsBackView);
-        final RadioGroup langGroup = findViewById(R.id.langGroup);
         final RadioButton langBtn1 = findViewById(R.id.langRadio1);
         final RadioButton langBtn2 = findViewById(R.id.langRadio2);
 
-        final RadioGroup soundsGroup = findViewById(R.id.soundsGroup);
         final RadioButton soundsBtn1 = findViewById(R.id.soundsRadio1);
         final RadioButton soundsBtn2 = findViewById(R.id.soundsRadio2);
 
-        final RadioGroup musicGroup = findViewById(R.id.musicGroup);
         final RadioButton musicBtn1 = findViewById(R.id.musicRadio1);
         final RadioButton musicBtn2 = findViewById(R.id.musicRadio2);
 

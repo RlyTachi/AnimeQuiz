@@ -24,6 +24,8 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.rlytachi.animequiz.Game;
 import com.rlytachi.animequiz.Language;
 import com.rlytachi.animequiz.LevelChoice;
@@ -78,7 +80,7 @@ public class Characters extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_characters);
 
-        MobileAds.initialize(this, "ca-app-pub-7217958397153183~4133073169");
+        MobileAds.initialize(this);
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId("ca-app-pub-7217958397153183/4052170352");
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -783,87 +785,105 @@ public class Characters extends AppCompatActivity {
 
     //Levels
     //
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void level1Load() {
-        //Linked list
-        questions.add("Kanna");
-        questions.add("Rabbit");
-        questions.add("Phosphophyllite");
-        questions.add("Phos broken");
-        questions.add("Heart");
-        questions.add("Play");
-        questions.add("Emilia");
-        images.add(getDrawable(R.drawable.ch1));
-        images.add(getDrawable(R.drawable.ch2));
-        images.add(getDrawable(R.drawable.ch3));
-        images.add(getDrawable(R.drawable.ch4));
-        images.add(getDrawable(R.drawable.heart));
-        images.add(getDrawable(R.drawable.play));
-        images.add(getDrawable(R.drawable.emilia));
+        questions.add("hinata");
+        questions.add("kanna");
+        questions.add("kurisu");
+        questions.add("mitsuha");
+        questions.add("phosphophyllite");
+        questions.add("diamond");
+        questions.add("naruto");
+        questions.add("dio");
+        questions.add("kaneki");
+        questions.add("kirito");
+        questions.add("lelouch");
+        questions.add("beatrice");
+        questions.add("kamina");
+        questions.add("mob");
+        questions.add("haruka");
+        questions.add("bruno");
+        questions.add("kira");
+        questions.add("rintaro");
+        questions.add("akiko");
+        questions.add("midoriya");
+        images.add(getDrawable(R.drawable.hinata));
+        images.add(getDrawable(R.drawable.kanna));
+        images.add(getDrawable(R.drawable.kurisu));
+        images.add(getDrawable(R.drawable.mitsuha));
+        images.add(getDrawable(R.drawable.phosphophyllite));
+        images.add(getDrawable(R.drawable.diamond));
+        images.add(getDrawable(R.drawable.naruto));
+        images.add(getDrawable(R.drawable.dio));
+        images.add(getDrawable(R.drawable.kaneki));
+        images.add(getDrawable(R.drawable.kirito));
+        images.add(getDrawable(R.drawable.lelouch));
+        images.add(getDrawable(R.drawable.beatrice));
+        images.add(getDrawable(R.drawable.kamina));
+        images.add(getDrawable(R.drawable.mob));
+        images.add(getDrawable(R.drawable.haruka));
+        images.add(getDrawable(R.drawable.bruno));
+        images.add(getDrawable(R.drawable.kira));
+        images.add(getDrawable(R.drawable.rintaro));
+        images.add(getDrawable(R.drawable.akiko));
+        images.add(getDrawable(R.drawable.midoriya));
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void level2Load() {
-        //Linked list
-        questions.add("Kanna");
-        questions.add("Rabbit");
-        questions.add("Emilia");
-        questions.add("Play");
-        images.add(getDrawable(R.drawable.ch1));
-        images.add(getDrawable(R.drawable.ch2));
-        images.add(getDrawable(R.drawable.emilia));
-        images.add(getDrawable(R.drawable.play));
+        questions.add("asta");
+        questions.add("dazai");
+        questions.add("decim");
+        questions.add("hinata");
+        questions.add("isla");
+        questions.add("kaguya");
+        questions.add("kaori");
+        questions.add("kiki");
+        questions.add("lain");
+        questions.add("luffy");
+        questions.add("madoka");
+        questions.add("maquia");
+        questions.add("mikasa");
+        questions.add("natsu");
+        questions.add("rika");
+        questions.add("rin");
+        questions.add("shiro");
+        questions.add("violet");
+        questions.add("yato");
+        questions.add("yukio");
+        images.add(getDrawable(R.drawable.asta));
+        images.add(getDrawable(R.drawable.dazai));
+        images.add(getDrawable(R.drawable.decim));
+        images.add(getDrawable(R.drawable.hinata2));
+        images.add(getDrawable(R.drawable.isla));
+        images.add(getDrawable(R.drawable.kaguya));
+        images.add(getDrawable(R.drawable.kaori));
+        images.add(getDrawable(R.drawable.kiki));
+        images.add(getDrawable(R.drawable.lain));
+        images.add(getDrawable(R.drawable.luffy));
+        images.add(getDrawable(R.drawable.madoka));
+        images.add(getDrawable(R.drawable.maquia));
+        images.add(getDrawable(R.drawable.mikasa));
+        images.add(getDrawable(R.drawable.natsu));
+        images.add(getDrawable(R.drawable.rika));
+        images.add(getDrawable(R.drawable.rin));
+        images.add(getDrawable(R.drawable.shiro));
+        images.add(getDrawable(R.drawable.violet));
+        images.add(getDrawable(R.drawable.yato));
+        images.add(getDrawable(R.drawable.yukio));
     }
 
     public void level3Load() {
-        //Linked list
-        questions.add("Kanna");
-        questions.add("Rabbit");
-        questions.add("Phosphophyllite");
-        questions.add("Phos broken");
-        questions.add("Heart");
-        questions.add("Play");
-        questions.add("Emilia");
-        images.add(getDrawable(R.drawable.ch1));
-        images.add(getDrawable(R.drawable.ch2));
-        images.add(getDrawable(R.drawable.ch3));
-        images.add(getDrawable(R.drawable.ch4));
-        images.add(getDrawable(R.drawable.heart));
-        images.add(getDrawable(R.drawable.play));
-        images.add(getDrawable(R.drawable.emilia));
+
+
     }
 
     public void level4Load() {
-        //Linked list
-        questions.add("Kanna");
-        questions.add("Rabbit");
-        questions.add("Phosphophyllite");
-        questions.add("Phos broken");
-        questions.add("Heart");
-        questions.add("Play");
-        questions.add("Emilia");
-        images.add(getDrawable(R.drawable.ch1));
-        images.add(getDrawable(R.drawable.ch2));
-        images.add(getDrawable(R.drawable.ch3));
-        images.add(getDrawable(R.drawable.ch4));
-        images.add(getDrawable(R.drawable.heart));
-        images.add(getDrawable(R.drawable.play));
-        images.add(getDrawable(R.drawable.emilia));
+
+
     }
 
     public void level5Load() {
-        //Linked list
-        questions.add("Kanna");
-        questions.add("Rabbit");
-        questions.add("Phosphophyllite");
-        questions.add("Phos broken");
-        questions.add("Heart");
-        questions.add("Play");
-        questions.add("Emilia");
-        images.add(getDrawable(R.drawable.ch1));
-        images.add(getDrawable(R.drawable.ch2));
-        images.add(getDrawable(R.drawable.ch3));
-        images.add(getDrawable(R.drawable.ch4));
-        images.add(getDrawable(R.drawable.heart));
-        images.add(getDrawable(R.drawable.play));
-        images.add(getDrawable(R.drawable.emilia));
+
     }
 }

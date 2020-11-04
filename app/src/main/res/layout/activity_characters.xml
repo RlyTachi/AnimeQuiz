@@ -68,9 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:contentDescription="@string/characters"
-                app:srcCompat="@drawable/emilia"
-                tools:srcCompat="@drawable/emilia" />
+                android:contentDescription="@string/characters" />
         </FrameLayout>
 
         <FrameLayout

@@ -23,64 +23,89 @@
             android:textColor="@color/icons"
             android:textSize="22sp" />
 
-        <Button
-            android:id="@+id/itLevel1"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/btn_1"
-            android:fontFamily="@font/pixel"
-            android:text="@string/level1" />
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/itLevel2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/btn_1_locked"
-            android:fontFamily="@font/pixel"
-            android:text="@string/level2" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/itLevel3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/btn_1_locked"
-            android:fontFamily="@font/pixel"
-            android:text="@string/level3" />
+                <Button
+                    android:id="@+id/itLevel1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/btn_1"
+                    android:fontFamily="@font/pixel"
+                    android:text="@string/level1" />
 
-        <Button
-            android:id="@+id/itLevel4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/btn_1_locked"
-            android:fontFamily="@font/pixel"
-            android:text="@string/level4" />
+                <Button
+                    android:id="@+id/itLevel2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/btn_1_locked"
+                    android:fontFamily="@font/pixel"
+                    android:text="@string/level2" />
 
-        <Button
-            android:id="@+id/itLevel5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/btn_1_locked"
-            android:fontFamily="@font/pixel"
-            android:text="@string/level5" />
+                <Button
+                    android:id="@+id/itLevel3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/btn_1_locked"
+                    android:fontFamily="@font/pixel"
+                    android:text="@string/level3" />
+
+                <Button
+                    android:id="@+id/itLevel4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/btn_1_locked"
+                    android:fontFamily="@font/pixel"
+                    android:text="@string/level4" />
+
+                <Button
+                    android:id="@+id/itLevel5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/btn_1_locked"
+                    android:fontFamily="@font/pixel"
+                    android:text="@string/level5" />
+
+                <Button
+                    android:id="@+id/soon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/btn_1_locked"
+                    android:enabled="false"
+                    android:fontFamily="@font/pixel"
+                    android:text="@string/soon" />
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

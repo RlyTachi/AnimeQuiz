@@ -55,6 +55,15 @@ public class Share extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+        try {
+            System.out.println(Language.getLang());
+            if (Language.getLang().equals("ru")) {
+                getBaseContext().getResources().updateConfiguration(Language.setLocationRu(), null);
+            } else {
+                getBaseContext().getResources().updateConfiguration(Language.setLocationEn(), null);
+            }
+        } catch (Exception ignore) {
+        }
         super.onStart();
     }
 

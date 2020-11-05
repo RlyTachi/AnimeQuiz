@@ -24,10 +24,12 @@
     <string name="share1">Спасибо за установку этой игры и за поддержку!</string>
     <string name="share2">Рассказывайте друзьям и подписывайтесь, следите за обновлениями и новостями!</string>
     <string name="share3">Там вы найдете актуальные промокоды, которые сможете активировать внутри игры.</string>
+    <string name="share4">Также присылайте предложения по улучшению игры и баги, которые вы нашли, в дальнейшем они будут исправлены!</string>
     <string name="vk">Перейти в Вк</string>
     <string name="twitter">Перейти в Твиттер</string>
     <string name="shop">Магазин</string>
     <string name="soon">Скоро</string>
+    <string name="levelPrevious">Разблокируйте предыдущий уровень</string>
 
     <string name="characters">Персонажи</string>
     <string name="locations">Локации</string>

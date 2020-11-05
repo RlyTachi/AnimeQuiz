@@ -40,7 +40,7 @@
                         android:layout_height="100dp"
                         android:layout_weight="1"
                         android:contentDescription="@string/characters"
-                        android:src="@drawable/emilia" />
+                        android:src="@drawable/characterslogo" />
 
                     <LinearLayout
                         android:id="@+id/chTextLayout"

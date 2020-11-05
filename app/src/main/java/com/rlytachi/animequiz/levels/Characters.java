@@ -623,7 +623,7 @@ public class Characters extends AppCompatActivity {
         final Button btn4 = findViewById(R.id.btnCh4);
         final ProgressBar progressBar = findViewById(R.id.progressBar);
         //Threads
-        myTimer myTimer = new myTimer(16000, 1000);
+        myTimer myTimer = new myTimer(11000, 1000);
 
         @Override
         public void run() {
@@ -640,7 +640,7 @@ public class Characters extends AppCompatActivity {
             myTimer.start();
 
             //Полоса времени
-            progressBar.setMax(15);
+            progressBar.setMax(10);
 
             //Проверка статусов
             while (true) {
@@ -873,9 +873,48 @@ public class Characters extends AppCompatActivity {
         images.add(getDrawable(R.drawable.yukio));
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void level3Load() {
-
-
+        questions.add("antarcticite");
+        questions.add("eugeo");
+        questions.add("felix");
+        questions.add("fubuki");
+        questions.add("hachiman");
+        questions.add("itachi");
+        questions.add("izaya");
+        questions.add("keima");
+        questions.add("maho");
+        questions.add("mashiro");
+        questions.add("mei");
+        questions.add("mikaela");
+        questions.add("mirai");
+        questions.add("sagiri");
+        questions.add("saiko");
+        questions.add("shana");
+        questions.add("suzaku");
+        questions.add("taiga");
+        questions.add("tomoko");
+        questions.add("zoro");
+        images.add(getDrawable(R.drawable.antarcticite));
+        images.add(getDrawable(R.drawable.eugeo));
+        images.add(getDrawable(R.drawable.felix));
+        images.add(getDrawable(R.drawable.fubuki));
+        images.add(getDrawable(R.drawable.hachiman));
+        images.add(getDrawable(R.drawable.itachi));
+        images.add(getDrawable(R.drawable.izaya));
+        images.add(getDrawable(R.drawable.keima));
+        images.add(getDrawable(R.drawable.maho));
+        images.add(getDrawable(R.drawable.mashiro));
+        images.add(getDrawable(R.drawable.mei));
+        images.add(getDrawable(R.drawable.mikaela));
+        images.add(getDrawable(R.drawable.mirai));
+        images.add(getDrawable(R.drawable.sagiri));
+        images.add(getDrawable(R.drawable.saiko));
+        images.add(getDrawable(R.drawable.shana));
+        images.add(getDrawable(R.drawable.suzaku));
+        images.add(getDrawable(R.drawable.taiga));
+        images.add(getDrawable(R.drawable.tomoko));
+        images.add(getDrawable(R.drawable.zoro));
     }
 
     public void level4Load() {

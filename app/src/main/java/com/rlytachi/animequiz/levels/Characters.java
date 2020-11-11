@@ -24,8 +24,6 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.rlytachi.animequiz.Game;
 import com.rlytachi.animequiz.Language;
 import com.rlytachi.animequiz.LevelChoice;
@@ -186,6 +184,7 @@ public class Characters extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         playSound(out);
+        saveAction();
         finish();
         startActivity(new Intent(Characters.this, Game.class));
     }
@@ -784,7 +783,6 @@ public class Characters extends AppCompatActivity {
     }
 
     //Levels
-    //
     @SuppressLint("UseCompatLoadingForDrawables")
     public void level1Load() {
         questions.add("hinata");
@@ -917,12 +915,91 @@ public class Characters extends AppCompatActivity {
         images.add(getDrawable(R.drawable.zoro));
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void level4Load() {
-
-
+        questions.add("boogiepop");
+        questions.add("edward");
+        questions.add("guts");
+        questions.add("haise");
+        questions.add("hitagi");
+        questions.add("hyakkimaru");
+        questions.add("inori");
+        questions.add("kanade");
+        questions.add("kayo");
+        questions.add("makoto");
+        questions.add("moritaka");
+        questions.add("mugi");
+        questions.add("nine");
+        questions.add("sawa");
+        questions.add("sekai");
+        questions.add("senkuu");
+        questions.add("shuu");
+        questions.add("twelve");
+        questions.add("yuno");
+        questions.add("zero two");
+        images.add(getDrawable(R.drawable.boogiepop));
+        images.add(getDrawable(R.drawable.edward));
+        images.add(getDrawable(R.drawable.guts));
+        images.add(getDrawable(R.drawable.haise));
+        images.add(getDrawable(R.drawable.hitagi));
+        images.add(getDrawable(R.drawable.hyakkimaru));
+        images.add(getDrawable(R.drawable.inori));
+        images.add(getDrawable(R.drawable.kanade));
+        images.add(getDrawable(R.drawable.kayo));
+        images.add(getDrawable(R.drawable.makoto));
+        images.add(getDrawable(R.drawable.moritaka));
+        images.add(getDrawable(R.drawable.mugi));
+        images.add(getDrawable(R.drawable.nine));
+        images.add(getDrawable(R.drawable.sawa));
+        images.add(getDrawable(R.drawable.sekai));
+        images.add(getDrawable(R.drawable.senkuu));
+        images.add(getDrawable(R.drawable.shuu));
+        images.add(getDrawable(R.drawable.twelve));
+        images.add(getDrawable(R.drawable.yuno));
+        images.add(getDrawable(R.drawable.zero_two));
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void level5Load() {
-
+        questions.add("alice");
+        questions.add("chitoge");
+        questions.add("genos");
+        questions.add("haruka");
+        questions.add("hei");
+        questions.add("hestia");
+        questions.add("holo");
+        questions.add("houtarou");
+        questions.add("ichika");
+        questions.add("kei");
+        questions.add("michiru");
+        questions.add("nao");
+        questions.add("rin");
+        questions.add("sadao");
+        questions.add("sasuke");
+        questions.add("satsuki");
+        questions.add("shinichi");
+        questions.add("shouya");
+        questions.add("subaru");
+        questions.add("yuuta");
+        images.add(getDrawable(R.drawable.alice));
+        images.add(getDrawable(R.drawable.chitoge));
+        images.add(getDrawable(R.drawable.genos));
+        images.add(getDrawable(R.drawable.haruka2));
+        images.add(getDrawable(R.drawable.hei));
+        images.add(getDrawable(R.drawable.hestia));
+        images.add(getDrawable(R.drawable.holo));
+        images.add(getDrawable(R.drawable.houtarou));
+        images.add(getDrawable(R.drawable.ichika));
+        images.add(getDrawable(R.drawable.kei));
+        images.add(getDrawable(R.drawable.michiru));
+        images.add(getDrawable(R.drawable.nao));
+        images.add(getDrawable(R.drawable.rin2));
+        images.add(getDrawable(R.drawable.sadao));
+        images.add(getDrawable(R.drawable.sasuke));
+        images.add(getDrawable(R.drawable.satsuki));
+        images.add(getDrawable(R.drawable.shinichi));
+        images.add(getDrawable(R.drawable.shouya));
+        images.add(getDrawable(R.drawable.subaru));
+        images.add(getDrawable(R.drawable.yuuta));
     }
 }

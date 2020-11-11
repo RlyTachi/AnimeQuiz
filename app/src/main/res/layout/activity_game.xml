@@ -91,7 +91,7 @@
                         android:layout_height="100dp"
                         android:layout_weight="1"
                         android:contentDescription="@string/locations"
-                        android:src="@drawable/emilia" />
+                        android:src="@drawable/characterslogo" />
 
                     <LinearLayout
                         android:id="@+id/locTextLayout"
@@ -141,7 +141,7 @@
                         android:layout_height="100dp"
                         android:layout_weight="1"
                         android:contentDescription="@string/titles"
-                        android:src="@drawable/emilia" />
+                        android:src="@drawable/characterslogo" />
 
                     <LinearLayout
                         android:id="@+id/tiTextLayout"
@@ -191,7 +191,7 @@
                         android:layout_height="100dp"
                         android:layout_weight="1"
                         android:contentDescription="@string/titles"
-                        android:src="@drawable/emilia" />
+                        android:src="@drawable/characterslogo" />
 
                     <LinearLayout
                         android:id="@+id/itTextLayout"
@@ -241,7 +241,7 @@
                         android:layout_height="100dp"
                         android:layout_weight="1"
                         android:contentDescription="@string/titles"
-                        android:src="@drawable/emilia" />
+                        android:src="@drawable/soonlogo" />
 
                     <LinearLayout
                         android:id="@+id/evTextLayout"

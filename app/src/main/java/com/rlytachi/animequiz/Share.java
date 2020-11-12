@@ -27,7 +27,7 @@ public class Share extends AppCompatActivity {
         in = MediaPlayer.create(this, R.raw.in);
         out = MediaPlayer.create(this, R.raw.out);
 
-        MobileAds.initialize(this, "ca-app-pub-7217958397153183~4133073169");
+        MobileAds.initialize(this);
         AdView adView = findViewById(R.id.adView2);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
@@ -58,9 +58,9 @@ public class Share extends AppCompatActivity {
         try {
             System.out.println(Language.getLang());
             if (Language.getLang().equals("ru")) {
-                getBaseContext().getResources().updateConfiguration(Language.setLocationRu(), null);
+                MyContextWrapper.wrap(getBaseContext(), "ru");
             } else {
-                getBaseContext().getResources().updateConfiguration(Language.setLocationEn(), null);
+                MyContextWrapper.wrap(getBaseContext(), "en");
             }
         } catch (Exception ignore) {
         }

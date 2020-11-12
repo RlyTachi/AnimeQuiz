@@ -41,6 +41,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         share.setOnClickListener(this);
 
         loadAction();
+
+        try {
+            System.out.println(Language.getLang());
+            if (Language.getLang().equals("ru")) {
+                MyContextWrapper.wrap(getBaseContext(), "ru");
+            } else {
+                MyContextWrapper.wrap(getBaseContext(), "en");
+            }
+        } catch (Exception ignore) {
+        }
     }
 
     @Override
@@ -48,9 +58,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             System.out.println(Language.getLang());
             if (Language.getLang().equals("ru")) {
-                getBaseContext().getResources().updateConfiguration(Language.setLocationRu(), null);
+                MyContextWrapper.wrap(getBaseContext(), "ru");
             } else {
-                getBaseContext().getResources().updateConfiguration(Language.setLocationEn(), null);
+                MyContextWrapper.wrap(getBaseContext(), "en");
             }
         } catch (Exception ignore) {
         }

@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -89,10 +91,10 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         loadAction();
         if (Language.getLang().equals("ru")) {
             langBtn1.setChecked(true);
-            getBaseContext().getResources().updateConfiguration(Language.setLocationRu(), null);
+            MyContextWrapper.wrap(getBaseContext(), "ru");
         } else {
             langBtn2.setChecked(true);
-            getBaseContext().getResources().updateConfiguration(Language.setLocationEn(), null);
+            MyContextWrapper.wrap(getBaseContext(), "en");
         }
         if (Settings.getSounds()) {
             soundsBtn1.setChecked(true);
@@ -114,15 +116,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     protected void onDestroy() {
-        try {
-            System.out.println(Language.getLang());
-            if (Language.getLang().equals("ru")) {
-                getBaseContext().getResources().updateConfiguration(Language.setLocationRu(), null);
-            } else {
-                getBaseContext().getResources().updateConfiguration(Language.setLocationEn(), null);
-            }
-        } catch (Exception ignore) {
-        }
+
         saveAction();
         super.onDestroy();
     }
@@ -151,14 +145,15 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
 
             case R.id.langRadio1:
                 playSound(in);
-                getBaseContext().getResources().updateConfiguration(Language.setLocationRu(), null);
+                MyContextWrapper.wrap(getBaseContext(), "ru");
                 saveAction();
                 finish();
                 startActivity(new Intent(Settings.this, Settings.class));
                 break;
             case R.id.langRadio2:
                 playSound(out);
-                getBaseContext().getResources().updateConfiguration(Language.setLocationEn(), null);
+                MyContextWrapper.wrap(getBaseContext(), "en");
+
                 saveAction();
                 finish();
                 startActivity(new Intent(Settings.this, Settings.class));

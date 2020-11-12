@@ -27,6 +27,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.rlytachi.animequiz.Game;
 import com.rlytachi.animequiz.Language;
 import com.rlytachi.animequiz.LevelChoice;
+import com.rlytachi.animequiz.MyContextWrapper;
 import com.rlytachi.animequiz.PromoStorage;
 import com.rlytachi.animequiz.R;
 import com.rlytachi.animequiz.Score;
@@ -143,9 +144,9 @@ public class Characters extends AppCompatActivity {
         try {
             System.out.println(Language.getLang());
             if (Language.getLang().equals("ru")) {
-                getBaseContext().getResources().updateConfiguration(Language.setLocationRu(), null);
+                MyContextWrapper.wrap(getBaseContext(), "ru");
             } else {
-                getBaseContext().getResources().updateConfiguration(Language.setLocationEn(), null);
+                MyContextWrapper.wrap(getBaseContext(), "en");
             }
         } catch (Exception ignore) {
         }
@@ -163,15 +164,6 @@ public class Characters extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        try {
-            System.out.println(Language.getLang());
-            if (Language.getLang().equals("ru")) {
-                getBaseContext().getResources().updateConfiguration(Language.setLocationRu(), null);
-            } else {
-                getBaseContext().getResources().updateConfiguration(Language.setLocationEn(), null);
-            }
-        } catch (Exception ignore) {
-        }
         saveAction();
         image = 0;
         setId(-1);

@@ -35,7 +35,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     public static final String APP_PREFERENCES_LOCATIONS_LEVELS = "LocationsLevels";
     public static final String APP_PREFERENCES_TITLES_LEVELS = "TitlesLevels";
     public static final String APP_PREFERENCES_ITEMS_LEVELS = "ItemsLevels";
-    public static final String APP_PREFERENCES_EVENTS_LEVELS = "EventsLevels";
+//    public static final String APP_PREFERENCES_EVENTS_LEVELS = "EventsLevels";
     final int BUTTON_COUNT = 5;
     int score = Score.getScore();
     LevelChoice ch = new LevelChoice("ch");
@@ -93,9 +93,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         try {
             System.out.println(Language.getLang());
             if (Language.getLang().equals("ru")) {
-                getBaseContext().getResources().updateConfiguration(Language.setLocationRu(), null);
+                MyContextWrapper.wrap(getBaseContext(), "ru");
             } else {
-                getBaseContext().getResources().updateConfiguration(Language.setLocationEn(), null);
+                MyContextWrapper.wrap(getBaseContext(), "en");
             }
         } catch (Exception ignore) {
         }
@@ -116,15 +116,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onDestroy() {
-        try {
-            System.out.println(Language.getLang());
-            if (Language.getLang().equals("ru")) {
-                getBaseContext().getResources().updateConfiguration(Language.setLocationRu(), null);
-            } else {
-                getBaseContext().getResources().updateConfiguration(Language.setLocationEn(), null);
-            }
-        } catch (Exception ignore) {
-        }
         saveAction();
         dialog.dismiss();
         super.onDestroy();

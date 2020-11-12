@@ -33,7 +33,7 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
         in = MediaPlayer.create(this, R.raw.in);
         out = MediaPlayer.create(this, R.raw.out);
 
-        MobileAds.initialize(this, "ca-app-pub-7217958397153183~4133073169");
+        MobileAds.initialize(this);
         AdView adView = findViewById(R.id.adView3);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
@@ -58,6 +58,15 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
             startActivity(new Intent(this, Game.class));
         });
 
+        try {
+            System.out.println(Language.getLang());
+            if (Language.getLang().equals("ru")) {
+                MyContextWrapper.wrap(getBaseContext(), "ru");
+            } else {
+                MyContextWrapper.wrap(getBaseContext(), "en");
+            }
+        } catch (Exception ignore) {
+        }
     }
 
     @Override

@@ -25,22 +25,24 @@
     <string name="share2">Рассказывайте друзьям и подписывайтесь, следите за обновлениями и новостями!</string>
     <string name="share3">Там вы найдете актуальные промокоды, которые сможете активировать внутри игры.</string>
     <string name="share4">Также присылайте предложения по улучшению игры и баги, которые вы нашли, в дальнейшем они будут исправлены!</string>
+    <string name="shineSite">Перейти на официальный сайт игры</string>
     <string name="vk">Перейти в Вк</string>
     <string name="twitter">Перейти в Твиттер</string>
     <string name="shop">Магазин</string>
     <string name="soon">Скоро</string>
     <string name="levelPrevious">Разблокируйте предыдущий уровень</string>
-
+    <string name="get">Получить</string>
+    <string name="scoreLeftAnswer">Закончились очки?</string>
+    <string name="earnScoresByWatch">Получите очки за просмотр короткой рекламы!</string>
     <string name="characters">Персонажи</string>
     <string name="locations">Локации</string>
     <string name="titles">Тайтлы</string>
     <string name="unlocked">Доступно: </string>
-    <string name="unlockLevel">Разблокировать уровень за 20 очков</string>
+    <string name="unlockLevel">Разблокировать уровень за</string>
     <string name="items">Предметы</string>
     <string name="events">События</string>
     <string name="chAnswer">Как зовут персонажа?</string>
     <string name="heart">Жизни</string>
-
     <string name="use">Использовать</string>
     <string name="typePromo">Введите промокод</string>
     <string name="help">Помощь</string>
@@ -60,12 +62,9 @@
     <string name="timesUp">Время вышло!</string>
     <string name="earned">Заработано: </string>
     <string name="scores"> очков.</string>
-
     <string name="level1">Уровень 1</string>
     <string name="level2">Уровень 2</string>
     <string name="level3">Уровень 3</string>
     <string name="level4">Уровень 4</string>
     <string name="level5">Уровень 5</string>
-
-
 </resources>

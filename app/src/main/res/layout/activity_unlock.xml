@@ -39,6 +39,37 @@
             android:textSize="28sp" />
         />
     </LinearLayout>
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:fontFamily="@font/pixel"
+        android:text="@string/scoreLeftAnswer"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:fontFamily="@font/pixel"
+        android:text="@string/earnScoresByWatch"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/buttonWatch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_weight="0"
+        android:background="@drawable/btn_2"
+        android:fontFamily="@font/pixel"
+        android:text="@string/get" />
+
 
     <TextView
         android:id="@+id/textView2"
@@ -47,7 +78,7 @@
         android:layout_margin="25dp"
         android:fontFamily="@font/pixel"
         android:text="@string/unlockText"
-        android:textSize="28sp" />
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/buttonBuy"

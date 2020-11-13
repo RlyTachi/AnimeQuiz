@@ -35,7 +35,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     public static final String APP_PREFERENCES_LOCATIONS_LEVELS = "LocationsLevels";
     public static final String APP_PREFERENCES_TITLES_LEVELS = "TitlesLevels";
     public static final String APP_PREFERENCES_ITEMS_LEVELS = "ItemsLevels";
-//    public static final String APP_PREFERENCES_EVENTS_LEVELS = "EventsLevels";
+    //    public static final String APP_PREFERENCES_EVENTS_LEVELS = "EventsLevels";
     final int BUTTON_COUNT = 5;
     int score = Score.getScore();
     LevelChoice ch = new LevelChoice("ch");
@@ -47,7 +47,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     Boolean[] locLevels = loc.getLevels();
     Boolean[] tiLevels = ti.getLevels();
     Boolean[] itLevels = it.getLevels();
-    Boolean[] evLevels = ev.getLevels();
+    //    Boolean[] evLevels = ev.getLevels();
     Dialog dialog;
 
     @SuppressLint("SetTextI18n")
@@ -267,7 +267,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             case R.id.chLevel2:
                 playSound(in);
                 if (!chLevels[1]) {
-                    unlockDialog(chLevels, 1, 1);
+                    unlockDialog(chLevels, 1, 1, 20);
                 } else {
                     finish();
                     startActivity(new Intent(this, Characters.class));
@@ -279,7 +279,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 playSound(in);
                 if (chLevels[1]) {
                     if (!chLevels[2]) {
-                        unlockDialog(chLevels, 2, 1);
+                        unlockDialog(chLevels, 2, 1, 20);
                     } else {
                         finish();
                         startActivity(new Intent(this, Characters.class));
@@ -293,7 +293,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 playSound(in);
                 if (chLevels[2]) {
                     if (!chLevels[3]) {
-                        unlockDialog(chLevels, 3, 1);
+                        unlockDialog(chLevels, 3, 1, 30);
                     } else {
                         finish();
                         startActivity(new Intent(this, Characters.class));
@@ -307,7 +307,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 playSound(in);
                 if (chLevels[3]) {
                     if (!chLevels[4]) {
-                        unlockDialog(chLevels, 4, 1);
+                        unlockDialog(chLevels, 4, 1, 30);
                     } else {
                         finish();
                         startActivity(new Intent(this, Characters.class));
@@ -327,7 +327,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             case R.id.locLevel2:
                 playSound(in);
                 if (!locLevels[1]) {
-                    unlockDialog(locLevels, 1, 2);
+                    unlockDialog(locLevels, 1, 2, 30);
                 } else {
                     finish();
                     //todo level 2 locations
@@ -338,7 +338,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 playSound(in);
                 if (locLevels[1]) {
                     if (!locLevels[2]) {
-                        unlockDialog(locLevels, 2, 2);
+                        unlockDialog(locLevels, 2, 2, 30);
                     } else {
                         finish();
                         //todo level 3 locations
@@ -352,7 +352,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 playSound(in);
                 if (locLevels[2]) {
                     if (!locLevels[3]) {
-                        unlockDialog(locLevels, 3, 2);
+                        unlockDialog(locLevels, 3, 2, 60);
                     } else {
                         finish();
                         //todo level 4 locations
@@ -366,7 +366,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 playSound(in);
                 if (locLevels[3]) {
                     if (!locLevels[4]) {
-                        unlockDialog(locLevels, 4, 2);
+                        unlockDialog(locLevels, 4, 2, 60);
                     } else {
                         finish();
                         //todo level 5 locations
@@ -386,7 +386,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             case R.id.tiLevel2:
                 playSound(in);
                 if (!tiLevels[1]) {
-                    unlockDialog(tiLevels, 1, 3);
+                    unlockDialog(tiLevels, 1, 3, 20);
                 } else {
                     finish();
                     //todo level 2 titles
@@ -397,7 +397,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 playSound(in);
                 if (tiLevels[1]) {
                     if (!tiLevels[2]) {
-                        unlockDialog(tiLevels, 2, 3);
+                        unlockDialog(tiLevels, 2, 3, 20);
                     } else {
                         finish();
                         //todo level 3 titles
@@ -411,7 +411,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 playSound(in);
                 if (tiLevels[2]) {
                     if (!tiLevels[3]) {
-                        unlockDialog(tiLevels, 3, 3);
+                        unlockDialog(tiLevels, 3, 3, 30);
                     } else {
                         finish();
                         //todo level 4 titles
@@ -425,7 +425,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 playSound(in);
                 if (tiLevels[3]) {
                     if (!tiLevels[4]) {
-                        unlockDialog(tiLevels, 4, 3);
+                        unlockDialog(tiLevels, 4, 3, 30);
                     } else {
                         finish();
                         //todo level 5 titles
@@ -445,7 +445,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             case R.id.itLevel2:
                 playSound(in);
                 if (!itLevels[1]) {
-                    unlockDialog(itLevels, 1, 4);
+                    unlockDialog(itLevels, 1, 4, 30);
                 } else {
                     finish();
                     //todo level 2 items
@@ -456,7 +456,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 playSound(in);
                 if (itLevels[1]) {
                     if (!itLevels[2]) {
-                        unlockDialog(itLevels, 2, 4);
+                        unlockDialog(itLevels, 2, 4, 30);
                     } else {
                         finish();
                         //todo level 3 items
@@ -470,7 +470,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 playSound(in);
                 if (tiLevels[2]) {
                     if (!itLevels[3]) {
-                        unlockDialog(itLevels, 3, 4);
+                        unlockDialog(itLevels, 3, 4, 40);
                     } else {
                         finish();
                         //todo level 4 items
@@ -484,7 +484,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 playSound(in);
                 if (tiLevels[3]) {
                     if (!itLevels[4]) {
-                        unlockDialog(itLevels, 4, 4);
+                        unlockDialog(itLevels, 4, 4, 40);
                     } else {
                         finish();
                         //todo level 5 items
@@ -548,7 +548,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     }
 
     @SuppressLint("SetTextI18n")
-    public boolean unlockDialog(Boolean[] levels, int index, int type) {
+    public boolean unlockDialog(Boolean[] levels, int index, int type, int cost) {
         Dialog unlockDialog = new Dialog(Game.this);
         unlockDialog.setContentView(R.layout.activity_unlock_action);
         unlockDialog.show();
@@ -557,12 +557,16 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         final Button okButton = unlockDialog.findViewById(R.id.unlockBtn);
         final TextView unlockScoreLeftView = unlockDialog.findViewById(R.id.unlockScoreLeftView);
         final TextView unlockWarning = unlockDialog.findViewById(R.id.unlockNotEnoughView);
+        final TextView unlockCost = unlockDialog.findViewById(R.id.unlockTextView);
+
+        unlockCost.setText(getString(R.string.unlockLevel) + " " + cost + " " + getString(R.string.scores));
 
         unlockScoreLeftView.setText(getString(R.string.scoreLeft) + " " + Score.getScore());
         okButton.setOnClickListener(v -> {
             okButton.setAnimation(animButton);
             okButton.startAnimation(animButton);
-            if (Score.minusScore(20)) {
+
+            if (Score.minusScore(cost)) {
                 playSound(out);
                 unlockDialog.dismiss();
                 levels[index] = true;
@@ -588,6 +592,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 unlockWarning.setAnimation(animEnd);
                 unlockWarning.startAnimation(animEnd);
                 unlockWarning.setVisibility(View.INVISIBLE);
+                finish();
+                startActivity(new Intent(this, Unlock.class));
             }
         });
         return true;

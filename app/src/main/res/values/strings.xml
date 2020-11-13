@@ -25,30 +25,32 @@
     <string name="share2">Tell your friends and subscribe, stay tuned for updates and news!</string>
     <string name="share3">There you will find the current promotional codes that can be activated in the game.</string>
     <string name="share4">Also send suggestions for improving the game and bugs that you found, in the future they will be fixed!</string>
+    <string name="shineSite">Go to the official site of the game</string>
     <string name="vk">Go to VK</string>
     <string name="twitter">Go to Twitter</string>
     <string name="shop">Shop</string>
     <string name="soon">Soon</string>
     <string name="levelPrevious">Unlock the previous level</string>
-
+    <string name="get">Get</string>
+    <string name="scoreLeftAnswer">Out of points?</string>
+    <string name="earnScoresByWatch">Get points for watching short ads!</string>
     <string name="characters">Characters</string>
     <string name="locations">Locations</string>
     <string name="titles">Titles</string>
     <string name="unlocked">Unlocked: </string>
-    <string name="unlockLevel">Unlock the level for 20 scores</string>
+    <string name="unlockLevel">Unlock the level for</string>
     <string name="items">Items</string>
     <string name="events">Events</string>
     <string name="chAnswer">What is the character\'s name?</string>
     <string name="heart">Hearts</string>
-
     <string name="use">Use</string>
     <string name="typePromo">Enter promo code</string>
     <string name="help">Help</string>
-    <string name="costHelp">Cost: 5 scores</string>
-    <string name="scoreLeft">Score left:</string>
+    <string name="costHelp">Cost: 5 points</string>
+    <string name="scoreLeft">Points left:</string>
     <string name="takeHelp">Get help</string>
     <string name="takeHeath">Replenish health</string>
-    <string name="takeScore">Add score</string>
+    <string name="takeScore">Add point</string>
     <string name="notEnough">Not enough</string>
     <string name="availableLevels">Available levels</string>
     <string name="win">Level passed!</string>
@@ -59,13 +61,10 @@
     <string name="seconds"> sec.</string>
     <string name="timesUp">Time\'s up!</string>
     <string name="earned">Earned: </string>
-    <string name="scores"> scores.</string>
-
+    <string name="scores"> points.</string>
     <string name="level1">Level 1</string>
     <string name="level2">Level 2</string>
     <string name="level3">Level 3</string>
     <string name="level4">Level 4</string>
     <string name="level5">Level 5</string>
-
-
 </resources>

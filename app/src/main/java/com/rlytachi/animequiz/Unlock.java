@@ -51,6 +51,15 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
 
         });
 
+        final Button get = findViewById(R.id.buttonWatch);
+        get.setOnClickListener(v -> {
+            Settings.playSound(in);
+            get.setAnimation(animButton);
+            get.startAnimation(animButton);
+            //TODO watch ad
+
+        });
+
         final ImageView backBtn = findViewById(R.id.unlockBackView);
         backBtn.setOnClickListener(v -> {
             Settings.playSound(out);
@@ -78,6 +87,16 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
     protected void onDestroy() {
         if (billingProcessor != null)
             billingProcessor.release();
+
+        try {
+            System.out.println(Language.getLang());
+            if (Language.getLang().equals("ru")) {
+                MyContextWrapper.wrap(getBaseContext(), "ru");
+            } else {
+                MyContextWrapper.wrap(getBaseContext(), "en");
+            }
+        } catch (Exception ignore) {
+        }
         super.onDestroy();
     }
 

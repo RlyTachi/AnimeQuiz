@@ -51,10 +51,6 @@ public class Share extends AppCompatActivity {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/emanongn")));
         });
 
-    }
-
-    @Override
-    protected void onStart() {
         try {
             System.out.println(Language.getLang());
             if (Language.getLang().equals("ru")) {
@@ -64,11 +60,20 @@ public class Share extends AppCompatActivity {
             }
         } catch (Exception ignore) {
         }
-        super.onStart();
     }
 
     @Override
     protected void onDestroy() {
+        try {
+            System.out.println(Language.getLang());
+            if (Language.getLang().equals("ru")) {
+                MyContextWrapper.wrap(getBaseContext(), "ru");
+            } else {
+                MyContextWrapper.wrap(getBaseContext(), "en");
+            }
+        } catch (Exception ignore) {
+        }
+
         super.onDestroy();
     }
 

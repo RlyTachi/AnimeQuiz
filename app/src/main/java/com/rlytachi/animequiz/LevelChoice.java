@@ -20,7 +20,11 @@ public class LevelChoice {
     }
 
     public void setLevels(Boolean[] levels) {
-        this.levels = levels;
+        this.levels[0] = levels[0];
+        this.levels[1] = levels[1];
+        this.levels[2] = levels[2];
+        this.levels[3] = levels[3];
+        this.levels[4] = levels[4];
     }
 
     public String getType() {

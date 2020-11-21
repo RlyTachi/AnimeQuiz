@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rlytachi.animequiz.levels.Characters;
+import com.rlytachi.animequiz.levels.Locations;
 
 import java.util.Locale;
 
@@ -99,7 +102,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             }
         } catch (Exception ignore) {
         }
-
     }
 
     @Override
@@ -116,6 +118,15 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onDestroy() {
+        try {
+            System.out.println(Language.getLang());
+            if (Language.getLang().equals("ru")) {
+                MyContextWrapper.wrap(getBaseContext(), "ru");
+            } else {
+                MyContextWrapper.wrap(getBaseContext(), "en");
+            }
+        } catch (Exception ignore) {
+        }
         saveAction();
         dialog.dismiss();
         super.onDestroy();
@@ -321,7 +332,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             //Locations levels
             case R.id.locLevel1:
                 playSound(in);
+                warningDialog();
                 LevelChoice.setLevel(1);
+
                 //todo level 1 locations
                 break;
             case R.id.locLevel2:
@@ -330,6 +343,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     unlockDialog(locLevels, 1, 2, 30);
                 } else {
                     finish();
+                    startActivity(new Intent(this, Locations.class));
                     //todo level 2 locations
                     LevelChoice.setLevel(2);
                 }
@@ -341,6 +355,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                         unlockDialog(locLevels, 2, 2, 30);
                     } else {
                         finish();
+                        startActivity(new Intent(this, Locations.class));
                         //todo level 3 locations
                         LevelChoice.setLevel(3);
                     }
@@ -355,6 +370,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                         unlockDialog(locLevels, 3, 2, 60);
                     } else {
                         finish();
+                        startActivity(new Intent(this, Locations.class));
                         //todo level 4 locations
                         LevelChoice.setLevel(4);
                     }
@@ -369,6 +385,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                         unlockDialog(locLevels, 4, 2, 60);
                     } else {
                         finish();
+                        startActivity(new Intent(this, Locations.class));
                         //todo level 5 locations
                         LevelChoice.setLevel(5);
                     }
@@ -599,6 +616,30 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         return true;
     }
 
+    public void warningDialog() {
+        Dialog warning = new Dialog(Game.this);
+        warning.setContentView(R.layout.activity_warning_difficult);
+        warning.show();
+
+        Animation animation = AnimationUtils.loadAnimation(Game.this, R.anim.anim_btn);
+
+        final Button ok = warning.findViewById(R.id.ok);
+        final Button cancel = warning.findViewById(R.id.cancel);
+
+        ok.setOnClickListener(v -> {
+            ok.setAnimation(animation);
+            playSound(in);
+            finish();
+            startActivity(new Intent(this, Locations.class));
+        });
+
+        cancel.setOnClickListener(v -> {
+            playSound(out);
+            cancel.setAnimation(animation);
+            warning.dismiss();
+        });
+    }
+
     @SuppressLint("SetTextI18n")
     public void dialog(Boolean show, Integer resDialog, Integer resButton1, Integer resButton2, Integer resButton3, Integer resButton4, Integer resButton5, Integer resTextScore, LevelChoice obj) {
 
@@ -634,6 +675,15 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         if (obj.getLevels()[2]) unlockedButton++;
         if (obj.getLevels()[3]) unlockedButton++;
         if (obj.getLevels()[4]) unlockedButton++;
+
+        if (Unlock.getUnlocked()) {
+            level1.setBackgroundResource(R.drawable.btn_1);
+            level2.setBackgroundResource(R.drawable.btn_1);
+            level3.setBackgroundResource(R.drawable.btn_1);
+            level4.setBackgroundResource(R.drawable.btn_1);
+            level5.setBackgroundResource(R.drawable.btn_1);
+            obj.setLevels(new Boolean[]{true, true, true, true, true});
+        }
 
         score.setText(getString(R.string.unlocked) + " " + unlockedButton + "/" + BUTTON_COUNT);
     }

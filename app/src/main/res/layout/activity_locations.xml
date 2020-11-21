@@ -38,7 +38,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/pixel"
                 android:gravity="center"
-                android:text="@string/characters"
+                android:text="@string/locations"
                 android:textSize="28sp" />
 
             <ImageView
@@ -100,25 +100,7 @@
                     android:contentDescription="@string/heart"
                     app:srcCompat="@drawable/heart" />
 
-                <ImageView
-                    android:id="@+id/heart2"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:layout_weight="0"
-                    android:contentDescription="@string/heart"
-                    app:srcCompat="@drawable/heart" />
 
-                <ImageView
-                    android:id="@+id/heart3"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:layout_weight="0"
-                    android:contentDescription="@string/heart"
-                    app:srcCompat="@drawable/heart" />
             </LinearLayout>
         </FrameLayout>
 
@@ -130,7 +112,7 @@
             android:layout_weight="0"
             android:fontFamily="@font/pixel"
             android:gravity="center"
-            android:text="@string/chAnswer"
+            android:text="@string/locAnswer"
             android:textSize="28sp" />
 
         <TableLayout
@@ -156,8 +138,7 @@
                     android:background="@drawable/btn_1"
                     android:fontFamily="@font/pixel"
                     android:gravity="center"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
+                    android:padding="10dp"
                     android:text=""
                     android:textColor="@color/background"
                     android:textSize="20sp" />
@@ -170,8 +151,7 @@
                     android:background="@drawable/btn_1"
                     android:fontFamily="@font/pixel"
                     android:gravity="center"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
+                    android:padding="10dp"
                     android:text=""
                     android:textColor="@color/background"
                     android:textSize="20sp" />
@@ -190,8 +170,7 @@
                     android:background="@drawable/btn_1"
                     android:fontFamily="@font/pixel"
                     android:gravity="center"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
+                    android:padding="10dp"
                     android:text=""
                     android:textColor="@color/background"
                     android:textSize="20sp" />
@@ -204,8 +183,7 @@
                     android:background="@drawable/btn_1"
                     android:fontFamily="@font/pixel"
                     android:gravity="center"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
+                    android:padding="10dp"
                     android:text=""
                     android:textColor="@color/background"
                     android:textSize="20sp" />

@@ -22,6 +22,9 @@
             android:name=".levels.Characters"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".levels.Locations"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Unlock"
             android:screenOrientation="portrait" />
         <activity

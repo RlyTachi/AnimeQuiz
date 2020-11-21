@@ -15,12 +15,12 @@
 
         <ImageView
             android:id="@+id/logoView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             android:layout_gravity="center"
             android:layout_marginTop="75dp"
             android:contentDescription="@string/logo"
-            android:src="@drawable/characterslogo"/>
+            android:src="@drawable/applogo" />
 
         <TextView
             android:id="@+id/mainTextView"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/main_text"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:textSize="52sp"
             android:textColor="@color/text"
             android:fontFamily="@font/pixel"/>
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="30dp">
 
             <ImageView
                 android:id="@+id/settingsView"

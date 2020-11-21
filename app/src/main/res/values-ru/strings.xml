@@ -42,6 +42,10 @@
     <string name="items">Предметы</string>
     <string name="events">События</string>
     <string name="chAnswer">Как зовут персонажа?</string>
+    <string name="locAnswer">Как называется локация?</string>
+    <string name="tiAnswer">Из какого аниме?</string>
+    <string name="itAnswer">Что это за предмет?</string>
+    <string name="warningDifficult">Эта категория повышенной сложности, у вас нет права на ошибку</string>
     <string name="heart">Жизни</string>
     <string name="use">Использовать</string>
     <string name="typePromo">Введите промокод</string>

@@ -2,8 +2,10 @@ package com.rlytachi.animequiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.animation.Animation;
@@ -23,7 +25,10 @@ import static com.rlytachi.animequiz.Settings.playSound;
 
 public class Unlock extends AppCompatActivity implements BillingProcessor.IBillingHandler {
 
+    public static final String APP_PREFERENCES = "mySettings";
+    public static final String APP_PREFERENCES_UNLOCK_STATUS = "unlockStatus";
     BillingProcessor billingProcessor = null;
+    static Boolean unlocked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,7 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
             buy.startAnimation(animButton);
             //TODO purchase
 
+            setUnlocked(true);
         });
 
         final Button get = findViewById(R.id.buttonWatch);
@@ -58,6 +64,7 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
             get.startAnimation(animButton);
             //TODO watch ad
 
+            setUnlocked(false);
         });
 
         final ImageView backBtn = findViewById(R.id.unlockBackView);
@@ -76,6 +83,8 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
             }
         } catch (Exception ignore) {
         }
+
+        loadAction();
     }
 
     @Override
@@ -97,6 +106,7 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
             }
         } catch (Exception ignore) {
         }
+        saveAction();
         super.onDestroy();
     }
 
@@ -126,5 +136,25 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
     @Override
     public void onBillingInitialized() {
 
+    }
+
+    public void saveAction() {
+        SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = mShared.edit();
+        editor.putBoolean(APP_PREFERENCES_UNLOCK_STATUS, getUnlocked());
+        editor.apply();
+    }
+
+    public void loadAction() {
+        SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        setUnlocked(mShared.getBoolean(APP_PREFERENCES_UNLOCK_STATUS, false));
+    }
+
+    public static Boolean getUnlocked() {
+        return unlocked;
+    }
+
+    public static void setUnlocked(Boolean unlocked) {
+        Unlock.unlocked = unlocked;
     }
 }

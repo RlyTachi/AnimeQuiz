@@ -74,7 +74,7 @@
                 android:layout_marginEnd="20dp"
                 android:fontFamily="@font/pixel"
                 android:text="@string/rus"
-                android:textSize="26sp" />
+                android:textSize="26sp"/>
 
             <RadioButton
                 android:id="@+id/langRadio2"
@@ -83,7 +83,7 @@
                 android:layout_margin="20dp"
                 android:fontFamily="@font/pixel"
                 android:text="@string/eng"
-                android:textSize="26sp" />
+                android:textSize="26sp"/>
         </RadioGroup>
 
         <TextView
@@ -171,6 +171,7 @@
             android:layout_weight="0"
             android:background="@drawable/btn_2"
             android:fontFamily="@font/pixel"
+            android:padding="10dp"
             android:text="@string/clearSave"
             android:textSize="18sp" />
 
@@ -194,9 +195,9 @@
                 android:id="@+id/adView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
                 ads:adSize="BANNER"
-                ads:adUnitId="ca-app-pub-7217958397153183/7940526044"
-                android:layout_marginBottom="1dp"/>
+                ads:adUnitId="ca-app-pub-7217958397153183/7940526044" />
         </LinearLayout>
     </LinearLayout>
 

@@ -42,6 +42,10 @@
     <string name="items">Items</string>
     <string name="events">Events</string>
     <string name="chAnswer">What is the character\'s name?</string>
+    <string name="locAnswer">What is the name of the location?</string>
+    <string name="tiAnswer">Which anime?</string>
+    <string name="itAnswer">What is this item?</string>
+    <string name="warningDifficult">This category is of increased difficulty, you have no margin for error</string>
     <string name="heart">Hearts</string>
     <string name="use">Use</string>
     <string name="typePromo">Enter promo code</string>

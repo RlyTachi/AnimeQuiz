@@ -43,16 +43,16 @@ import static com.rlytachi.animequiz.Settings.in;
 import static com.rlytachi.animequiz.Settings.out;
 import static com.rlytachi.animequiz.Settings.playSound;
 
-public class Characters extends AppCompatActivity {
+public class Locations extends AppCompatActivity {
 
     //Shared Preferences
     public static final String APP_PREFERENCES = "mySettings";
     public static final String APP_PREFERENCES_LANG = "myLanguage";
-    public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS_1 = "firstSessionCharacters1";
-    public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS_2 = "firstSessionCharacters2";
-    public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3 = "firstSessionCharacters3";
-    public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4 = "firstSessionCharacters4";
-    public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5 = "firstSessionCharacters5";
+    public static final String APP_PREFERENCES_FIRST_SESSION_LOCATIONS_1 = "firstSessionCharacters1";
+    public static final String APP_PREFERENCES_FIRST_SESSION_LOCATIONS_2 = "firstSessionCharacters2";
+    public static final String APP_PREFERENCES_FIRST_SESSION_LOCATIONS_3 = "firstSessionCharacters3";
+    public static final String APP_PREFERENCES_FIRST_SESSION_LOCATIONS_4 = "firstSessionCharacters4";
+    public static final String APP_PREFERENCES_FIRST_SESSION_LOCATIONS_5 = "firstSessionCharacters5";
     public static final int PROMO_VIEW_TARGET = 3;
     public InterstitialAd interstitialAd;
 
@@ -60,16 +60,16 @@ public class Characters extends AppCompatActivity {
     LinkedList<Drawable> images = new LinkedList<>();
     Integer[] imageArrCount;
     int image = 0;
-    int heartCount = 3;
+    int heartCount = 1;
     int id;
     int seconds = -1;
     int scoreEarnedSession = 0;
     int promoViewCount = 0;
-    boolean firstSessionChLvl1;
-    boolean firstSessionChLvl2;
-    boolean firstSessionChLvl3;
-    boolean firstSessionChLvl4;
-    boolean firstSessionChLvl5;
+    boolean firstSessionLocLvl1;
+    boolean firstSessionLocLvl2;
+    boolean firstSessionLocLvl3;
+    boolean firstSessionLocLvl4;
+    boolean firstSessionLocLvl5;
 
     boolean finished = false;
     boolean timesUp = false;
@@ -77,7 +77,7 @@ public class Characters extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_characters);
+        setContentView(R.layout.activity_locations);
 
         MobileAds.initialize(this);
         interstitialAd = new InterstitialAd(this);
@@ -91,7 +91,7 @@ public class Characters extends AppCompatActivity {
                 super.onAdClosed();
                 playSound(out);
                 finish();
-                startActivity(new Intent(Characters.this, Game.class));
+                startActivity(new Intent(Locations.this, Game.class));
             }
         });
 
@@ -103,22 +103,18 @@ public class Characters extends AppCompatActivity {
         if (buttonsEvent.isInterrupted()) buttonsEvent.interrupt();
         else buttonsEvent.start();
 
-        Animation animHeart = AnimationUtils.loadAnimation(Characters.this, R.anim.anim_btn);
+        Animation animHeart = AnimationUtils.loadAnimation(Locations.this, R.anim.anim_btn);
         final ImageView heart1 = findViewById(R.id.heart1);
-        final ImageView heart2 = findViewById(R.id.heart2);
-        final ImageView heart3 = findViewById(R.id.heart3);
+//        final ImageView heart2 = findViewById(R.id.heart2);
+//        final ImageView heart3 = findViewById(R.id.heart3);
         heart1.setAnimation(animHeart);
-        heart2.setAnimation(animHeart);
-        heart3.setAnimation(animHeart);
+//        heart2.setAnimation(animHeart);
+//        heart3.setAnimation(animHeart);
 
         new CountDownTimer(320000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if (heart3.getVisibility() == View.VISIBLE) {
-                    heart3.startAnimation(animHeart);
-                } else if (heart2.getVisibility() == View.VISIBLE) {
-                    heart2.startAnimation(animHeart);
-                } else if (heart1.getVisibility() == View.VISIBLE) {
+                if (heart1.getVisibility() == View.VISIBLE) {
                     heart1.startAnimation(animHeart);
                 }
             }
@@ -189,9 +185,8 @@ public class Characters extends AppCompatActivity {
         playSound(out);
         saveAction();
         finish();
-        startActivity(new Intent(Characters.this, Game.class));
+        startActivity(new Intent(Locations.this, Game.class));
     }
-
 
     @Override
     protected void onPause() {
@@ -202,11 +197,11 @@ public class Characters extends AppCompatActivity {
     public void saveAction() {
         SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = mShared.edit();
-        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_1, firstSessionChLvl1);
-        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_2, firstSessionChLvl2);
-        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3, firstSessionChLvl3);
-        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4, firstSessionChLvl4);
-        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5, firstSessionChLvl5);
+        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_1, firstSessionLocLvl1);
+        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_2, firstSessionLocLvl2);
+        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_3, firstSessionLocLvl3);
+        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_4, firstSessionLocLvl4);
+        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_5, firstSessionLocLvl5);
         editor.putInt(Game.APP_PREFERENCES_GLOBAL_SCORE, Score.getScore());
         editor.putString(APP_PREFERENCES_LANG, Language.getLang());
 
@@ -219,21 +214,21 @@ public class Characters extends AppCompatActivity {
 
     public void loadAction() {
         SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_1)) {
-            firstSessionChLvl1 = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_1, false);
-        } else firstSessionChLvl1 = true;
-        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_2)) {
-            firstSessionChLvl2 = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_2, false);
-        } else firstSessionChLvl2 = true;
-        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3)) {
-            firstSessionChLvl3 = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3, false);
-        } else firstSessionChLvl3 = true;
-        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4)) {
-            firstSessionChLvl4 = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4, false);
-        } else firstSessionChLvl4 = true;
-        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5)) {
-            firstSessionChLvl5 = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5, false);
-        } else firstSessionChLvl5 = true;
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_1)) {
+            firstSessionLocLvl1 = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_1, false);
+        } else firstSessionLocLvl1 = true;
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_2)) {
+            firstSessionLocLvl2 = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_2, false);
+        } else firstSessionLocLvl2 = true;
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_3)) {
+            firstSessionLocLvl3 = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_3, false);
+        } else firstSessionLocLvl3 = true;
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_4)) {
+            firstSessionLocLvl4 = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_4, false);
+        } else firstSessionLocLvl4 = true;
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_5)) {
+            firstSessionLocLvl5 = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_5, false);
+        } else firstSessionLocLvl5 = true;
 
         String[] temp = new String[PromoStorage.getPromoStorage().length];
         for (int i = 0; i < PromoStorage.getPromoStorage().length; i++) {
@@ -246,7 +241,7 @@ public class Characters extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void promoDialog() {
-        Dialog promoDialog = new Dialog(Characters.this);
+        Dialog promoDialog = new Dialog(Locations.this);
         promoDialog.setContentView(R.layout.activity_promo);
         promoDialog.show();
         Animation animEnd = AnimationUtils.loadAnimation(this, R.anim.anim_end);
@@ -273,7 +268,7 @@ public class Characters extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     public void winDialog() {
         try {
-            Dialog winDialog = new Dialog(Characters.this);
+            Dialog winDialog = new Dialog(Locations.this);
             winDialog.setContentView(R.layout.activity_win_action);
             if (!this.isFinishing()) {
                 winDialog.show();
@@ -285,24 +280,24 @@ public class Characters extends AppCompatActivity {
             final TextView earnedView = winDialog.findViewById(R.id.earned);
 
             if (LevelChoice.getLevel() == 1) {
-                if (!firstSessionChLvl1) scoreEarnedSession = 2;
-                firstSessionChLvl1 = false;
+                if (!firstSessionLocLvl1) scoreEarnedSession = 2;
+                firstSessionLocLvl1 = false;
             }
             if (LevelChoice.getLevel() == 2) {
-                if (!firstSessionChLvl2) scoreEarnedSession = 2;
-                firstSessionChLvl2 = false;
+                if (!firstSessionLocLvl2) scoreEarnedSession = 2;
+                firstSessionLocLvl2 = false;
             }
             if (LevelChoice.getLevel() == 3) {
-                if (!firstSessionChLvl3) scoreEarnedSession = 2;
-                firstSessionChLvl3 = false;
+                if (!firstSessionLocLvl3) scoreEarnedSession = 2;
+                firstSessionLocLvl3 = false;
             }
             if (LevelChoice.getLevel() == 4) {
-                if (!firstSessionChLvl4) scoreEarnedSession = 2;
-                firstSessionChLvl4 = false;
+                if (!firstSessionLocLvl4) scoreEarnedSession = 2;
+                firstSessionLocLvl4 = false;
             }
             if (LevelChoice.getLevel() == 5) {
-                if (!firstSessionChLvl5) scoreEarnedSession = 2;
-                firstSessionChLvl5 = false;
+                if (!firstSessionLocLvl5) scoreEarnedSession = 2;
+                firstSessionLocLvl5 = false;
             }
 
             earnedView.setText(getString(R.string.earned) + " " + scoreEarnedSession + " " + getString(R.string.scores));
@@ -315,7 +310,7 @@ public class Characters extends AppCompatActivity {
                     playSound(out);
                     winDialog.dismiss();
                     finish();
-                    startActivity(new Intent(Characters.this, Game.class));
+                    startActivity(new Intent(Locations.this, Game.class));
                 }
             });
         } catch (RuntimeException ignore) {
@@ -324,7 +319,7 @@ public class Characters extends AppCompatActivity {
 
     //Проигрыш
     public void lossDialog() {
-        Dialog lossDialog = new Dialog(Characters.this);
+        Dialog lossDialog = new Dialog(Locations.this);
         lossDialog.setContentView(R.layout.activity_loss);
         finished = true;
         if (!this.isFinishing()) {
@@ -340,7 +335,7 @@ public class Characters extends AppCompatActivity {
                 playSound(out);
                 lossDialog.dismiss();
                 finish();
-                startActivity(new Intent(Characters.this, Game.class));
+                startActivity(new Intent(Locations.this, Game.class));
             }
         });
     }
@@ -348,14 +343,14 @@ public class Characters extends AppCompatActivity {
     //Помощь
     @SuppressLint("SetTextI18n")
     public void helpDialog() {
-        Dialog helpDialog = new Dialog(Characters.this);
+        Dialog helpDialog = new Dialog(Locations.this);
         helpDialog.setContentView(R.layout.activity_help);
         if (!this.isFinishing()) {
             helpDialog.show();
         }
 
 
-        Animation animButton = AnimationUtils.loadAnimation(Characters.this, R.anim.anim_btn);
+        Animation animButton = AnimationUtils.loadAnimation(Locations.this, R.anim.anim_btn);
         Animation animEnd = AnimationUtils.loadAnimation(this, R.anim.anim_end);
         final Button getHelpBtn = helpDialog.findViewById(R.id.takeHelpBtn);
         final Button getHeartBtn = helpDialog.findViewById(R.id.takeHeartBtn);
@@ -380,6 +375,8 @@ public class Characters extends AppCompatActivity {
             saveAction();
         });
 
+        getHeartBtn.setEnabled(false);
+        getHeartBtn.setBackgroundResource(R.drawable.btn_1_locked);
         getHeartBtn.setOnClickListener(v -> {
             playSound(in);
             getHeartBtn.setAnimation(animButton);
@@ -442,7 +439,7 @@ public class Characters extends AppCompatActivity {
         final ImageView heart2 = findViewById(R.id.heart2);
         final ImageView heart3 = findViewById(R.id.heart3);
 
-        heartCount = 3;
+        heartCount = 1;
         heart1.setVisibility(View.VISIBLE);
         heart2.setVisibility(View.VISIBLE);
         heart3.setVisibility(View.VISIBLE);
@@ -462,15 +459,11 @@ public class Characters extends AppCompatActivity {
     //Минус жизни
     public void minusHeart() {
         final ImageView heart1 = findViewById(R.id.heart1);
-        final ImageView heart2 = findViewById(R.id.heart2);
-        final ImageView heart3 = findViewById(R.id.heart3);
+//        final ImageView heart2 = findViewById(R.id.heart2);
+//        final ImageView heart3 = findViewById(R.id.heart3);
         heartCount--;
         playSound(out);
-        if (heart3.getVisibility() == View.VISIBLE) {
-            heart3.setVisibility(View.INVISIBLE);
-        } else if (heart2.getVisibility() == View.VISIBLE) {
-            heart2.setVisibility(View.INVISIBLE);
-        } else if (heart1.getVisibility() == View.VISIBLE) {
+        if (heart1.getVisibility() == View.VISIBLE) {
             lossDialog();
             heart1.setVisibility(View.INVISIBLE);
         }
@@ -582,7 +575,7 @@ public class Characters extends AppCompatActivity {
     public class myTimer extends CountDownTimer {
         final TextView timer = findViewById(R.id.timerTextView);
         final TextView info = findViewById(R.id.informationText);
-        Animation animEnd = AnimationUtils.loadAnimation(Characters.this, R.anim.anim_end);
+        Animation animEnd = AnimationUtils.loadAnimation(Locations.this, R.anim.anim_end);
 
         //Конструктор таймера
         public myTimer(long millisInFuture, long countDownInterval) {
@@ -667,19 +660,19 @@ public class Characters extends AppCompatActivity {
 
         public void firstEarn() {
             if (LevelChoice.getLevel() == 1) {
-                if (firstSessionChLvl1) scoreEarnedSession++;
+                if (firstSessionLocLvl1) scoreEarnedSession += 2;
             }
             if (LevelChoice.getLevel() == 2) {
-                if (firstSessionChLvl2) scoreEarnedSession++;
+                if (firstSessionLocLvl2) scoreEarnedSession += 2;
             }
             if (LevelChoice.getLevel() == 3) {
-                if (firstSessionChLvl3) scoreEarnedSession++;
+                if (firstSessionLocLvl3) scoreEarnedSession += 2;
             }
             if (LevelChoice.getLevel() == 4) {
-                if (firstSessionChLvl4) scoreEarnedSession++;
+                if (firstSessionLocLvl4) scoreEarnedSession += 2;
             }
             if (LevelChoice.getLevel() == 5) {
-                if (firstSessionChLvl5) scoreEarnedSession++;
+                if (firstSessionLocLvl5) scoreEarnedSession += 2;
             }
         }
 
@@ -687,7 +680,7 @@ public class Characters extends AppCompatActivity {
         @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(View v) {
-            Animation animation = AnimationUtils.loadAnimation(Characters.this, R.anim.anim_btn);
+            Animation animation = AnimationUtils.loadAnimation(Locations.this, R.anim.anim_btn);
             btn1.setAnimation(animation);
             btn2.setAnimation(animation);
             btn3.setAnimation(animation);
@@ -698,7 +691,7 @@ public class Characters extends AppCompatActivity {
                 case R.id.backView:
                     playSound(out);
                     finish();
-                    startActivity(new Intent(Characters.this, Game.class));
+                    startActivity(new Intent(Locations.this, Game.class));
                     myTimer.onFinish();
                     break;
 
@@ -796,221 +789,55 @@ public class Characters extends AppCompatActivity {
     //Levels
     @SuppressLint("UseCompatLoadingForDrawables")
     public void level1Load() {
-        questions.add("hinata");
-        questions.add("kanna");
-        questions.add("kurisu");
-        questions.add("mitsuha");
-        questions.add("phosphophyllite");
-        questions.add("diamond");
-        questions.add("naruto");
-        questions.add("dio");
-        questions.add("kaneki");
-        questions.add("kirito");
-        questions.add("lelouch");
-        questions.add("beatrice");
-        questions.add("kamina");
-        questions.add("mob");
-        questions.add("haruka");
-        questions.add("bruno");
-        questions.add("kira");
-        questions.add("rintaro");
-        questions.add("akiko");
-        questions.add("midoriya");
-        images.add(getDrawable(R.drawable.hinata));
-        images.add(getDrawable(R.drawable.kanna));
-        images.add(getDrawable(R.drawable.kurisu));
-        images.add(getDrawable(R.drawable.mitsuha));
-        images.add(getDrawable(R.drawable.phosphophyllite));
-        images.add(getDrawable(R.drawable.diamond));
-        images.add(getDrawable(R.drawable.naruto));
-        images.add(getDrawable(R.drawable.dio));
-        images.add(getDrawable(R.drawable.kaneki));
-        images.add(getDrawable(R.drawable.kirito));
-        images.add(getDrawable(R.drawable.lelouch));
-        images.add(getDrawable(R.drawable.beatrice));
-        images.add(getDrawable(R.drawable.kamina));
-        images.add(getDrawable(R.drawable.mob));
-        images.add(getDrawable(R.drawable.haruka));
-        images.add(getDrawable(R.drawable.bruno));
-        images.add(getDrawable(R.drawable.kira));
-        images.add(getDrawable(R.drawable.rintaro));
-        images.add(getDrawable(R.drawable.akiko));
-        images.add(getDrawable(R.drawable.midoriya));
+        questions.add("Aindcrad");
+        questions.add("Anteiku");
+        questions.add("Elkia Kingdom");
+        questions.add("Gigas cedar");
+        questions.add("Honnooji Academy");
+        questions.add("King Chess Piece");
+        questions.add("Port Mafia Base");
+        questions.add("Seireitei");
+        questions.add("Shiganshina District");
+        questions.add("Silbern");
+        questions.add("Soul King Palace");
+        questions.add("True Cross Academy Town");
+        questions.add("U.S.J");
+        questions.add("Valley of the End");
+        questions.add("Yuuei");
+        images.add(getDrawable(R.drawable.aindcrad));
+        images.add(getDrawable(R.drawable.anteiku));
+        images.add(getDrawable(R.drawable.elkia_kingdom));
+        images.add(getDrawable(R.drawable.gigas_cedar));
+        images.add(getDrawable(R.drawable.honnji_academy));
+        images.add(getDrawable(R.drawable.king_chess_piece));
+        images.add(getDrawable(R.drawable.port_mafia_base));
+        images.add(getDrawable(R.drawable.seireitei));
+        images.add(getDrawable(R.drawable.shiganshina_district));
+        images.add(getDrawable(R.drawable.silbern));
+        images.add(getDrawable(R.drawable.soul_king_palace));
+        images.add(getDrawable(R.drawable.true_cross_academy_town));
+        images.add(getDrawable(R.drawable.u_s_j));
+        images.add(getDrawable(R.drawable.valley_of_the_end));
+        images.add(getDrawable(R.drawable.yuuei));
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public void level2Load() {
-        questions.add("asta");
-        questions.add("dazai");
-        questions.add("decim");
-        questions.add("hinata");
-        questions.add("isla");
-        questions.add("kaguya");
-        questions.add("kaori");
-        questions.add("kiki");
-        questions.add("lain");
-        questions.add("luffy");
-        questions.add("madoka");
-        questions.add("maquia");
-        questions.add("mikasa");
-        questions.add("natsu");
-        questions.add("rika");
-        questions.add("rin");
-        questions.add("shiro");
-        questions.add("violet");
-        questions.add("yato");
-        questions.add("yukio");
-        images.add(getDrawable(R.drawable.asta));
-        images.add(getDrawable(R.drawable.dazai));
-        images.add(getDrawable(R.drawable.decim));
-        images.add(getDrawable(R.drawable.hinata2));
-        images.add(getDrawable(R.drawable.isla));
-        images.add(getDrawable(R.drawable.kaguya));
-        images.add(getDrawable(R.drawable.kaori));
-        images.add(getDrawable(R.drawable.kiki));
-        images.add(getDrawable(R.drawable.lain));
-        images.add(getDrawable(R.drawable.luffy));
-        images.add(getDrawable(R.drawable.madoka));
-        images.add(getDrawable(R.drawable.maquia));
-        images.add(getDrawable(R.drawable.mikasa));
-        images.add(getDrawable(R.drawable.natsu));
-        images.add(getDrawable(R.drawable.rika));
-        images.add(getDrawable(R.drawable.rin));
-        images.add(getDrawable(R.drawable.shiro));
-        images.add(getDrawable(R.drawable.violet));
-        images.add(getDrawable(R.drawable.yato));
-        images.add(getDrawable(R.drawable.yukio));
+
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public void level3Load() {
-        questions.add("antarcticite");
-        questions.add("eugeo");
-        questions.add("felix");
-        questions.add("fubuki");
-        questions.add("hachiman");
-        questions.add("itachi");
-        questions.add("izaya");
-        questions.add("keima");
-        questions.add("maho");
-        questions.add("mashiro");
-        questions.add("mei");
-        questions.add("mikaela");
-        questions.add("mirai");
-        questions.add("sagiri");
-        questions.add("saiko");
-        questions.add("shana");
-        questions.add("suzaku");
-        questions.add("taiga");
-        questions.add("tomoko");
-        questions.add("zoro");
-        images.add(getDrawable(R.drawable.antarcticite));
-        images.add(getDrawable(R.drawable.eugeo));
-        images.add(getDrawable(R.drawable.felix));
-        images.add(getDrawable(R.drawable.fubuki));
-        images.add(getDrawable(R.drawable.hachiman));
-        images.add(getDrawable(R.drawable.itachi));
-        images.add(getDrawable(R.drawable.izaya));
-        images.add(getDrawable(R.drawable.keima));
-        images.add(getDrawable(R.drawable.maho));
-        images.add(getDrawable(R.drawable.mashiro));
-        images.add(getDrawable(R.drawable.mei));
-        images.add(getDrawable(R.drawable.mikaela));
-        images.add(getDrawable(R.drawable.mirai));
-        images.add(getDrawable(R.drawable.sagiri));
-        images.add(getDrawable(R.drawable.saiko));
-        images.add(getDrawable(R.drawable.shana));
-        images.add(getDrawable(R.drawable.suzaku));
-        images.add(getDrawable(R.drawable.taiga));
-        images.add(getDrawable(R.drawable.tomoko));
-        images.add(getDrawable(R.drawable.zoro));
+
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public void level4Load() {
-        questions.add("boogiepop");
-        questions.add("edward");
-        questions.add("guts");
-        questions.add("haise");
-        questions.add("hitagi");
-        questions.add("hyakkimaru");
-        questions.add("inori");
-        questions.add("kanade");
-        questions.add("kayo");
-        questions.add("makoto");
-        questions.add("moritaka");
-        questions.add("mugi");
-        questions.add("nine");
-        questions.add("sawa");
-        questions.add("sekai");
-        questions.add("senkuu");
-        questions.add("shuu");
-        questions.add("twelve");
-        questions.add("yuno");
-        questions.add("zero two");
-        images.add(getDrawable(R.drawable.boogiepop));
-        images.add(getDrawable(R.drawable.edward));
-        images.add(getDrawable(R.drawable.guts));
-        images.add(getDrawable(R.drawable.haise));
-        images.add(getDrawable(R.drawable.hitagi));
-        images.add(getDrawable(R.drawable.hyakkimaru));
-        images.add(getDrawable(R.drawable.inori));
-        images.add(getDrawable(R.drawable.kanade));
-        images.add(getDrawable(R.drawable.kayo));
-        images.add(getDrawable(R.drawable.makoto));
-        images.add(getDrawable(R.drawable.moritaka));
-        images.add(getDrawable(R.drawable.mugi));
-        images.add(getDrawable(R.drawable.nine));
-        images.add(getDrawable(R.drawable.sawa));
-        images.add(getDrawable(R.drawable.sekai));
-        images.add(getDrawable(R.drawable.senkuu));
-        images.add(getDrawable(R.drawable.shuu));
-        images.add(getDrawable(R.drawable.twelve));
-        images.add(getDrawable(R.drawable.yuno));
-        images.add(getDrawable(R.drawable.zero_two));
+
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public void level5Load() {
-        questions.add("alice");
-        questions.add("chitoge");
-        questions.add("genos");
-        questions.add("haruka");
-        questions.add("hei");
-        questions.add("hestia");
-        questions.add("holo");
-        questions.add("houtarou");
-        questions.add("ichika");
-        questions.add("kei");
-        questions.add("michiru");
-        questions.add("nao");
-        questions.add("rin");
-        questions.add("sadao");
-        questions.add("sasuke");
-        questions.add("satsuki");
-        questions.add("shinichi");
-        questions.add("shouya");
-        questions.add("subaru");
-        questions.add("yuuta");
-        images.add(getDrawable(R.drawable.alice));
-        images.add(getDrawable(R.drawable.chitoge));
-        images.add(getDrawable(R.drawable.genos));
-        images.add(getDrawable(R.drawable.haruka2));
-        images.add(getDrawable(R.drawable.hei));
-        images.add(getDrawable(R.drawable.hestia));
-        images.add(getDrawable(R.drawable.holo));
-        images.add(getDrawable(R.drawable.houtarou));
-        images.add(getDrawable(R.drawable.ichika));
-        images.add(getDrawable(R.drawable.kei));
-        images.add(getDrawable(R.drawable.michiru));
-        images.add(getDrawable(R.drawable.nao));
-        images.add(getDrawable(R.drawable.rin2));
-        images.add(getDrawable(R.drawable.sadao));
-        images.add(getDrawable(R.drawable.sasuke));
-        images.add(getDrawable(R.drawable.satsuki));
-        images.add(getDrawable(R.drawable.shinichi));
-        images.add(getDrawable(R.drawable.shouya));
-        images.add(getDrawable(R.drawable.subaru));
-        images.add(getDrawable(R.drawable.yuuta));
+
     }
 }

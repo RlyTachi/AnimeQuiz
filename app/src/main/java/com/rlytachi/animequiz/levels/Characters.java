@@ -65,13 +65,14 @@ public class Characters extends AppCompatActivity {
     int seconds = -1;
     int scoreEarnedSession = 0;
     int promoViewCount = 0;
-    boolean firstSessionChLvl1;
-    boolean firstSessionChLvl2;
-    boolean firstSessionChLvl3;
-    boolean firstSessionChLvl4;
-    boolean firstSessionChLvl5;
+    static boolean firstSessionChLvl1 = true;
+    static boolean firstSessionChLvl2 = true;
+    static boolean firstSessionChLvl3 = true;
+    static boolean firstSessionChLvl4 = true;
+    static boolean firstSessionChLvl5 = true;
 
     boolean finished = false;
+    boolean finishedByWin = false;
     boolean timesUp = false;
 
     @Override
@@ -195,18 +196,19 @@ public class Characters extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        lossDialog();
+        if (!finishedByWin)
+            lossDialog();
         super.onPause();
     }
 
     public void saveAction() {
         SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = mShared.edit();
-        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_1, firstSessionChLvl1);
-        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_2, firstSessionChLvl2);
-        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3, firstSessionChLvl3);
-        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4, firstSessionChLvl4);
-        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5, firstSessionChLvl5);
+        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_1, isFirstSessionChLvl1());
+        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_2, isFirstSessionChLvl2());
+        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3, isFirstSessionChLvl3());
+        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4, isFirstSessionChLvl4());
+        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5, isFirstSessionChLvl5());
         editor.putInt(Game.APP_PREFERENCES_GLOBAL_SCORE, Score.getScore());
         editor.putString(APP_PREFERENCES_LANG, Language.getLang());
 
@@ -220,20 +222,20 @@ public class Characters extends AppCompatActivity {
     public void loadAction() {
         SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_1)) {
-            firstSessionChLvl1 = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_1, false);
-        } else firstSessionChLvl1 = true;
+            setFirstSessionChLvl1(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_1, false));
+        } else setFirstSessionChLvl1(true);
         if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_2)) {
-            firstSessionChLvl2 = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_2, false);
-        } else firstSessionChLvl2 = true;
+            setFirstSessionChLvl2(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_2, false));
+        } else setFirstSessionChLvl2(true);
         if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3)) {
-            firstSessionChLvl3 = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3, false);
-        } else firstSessionChLvl3 = true;
+            setFirstSessionChLvl3(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3, false));
+        } else setFirstSessionChLvl3(true);
         if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4)) {
-            firstSessionChLvl4 = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4, false);
-        } else firstSessionChLvl4 = true;
+            setFirstSessionChLvl4(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4, false));
+        } else setFirstSessionChLvl4(true);
         if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5)) {
-            firstSessionChLvl5 = mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5, false);
-        } else firstSessionChLvl5 = true;
+            setFirstSessionChLvl5(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5, false));
+        } else setFirstSessionChLvl5(true);
 
         String[] temp = new String[PromoStorage.getPromoStorage().length];
         for (int i = 0; i < PromoStorage.getPromoStorage().length; i++) {
@@ -281,28 +283,29 @@ public class Characters extends AppCompatActivity {
 
             winDialog.setCancelable(false);
             finished = true;
+            finishedByWin = true;
             final Button okButton = winDialog.findViewById(R.id.ok);
             final TextView earnedView = winDialog.findViewById(R.id.earned);
 
             if (LevelChoice.getLevel() == 1) {
-                if (!firstSessionChLvl1) scoreEarnedSession = 2;
-                firstSessionChLvl1 = false;
+                if (!isFirstSessionChLvl1()) scoreEarnedSession = 2;
+                setFirstSessionChLvl1(false);
             }
             if (LevelChoice.getLevel() == 2) {
-                if (!firstSessionChLvl2) scoreEarnedSession = 2;
-                firstSessionChLvl2 = false;
+                if (!isFirstSessionChLvl2()) scoreEarnedSession = 2;
+                setFirstSessionChLvl2(false);
             }
             if (LevelChoice.getLevel() == 3) {
-                if (!firstSessionChLvl3) scoreEarnedSession = 2;
-                firstSessionChLvl3 = false;
+                if (!isFirstSessionChLvl3()) scoreEarnedSession = 2;
+                setFirstSessionChLvl3(false);
             }
             if (LevelChoice.getLevel() == 4) {
-                if (!firstSessionChLvl4) scoreEarnedSession = 2;
-                firstSessionChLvl4 = false;
+                if (!isFirstSessionChLvl4()) scoreEarnedSession = 2;
+                setFirstSessionChLvl4(false);
             }
             if (LevelChoice.getLevel() == 5) {
-                if (!firstSessionChLvl5) scoreEarnedSession = 2;
-                firstSessionChLvl5 = false;
+                if (!isFirstSessionChLvl5()) scoreEarnedSession = 2;
+                setFirstSessionChLvl5(false);
             }
 
             earnedView.setText(getString(R.string.earned) + " " + scoreEarnedSession + " " + getString(R.string.scores));
@@ -483,6 +486,46 @@ public class Characters extends AppCompatActivity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public static boolean isFirstSessionChLvl1() {
+        return firstSessionChLvl1;
+    }
+
+    public static void setFirstSessionChLvl1(boolean firstSessionChLvl1) {
+        Characters.firstSessionChLvl1 = firstSessionChLvl1;
+    }
+
+    public static boolean isFirstSessionChLvl2() {
+        return firstSessionChLvl2;
+    }
+
+    public static void setFirstSessionChLvl2(boolean firstSessionChLvl2) {
+        Characters.firstSessionChLvl2 = firstSessionChLvl2;
+    }
+
+    public static boolean isFirstSessionChLvl3() {
+        return firstSessionChLvl3;
+    }
+
+    public static void setFirstSessionChLvl3(boolean firstSessionChLvl3) {
+        Characters.firstSessionChLvl3 = firstSessionChLvl3;
+    }
+
+    public static boolean isFirstSessionChLvl4() {
+        return firstSessionChLvl4;
+    }
+
+    public static void setFirstSessionChLvl4(boolean firstSessionChLvl4) {
+        Characters.firstSessionChLvl4 = firstSessionChLvl4;
+    }
+
+    public static boolean isFirstSessionChLvl5() {
+        return firstSessionChLvl5;
+    }
+
+    public static void setFirstSessionChLvl5(boolean firstSessionChLvl5) {
+        Characters.firstSessionChLvl5 = firstSessionChLvl5;
     }
 
     public void nextQuestion() {
@@ -667,19 +710,19 @@ public class Characters extends AppCompatActivity {
 
         public void firstEarn() {
             if (LevelChoice.getLevel() == 1) {
-                if (firstSessionChLvl1) scoreEarnedSession++;
+                if (isFirstSessionChLvl1()) scoreEarnedSession++;
             }
             if (LevelChoice.getLevel() == 2) {
-                if (firstSessionChLvl2) scoreEarnedSession++;
+                if (isFirstSessionChLvl2()) scoreEarnedSession++;
             }
             if (LevelChoice.getLevel() == 3) {
-                if (firstSessionChLvl3) scoreEarnedSession++;
+                if (isFirstSessionChLvl3()) scoreEarnedSession++;
             }
             if (LevelChoice.getLevel() == 4) {
-                if (firstSessionChLvl4) scoreEarnedSession++;
+                if (isFirstSessionChLvl4()) scoreEarnedSession++;
             }
             if (LevelChoice.getLevel() == 5) {
-                if (firstSessionChLvl5) scoreEarnedSession++;
+                if (isFirstSessionChLvl5()) scoreEarnedSession++;
             }
         }
 

@@ -28,6 +28,8 @@ import java.util.Locale;
 import static com.rlytachi.animequiz.Settings.in;
 import static com.rlytachi.animequiz.Settings.out;
 import static com.rlytachi.animequiz.Settings.playSound;
+import static com.rlytachi.animequiz.levels.Characters.*;
+import static com.rlytachi.animequiz.levels.Locations.*;
 
 public class Game extends AppCompatActivity implements View.OnClickListener {
 
@@ -193,6 +195,45 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 //            ev.setLevels(evLevels);
 //        }
         Language.setLang(mShared.getString(APP_PREFERENCES_LANG, Locale.getDefault().getLanguage()));
+
+        //Characters
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_1)) {
+            setFirstSessionChLvl1(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_1, false));
+        } else setFirstSessionChLvl1(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_2)) {
+            setFirstSessionChLvl2(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_2, false));
+        } else setFirstSessionChLvl2(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3)) {
+            setFirstSessionChLvl3(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3, false));
+        } else setFirstSessionChLvl3(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4)) {
+            setFirstSessionChLvl4(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4, false));
+        } else setFirstSessionChLvl4(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5)) {
+            setFirstSessionChLvl5(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5, false));
+        } else setFirstSessionChLvl5(true);
+
+        //Locations
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_1)) {
+            setFirstSessionLocLvl1(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_1, false));
+        } else setFirstSessionLocLvl5(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_2)) {
+            setFirstSessionLocLvl2(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_2, false));
+        } else setFirstSessionLocLvl5(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_3)) {
+            setFirstSessionLocLvl3(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_3, false));
+        } else setFirstSessionLocLvl5(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_4)) {
+            setFirstSessionLocLvl4(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_4, false));
+        } else setFirstSessionLocLvl5(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_5)) {
+            setFirstSessionLocLvl5(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_LOCATIONS_5, false));
+        } else setFirstSessionLocLvl5(true);
+
+        //Titles
+
+        //Items
+
         saveAction();
         refreshScore();
     }
@@ -683,6 +724,20 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             level4.setBackgroundResource(R.drawable.btn_1);
             level5.setBackgroundResource(R.drawable.btn_1);
             obj.setLevels(new Boolean[]{true, true, true, true, true});
+        }
+
+        if (obj.getType().equals("ch")){
+            if (!Characters.isFirstSessionChLvl1()) level1.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Characters.isFirstSessionChLvl2()) level2.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Characters.isFirstSessionChLvl3()) level3.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Characters.isFirstSessionChLvl4()) level4.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Characters.isFirstSessionChLvl5()) level5.setBackgroundResource(R.drawable.btn_1_passed);
+        } else if (obj.getType().equals("loc")){
+            if (!Locations.isFirstSessionLocLvl1()) level1.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Locations.isFirstSessionLocLvl2()) level2.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Locations.isFirstSessionLocLvl3()) level3.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Locations.isFirstSessionLocLvl4()) level4.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Locations.isFirstSessionLocLvl5()) level5.setBackgroundResource(R.drawable.btn_1_passed);
         }
 
         score.setText(getString(R.string.unlocked) + " " + unlockedButton + "/" + BUTTON_COUNT);

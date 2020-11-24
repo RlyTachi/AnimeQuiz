@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/secondBackground">
+    android:background="@color/background">
 
     <LinearLayout
         android:id="@+id/mainLevels"
@@ -20,7 +20,7 @@
             android:fontFamily="@font/pixel"
             android:gravity="center"
             android:text="@string/availableLevels"
-            android:textColor="@color/icons"
+            android:textColor="@color/text"
             android:textSize="22sp" />
 
         <ScrollView

@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +15,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdListener;
@@ -25,7 +22,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.rlytachi.animequiz.levels.Characters;
 
 import java.util.Locale;
 
@@ -41,6 +37,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
     private static boolean sounds = true;
     private static boolean music = true;
     public static MediaPlayer in, out;
+    Dialog confirmDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +104,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
             musicBtn2.setChecked(true);
         }
         saveAction();
+        langUpdate();
     }
 
     @Override
@@ -115,8 +113,18 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onPause() {
+        try {
+            if (confirmDialog.isShowing())
+                confirmDialog.dismiss();
+        } catch (NullPointerException ignore) {
+        }
+        super.onPause();
+    }
 
+    @Override
+    protected void onDestroy() {
+        langUpdate();
         saveAction();
         super.onDestroy();
     }
@@ -240,7 +248,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
     }
 
     public void dialogConfirm() {
-        Dialog confirmDialog = new Dialog(Settings.this);
+        confirmDialog = new Dialog(Settings.this);
         confirmDialog.setContentView(R.layout.activity_confirm);
         if (!this.isFinishing()) {
             confirmDialog.show();
@@ -270,6 +278,18 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
             confirmDialog.dismiss();
         });
 
+    }
+
+    public void langUpdate() {
+        try {
+            System.out.println(Language.getLang());
+            if (Language.getLang().equals("ru")) {
+                MyContextWrapper.wrap(getBaseContext(), "ru");
+            } else {
+                MyContextWrapper.wrap(getBaseContext(), "en");
+            }
+        } catch (Exception ignore) {
+        }
     }
 
     public static boolean getSounds() {

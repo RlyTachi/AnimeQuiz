@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -53,7 +51,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     Boolean[] tiLevels = ti.getLevels();
     Boolean[] itLevels = it.getLevels();
     //    Boolean[] evLevels = ev.getLevels();
-    Dialog dialog;
+    Dialog dialog, warning, unlockDialog;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -95,15 +93,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         unlock.setOnClickListener(this);
 
         loadAction();
-        try {
-            System.out.println(Language.getLang());
-            if (Language.getLang().equals("ru")) {
-                MyContextWrapper.wrap(getBaseContext(), "ru");
-            } else {
-                MyContextWrapper.wrap(getBaseContext(), "en");
-            }
-        } catch (Exception ignore) {
-        }
+        langUpdate();
     }
 
     @Override
@@ -119,18 +109,23 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onPause() {
         try {
-            System.out.println(Language.getLang());
-            if (Language.getLang().equals("ru")) {
-                MyContextWrapper.wrap(getBaseContext(), "ru");
-            } else {
-                MyContextWrapper.wrap(getBaseContext(), "en");
-            }
-        } catch (Exception ignore) {
+            if (dialog.isShowing())
+                dialog.dismiss();
+            if (warning.isShowing())
+                warning.dismiss();
+            if (unlockDialog.isShowing())
+                unlockDialog.dismiss();
+        } catch (NullPointerException ignore) {
         }
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        langUpdate();
         saveAction();
-        dialog.dismiss();
         super.onDestroy();
     }
 
@@ -140,6 +135,18 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         playSound(out);
         finish();
         startActivity(new Intent(Game.this, MainActivity.class));
+    }
+
+    public void langUpdate() {
+        try {
+            System.out.println(Language.getLang());
+            if (Language.getLang().equals("ru")) {
+                MyContextWrapper.wrap(getBaseContext(), "ru");
+            } else {
+                MyContextWrapper.wrap(getBaseContext(), "en");
+            }
+        } catch (Exception ignore) {
+        }
     }
 
     public void saveAction() {
@@ -607,7 +614,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
     @SuppressLint("SetTextI18n")
     public boolean unlockDialog(Boolean[] levels, int index, int type, int cost) {
-        Dialog unlockDialog = new Dialog(Game.this);
+        langUpdate();
+        unlockDialog = new Dialog(Game.this);
         unlockDialog.setContentView(R.layout.activity_unlock_action);
         unlockDialog.show();
         Animation animButton = AnimationUtils.loadAnimation(Game.this, R.anim.anim_btn);
@@ -658,7 +666,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void warningDialog() {
-        Dialog warning = new Dialog(Game.this);
+        langUpdate();
+        warning = new Dialog(Game.this);
         warning.setContentView(R.layout.activity_warning_difficult);
         warning.show();
 
@@ -683,7 +692,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
     @SuppressLint("SetTextI18n")
     public void dialog(Boolean show, Integer resDialog, Integer resButton1, Integer resButton2, Integer resButton3, Integer resButton4, Integer resButton5, Integer resTextScore, LevelChoice obj) {
-
+        langUpdate();
         dialog.setContentView(resDialog);
         if (show) dialog.show();
 
@@ -726,18 +735,28 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             obj.setLevels(new Boolean[]{true, true, true, true, true});
         }
 
-        if (obj.getType().equals("ch")){
-            if (!Characters.isFirstSessionChLvl1()) level1.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Characters.isFirstSessionChLvl2()) level2.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Characters.isFirstSessionChLvl3()) level3.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Characters.isFirstSessionChLvl4()) level4.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Characters.isFirstSessionChLvl5()) level5.setBackgroundResource(R.drawable.btn_1_passed);
-        } else if (obj.getType().equals("loc")){
-            if (!Locations.isFirstSessionLocLvl1()) level1.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Locations.isFirstSessionLocLvl2()) level2.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Locations.isFirstSessionLocLvl3()) level3.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Locations.isFirstSessionLocLvl4()) level4.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Locations.isFirstSessionLocLvl5()) level5.setBackgroundResource(R.drawable.btn_1_passed);
+        if (obj.getType().equals("ch")) {
+            if (!Characters.isFirstSessionChLvl1())
+                level1.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Characters.isFirstSessionChLvl2())
+                level2.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Characters.isFirstSessionChLvl3())
+                level3.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Characters.isFirstSessionChLvl4())
+                level4.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Characters.isFirstSessionChLvl5())
+                level5.setBackgroundResource(R.drawable.btn_1_passed);
+        } else if (obj.getType().equals("loc")) {
+            if (!Locations.isFirstSessionLocLvl1())
+                level1.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Locations.isFirstSessionLocLvl2())
+                level2.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Locations.isFirstSessionLocLvl3())
+                level3.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Locations.isFirstSessionLocLvl4())
+                level4.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Locations.isFirstSessionLocLvl5())
+                level5.setBackgroundResource(R.drawable.btn_1_passed);
         }
 
         score.setText(getString(R.string.unlocked) + " " + unlockedButton + "/" + BUTTON_COUNT);

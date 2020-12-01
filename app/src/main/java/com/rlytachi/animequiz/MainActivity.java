@@ -9,8 +9,6 @@ import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import java.util.Locale;
@@ -43,29 +41,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         share.setOnClickListener(this);
 
         loadAction();
-
-        try {
-            System.out.println(Language.getLang());
-            if (Language.getLang().equals("ru")) {
-                MyContextWrapper.wrap(getBaseContext(), "ru");
-            } else {
-                MyContextWrapper.wrap(getBaseContext(), "en");
-            }
-        } catch (Exception ignore) {
-        }
+        langUpdate();
     }
 
     @Override
     protected void onDestroy() {
-        try {
-            System.out.println(Language.getLang());
-            if (Language.getLang().equals("ru")) {
-                MyContextWrapper.wrap(getBaseContext(), "ru");
-            } else {
-                MyContextWrapper.wrap(getBaseContext(), "en");
-            }
-        } catch (Exception ignore) {
-        }
+        langUpdate();
         saveAction();
         super.onDestroy();
     }
@@ -90,6 +71,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, Share.class));
                 break;
 
+        }
+    }
+
+    public void langUpdate() {
+        try {
+            System.out.println(Language.getLang());
+            if (Language.getLang().equals("ru")) {
+                MyContextWrapper.wrap(getBaseContext(), "ru");
+            } else {
+                MyContextWrapper.wrap(getBaseContext(), "en");
+            }
+        } catch (Exception ignore) {
         }
     }
 

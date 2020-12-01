@@ -75,10 +75,17 @@ public class Characters extends AppCompatActivity {
     boolean finishedByWin = false;
     boolean timesUp = false;
 
+    Dialog promoDialog, helpDialog, winDialog, lossDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_characters);
+
+        promoDialog = new Dialog(Characters.this);
+        helpDialog = new Dialog(Characters.this);
+        winDialog = new Dialog(Characters.this);
+        lossDialog = new Dialog(Characters.this);
 
         MobileAds.initialize(this);
         interstitialAd = new InterstitialAd(this);
@@ -137,21 +144,13 @@ public class Characters extends AppCompatActivity {
                 promoViewCount = 0;
             }
         });
+
+        langUpdate();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        try {
-            System.out.println(Language.getLang());
-            if (Language.getLang().equals("ru")) {
-                MyContextWrapper.wrap(getBaseContext(), "ru");
-            } else {
-                MyContextWrapper.wrap(getBaseContext(), "en");
-            }
-        } catch (Exception ignore) {
-        }
 
         if (LevelChoice.getLevel() == 1) level1Load();
         if (LevelChoice.getLevel() == 2) level2Load();
@@ -166,16 +165,7 @@ public class Characters extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        try {
-            System.out.println(Language.getLang());
-            if (Language.getLang().equals("ru")) {
-                MyContextWrapper.wrap(getBaseContext(), "ru");
-            } else {
-                MyContextWrapper.wrap(getBaseContext(), "en");
-            }
-        } catch (Exception ignore) {
-        }
-
+        langUpdate();
         saveAction();
         image = 0;
         setId(-1);
@@ -198,7 +188,32 @@ public class Characters extends AppCompatActivity {
     protected void onPause() {
         if (!finishedByWin)
             lossDialog();
+
+        try {
+            if (promoDialog.isShowing())
+                promoDialog.dismiss();
+            if (helpDialog.isShowing())
+                helpDialog.dismiss();
+            if (winDialog.isShowing())
+                winDialog.dismiss();
+            if (lossDialog.isShowing())
+                lossDialog.dismiss();
+        } catch (NullPointerException ignore) {
+        }
+
         super.onPause();
+    }
+
+    public void langUpdate() {
+        try {
+            System.out.println(Language.getLang());
+            if (Language.getLang().equals("ru")) {
+                MyContextWrapper.wrap(getBaseContext(), "ru");
+            } else {
+                MyContextWrapper.wrap(getBaseContext(), "en");
+            }
+        } catch (Exception ignore) {
+        }
     }
 
     public void saveAction() {
@@ -248,7 +263,7 @@ public class Characters extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void promoDialog() {
-        Dialog promoDialog = new Dialog(Characters.this);
+        langUpdate();
         promoDialog.setContentView(R.layout.activity_promo);
         promoDialog.show();
         Animation animEnd = AnimationUtils.loadAnimation(this, R.anim.anim_end);
@@ -274,8 +289,8 @@ public class Characters extends AppCompatActivity {
     //Победа
     @SuppressLint("SetTextI18n")
     public void winDialog() {
+        langUpdate();
         try {
-            Dialog winDialog = new Dialog(Characters.this);
             winDialog.setContentView(R.layout.activity_win_action);
             if (!this.isFinishing()) {
                 winDialog.show();
@@ -313,8 +328,10 @@ public class Characters extends AppCompatActivity {
 
             saveAction();
             okButton.setOnClickListener(v -> {
-                if (interstitialAd.isLoaded()) interstitialAd.show();
-                else {
+                if (interstitialAd.isLoaded()) {
+                    winDialog.dismiss();
+                    interstitialAd.show();
+                } else {
                     playSound(out);
                     winDialog.dismiss();
                     finish();
@@ -327,7 +344,7 @@ public class Characters extends AppCompatActivity {
 
     //Проигрыш
     public void lossDialog() {
-        Dialog lossDialog = new Dialog(Characters.this);
+        langUpdate();
         lossDialog.setContentView(R.layout.activity_loss);
         finished = true;
         if (!this.isFinishing()) {
@@ -338,8 +355,10 @@ public class Characters extends AppCompatActivity {
         scoreEarnedSession = 0;
         final Button okButton = lossDialog.findViewById(R.id.ok);
         okButton.setOnClickListener(v -> {
-            if (interstitialAd.isLoaded()) interstitialAd.show();
-            else {
+            if (interstitialAd.isLoaded()) {
+                lossDialog.dismiss();
+                interstitialAd.show();
+            } else {
                 playSound(out);
                 lossDialog.dismiss();
                 finish();
@@ -351,7 +370,8 @@ public class Characters extends AppCompatActivity {
     //Помощь
     @SuppressLint("SetTextI18n")
     public void helpDialog() {
-        Dialog helpDialog = new Dialog(Characters.this);
+        langUpdate();
+
         helpDialog.setContentView(R.layout.activity_help);
         if (!this.isFinishing()) {
             helpDialog.show();

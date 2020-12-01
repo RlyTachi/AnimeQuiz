@@ -74,16 +74,7 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
             startActivity(new Intent(this, Game.class));
         });
 
-        try {
-            System.out.println(Language.getLang());
-            if (Language.getLang().equals("ru")) {
-                MyContextWrapper.wrap(getBaseContext(), "ru");
-            } else {
-                MyContextWrapper.wrap(getBaseContext(), "en");
-            }
-        } catch (Exception ignore) {
-        }
-
+        langUpdate();
         loadAction();
     }
 
@@ -97,15 +88,7 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
         if (billingProcessor != null)
             billingProcessor.release();
 
-        try {
-            System.out.println(Language.getLang());
-            if (Language.getLang().equals("ru")) {
-                MyContextWrapper.wrap(getBaseContext(), "ru");
-            } else {
-                MyContextWrapper.wrap(getBaseContext(), "en");
-            }
-        } catch (Exception ignore) {
-        }
+        langUpdate();
         saveAction();
         super.onDestroy();
     }
@@ -136,6 +119,18 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
     @Override
     public void onBillingInitialized() {
 
+    }
+
+    public void langUpdate() {
+        try {
+            System.out.println(Language.getLang());
+            if (Language.getLang().equals("ru")) {
+                MyContextWrapper.wrap(getBaseContext(), "ru");
+            } else {
+                MyContextWrapper.wrap(getBaseContext(), "en");
+            }
+        } catch (Exception ignore) {
+        }
     }
 
     public void saveAction() {

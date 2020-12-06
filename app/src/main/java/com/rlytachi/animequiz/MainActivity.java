@@ -16,17 +16,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.jaeger.library.StatusBarUtil;
-
 import java.util.Locale;
 
-import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-import static com.rlytachi.animequiz.Settings.APP_PREFERENCES_MUSIC;
-import static com.rlytachi.animequiz.Settings.APP_PREFERENCES_SOUNDS;
-import static com.rlytachi.animequiz.Settings.getMusic;
-import static com.rlytachi.animequiz.Settings.getSounds;
-import static com.rlytachi.animequiz.Settings.in;
-import static com.rlytachi.animequiz.Settings.out;
+import static com.rlytachi.animequiz.Settings.*;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

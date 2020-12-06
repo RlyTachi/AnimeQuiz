@@ -26,14 +26,8 @@ import com.rlytachi.animequiz.levels.Titles;
 
 import java.util.Locale;
 
-import static com.rlytachi.animequiz.Settings.in;
-import static com.rlytachi.animequiz.Settings.out;
-import static com.rlytachi.animequiz.Settings.playSound;
+import static com.rlytachi.animequiz.Settings.*;
 import static com.rlytachi.animequiz.levels.Characters.*;
-import static com.rlytachi.animequiz.levels.Items.APP_PREFERENCES_FIRST_SESSION_ITEMS_2;
-import static com.rlytachi.animequiz.levels.Items.APP_PREFERENCES_FIRST_SESSION_ITEMS_3;
-import static com.rlytachi.animequiz.levels.Items.APP_PREFERENCES_FIRST_SESSION_ITEMS_4;
-import static com.rlytachi.animequiz.levels.Items.APP_PREFERENCES_FIRST_SESSION_ITEMS_5;
 import static com.rlytachi.animequiz.levels.Locations.*;
 import static com.rlytachi.animequiz.levels.Titles.*;
 import static com.rlytachi.animequiz.levels.Items.*;

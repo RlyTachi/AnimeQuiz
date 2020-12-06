@@ -32,18 +32,14 @@ import com.rlytachi.animequiz.MyContextWrapper;
 import com.rlytachi.animequiz.PromoStorage;
 import com.rlytachi.animequiz.R;
 import com.rlytachi.animequiz.Score;
-import com.rlytachi.animequiz.Settings;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Locale;
 
-import static com.rlytachi.animequiz.PromoStorage.APP_PREFERENCES_PROMO_CODES;
-import static com.rlytachi.animequiz.PromoStorage.promoStorage;
-import static com.rlytachi.animequiz.Settings.in;
-import static com.rlytachi.animequiz.Settings.out;
-import static com.rlytachi.animequiz.Settings.playSound;
+import static com.rlytachi.animequiz.PromoStorage.*;
+import static com.rlytachi.animequiz.Settings.*;
 
 public class Characters extends AppCompatActivity {
 

@@ -14,9 +14,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.jaeger.library.StatusBarUtil;
 
-import static com.rlytachi.animequiz.Settings.in;
-import static com.rlytachi.animequiz.Settings.out;
-import static com.rlytachi.animequiz.Settings.playSound;
+import static com.rlytachi.animequiz.Settings.*;
 
 public class Share extends AppCompatActivity {
 
@@ -45,13 +43,13 @@ public class Share extends AppCompatActivity {
 
         final LinearLayout vkView = findViewById(R.id.vkViewClick);
         vkView.setOnClickListener(v -> {
-            finish();
+            back = true;
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://vk.com/onoderadev")));
         });
 
         final LinearLayout twitterView = findViewById(R.id.twitterViewClick);
         twitterView.setOnClickListener(v -> {
-            finish();
+            back = true;
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/emanongn")));
         });
 

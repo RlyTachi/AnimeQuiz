@@ -20,9 +20,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.jaeger.library.StatusBarUtil;
 
-import static com.rlytachi.animequiz.Settings.in;
-import static com.rlytachi.animequiz.Settings.out;
-import static com.rlytachi.animequiz.Settings.playSound;
+import static com.rlytachi.animequiz.Settings.*;
 
 public class Unlock extends AppCompatActivity implements BillingProcessor.IBillingHandler {
 

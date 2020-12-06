@@ -25,7 +25,7 @@
             android:layout_height="30dp"
             android:layout_gravity="start|bottom"
             android:layout_margin="2dp"
-            android:layout_weight="0"
+            android:layout_weight="1"
             android:contentDescription="@string/back"
             android:src="@drawable/back" />
 
@@ -39,6 +39,16 @@
             android:gravity="center"
             android:text="@string/share"
             android:textSize="28sp" />
+
+        <ImageView
+            android:id="@+id/invisibleView"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="start|bottom"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:src="@drawable/back"
+            android:visibility="invisible" />
         />
     </LinearLayout>
 

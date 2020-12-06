@@ -16,7 +16,6 @@
             android:id="@+id/settingsMainLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout
@@ -36,8 +35,8 @@
                     android:layout_height="30dp"
                     android:layout_gravity="start|bottom"
                     android:layout_margin="2dp"
-                    android:layout_weight="0"
                     android:contentDescription="@string/back"
+                    android:layout_weight="1"
                     android:src="@drawable/back" />
 
                 <TextView
@@ -45,11 +44,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="0"
                     android:fontFamily="@font/pixel"
                     android:gravity="center"
                     android:text="@string/settings"
+                    android:layout_weight="0"
                     android:textSize="28sp" />
+
+                <ImageView
+                    android:id="@+id/invisibleView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="start|bottom"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/back"
+                    android:visibility="invisible" />
                 />
             </LinearLayout>
 

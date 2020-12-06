@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.jaeger.library.StatusBarUtil;
 
 import static com.rlytachi.animequiz.Settings.in;
 import static com.rlytachi.animequiz.Settings.out;
@@ -25,7 +26,7 @@ public class Share extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share);
-
+        StatusBarUtil.setTransparent(this);
         in = MediaPlayer.create(this, R.raw.in);
         out = MediaPlayer.create(this, R.raw.out);
 

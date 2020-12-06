@@ -18,6 +18,7 @@ import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.jaeger.library.StatusBarUtil;
 
 import static com.rlytachi.animequiz.Settings.in;
 import static com.rlytachi.animequiz.Settings.out;
@@ -29,13 +30,14 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
     public static final String APP_PREFERENCES_UNLOCK_STATUS = "unlockStatus";
     BillingProcessor billingProcessor = null;
     static Boolean unlocked = false;
+    static boolean firstUnlockUpdate = false;
     boolean back = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_unlock);
-
+        StatusBarUtil.setTransparent(this);
         in = MediaPlayer.create(this, R.raw.in);
         out = MediaPlayer.create(this, R.raw.out);
 
@@ -56,6 +58,7 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
             //TODO purchase
 
             setUnlocked(true);
+            setFirstUnlockUpdate(true);
         });
 
         final Button get = findViewById(R.id.buttonWatch);
@@ -167,5 +170,13 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
 
     public static void setUnlocked(Boolean unlocked) {
         Unlock.unlocked = unlocked;
+    }
+
+    public static boolean isFirstUnlockUpdate() {
+        return firstUnlockUpdate;
+    }
+
+    public static void setFirstUnlockUpdate(boolean firstUnlockUpdate) {
+        Unlock.firstUnlockUpdate = firstUnlockUpdate;
     }
 }

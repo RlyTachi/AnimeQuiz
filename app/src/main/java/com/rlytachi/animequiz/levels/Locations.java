@@ -24,6 +24,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.jaeger.library.StatusBarUtil;
 import com.rlytachi.animequiz.Game;
 import com.rlytachi.animequiz.Language;
 import com.rlytachi.animequiz.LevelChoice;
@@ -82,7 +83,7 @@ public class Locations extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locations);
-
+        StatusBarUtil.setTransparent(this);
         promoDialog = new Dialog(Locations.this);
         helpDialog = new Dialog(Locations.this);
         winDialog = new Dialog(Locations.this);

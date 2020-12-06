@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jaeger.library.StatusBarUtil;
 import com.rlytachi.animequiz.levels.Characters;
 import com.rlytachi.animequiz.levels.Items;
 import com.rlytachi.animequiz.levels.Locations;
@@ -29,7 +30,13 @@ import static com.rlytachi.animequiz.Settings.in;
 import static com.rlytachi.animequiz.Settings.out;
 import static com.rlytachi.animequiz.Settings.playSound;
 import static com.rlytachi.animequiz.levels.Characters.*;
+import static com.rlytachi.animequiz.levels.Items.APP_PREFERENCES_FIRST_SESSION_ITEMS_2;
+import static com.rlytachi.animequiz.levels.Items.APP_PREFERENCES_FIRST_SESSION_ITEMS_3;
+import static com.rlytachi.animequiz.levels.Items.APP_PREFERENCES_FIRST_SESSION_ITEMS_4;
+import static com.rlytachi.animequiz.levels.Items.APP_PREFERENCES_FIRST_SESSION_ITEMS_5;
 import static com.rlytachi.animequiz.levels.Locations.*;
+import static com.rlytachi.animequiz.levels.Titles.*;
+import static com.rlytachi.animequiz.levels.Items.*;
 
 public class Game extends AppCompatActivity implements View.OnClickListener {
 
@@ -61,7 +68,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
+        StatusBarUtil.setTransparent(this);
         in = MediaPlayer.create(this, R.raw.in);
         out = MediaPlayer.create(this, R.raw.out);
         dialog = new Dialog(Game.this);
@@ -120,12 +127,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         }
 
         try {
+            if (unlockDialog.isShowing())
+                unlockDialog.dismiss();
             if (dialog.isShowing())
                 dialog.dismiss();
             if (warning.isShowing())
                 warning.dismiss();
-            if (unlockDialog.isShowing())
-                unlockDialog.dismiss();
         } catch (NullPointerException ignore) {
         }
         super.onPause();
@@ -145,6 +152,18 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         back = true;
         finish();
         startActivity(new Intent(Game.this, MainActivity.class));
+    }
+
+    public void updateAfterPurchase(){
+        if(Unlock.isFirstUnlockUpdate()){
+            finish();
+            startActivity(new Intent(Game.this, Game.class));
+            dialog(false, R.layout.activity_characters_levels, R.id.chLevel1, R.id.chLevel2, R.id.chLevel3, R.id.chLevel4, R.id.chLevel5, R.id.chScoreTextView, ch);
+            dialog(false, R.layout.activity_locations_levels, R.id.locLevel1, R.id.locLevel2, R.id.locLevel3, R.id.locLevel4, R.id.locLevel5, R.id.locScoreTextView, loc);
+            dialog(false, R.layout.activity_titles_levels, R.id.tiLevel1, R.id.tiLevel2, R.id.tiLevel3, R.id.tiLevel4, R.id.tiLevel5, R.id.tiScoreTextView, ti);
+            dialog(false, R.layout.activity_items_levels, R.id.itLevel1, R.id.itLevel2, R.id.itLevel3, R.id.itLevel4, R.id.itLevel5, R.id.itScoreTextView, it);
+            Unlock.setFirstUnlockUpdate(false);
+        }
     }
 
     public void langUpdate() {
@@ -250,8 +269,38 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         } else setFirstSessionLocLvl5(true);
 
         //Titles
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_TITLES_1)) {
+            setFirstSessionTiLvl1(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_TITLES_1, false));
+        } else setFirstSessionTiLvl5(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_TITLES_2)) {
+            setFirstSessionTiLvl2(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_TITLES_2, false));
+        } else setFirstSessionTiLvl5(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_TITLES_3)) {
+            setFirstSessionTiLvl3(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_TITLES_3, false));
+        } else setFirstSessionTiLvl5(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_TITLES_4)) {
+            setFirstSessionTiLvl4(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_TITLES_4, false));
+        } else setFirstSessionTiLvl5(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_TITLES_5)) {
+            setFirstSessionTiLvl5(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_TITLES_5, false));
+        } else setFirstSessionTiLvl5(true);
 
         //Items
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_ITEMS_1)) {
+            setFirstSessionItLvl1(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_ITEMS_1, false));
+        } else setFirstSessionItLvl5(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_ITEMS_2)) {
+            setFirstSessionItLvl2(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_ITEMS_2, false));
+        } else setFirstSessionItLvl5(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_ITEMS_3)) {
+            setFirstSessionItLvl3(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_ITEMS_3, false));
+        } else setFirstSessionItLvl5(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_ITEMS_4)) {
+            setFirstSessionItLvl4(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_ITEMS_4, false));
+        } else setFirstSessionItLvl5(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_ITEMS_5)) {
+            setFirstSessionItLvl5(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_ITEMS_5, false));
+        } else setFirstSessionItLvl5(true);
 
         saveAction();
         refreshScore();
@@ -639,6 +688,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 unlockWarning.setAnimation(animEnd);
                 unlockWarning.startAnimation(animEnd);
                 unlockWarning.setVisibility(View.INVISIBLE);
+                back = true;
                 finish();
                 startActivity(new Intent(this, Unlock.class));
             }
@@ -739,8 +789,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 level4.setBackgroundResource(R.drawable.btn_1_passed);
             if (!Locations.isFirstSessionLocLvl5())
                 level5.setBackgroundResource(R.drawable.btn_1_passed);
-        }
-        else if (obj.getType().equals("ti")) {
+        } else if (obj.getType().equals("ti")) {
             if (!Titles.isFirstSessionTiLvl1())
                 level1.setBackgroundResource(R.drawable.btn_1_passed);
             if (!Titles.isFirstSessionTiLvl2())
@@ -751,8 +800,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 level4.setBackgroundResource(R.drawable.btn_1_passed);
             if (!Titles.isFirstSessionTiLvl5())
                 level5.setBackgroundResource(R.drawable.btn_1_passed);
-        }
-        else if (obj.getType().equals("it")) {
+        } else if (obj.getType().equals("it")) {
             if (!Items.isFirstSessionItLvl1())
                 level1.setBackgroundResource(R.drawable.btn_1_passed);
             if (!Items.isFirstSessionItLvl2())

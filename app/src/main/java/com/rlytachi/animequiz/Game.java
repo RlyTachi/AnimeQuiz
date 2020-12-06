@@ -19,7 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rlytachi.animequiz.levels.Characters;
+import com.rlytachi.animequiz.levels.Items;
 import com.rlytachi.animequiz.levels.Locations;
+import com.rlytachi.animequiz.levels.Titles;
 
 import java.util.Locale;
 
@@ -52,6 +54,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     Boolean[] itLevels = it.getLevels();
     //    Boolean[] evLevels = ev.getLevels();
     Dialog dialog, warning, unlockDialog;
+    boolean back = false;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -110,6 +113,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onPause() {
+        if (!back) {
+            langUpdate();
+            finish();
+            startActivity(new Intent(Game.this, Game.class));
+        }
+
         try {
             if (dialog.isShowing())
                 dialog.dismiss();
@@ -133,6 +142,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     public void onBackPressed() {
         super.onBackPressed();
         playSound(out);
+        back = true;
         finish();
         startActivity(new Intent(Game.this, MainActivity.class));
     }
@@ -142,6 +152,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             System.out.println(Language.getLang());
             if (Language.getLang().equals("ru")) {
                 MyContextWrapper.wrap(getBaseContext(), "ru");
+            } else if (Language.getLang().equals("ja")) {
+                MyContextWrapper.wrap(getBaseContext(), "ja");
             } else {
                 MyContextWrapper.wrap(getBaseContext(), "en");
             }
@@ -265,11 +277,13 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.backView:
                 playSound(out);
+                back = true;
                 finish();
                 startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.unlockView:
                 playSound(in);
+                back = true;
                 finish();
                 startActivity(new Intent(this, Unlock.class));
                 break;
@@ -317,6 +331,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             //Characters levels
             case R.id.chLevel1:
                 playSound(in);
+                back = true;
                 finish();
                 startActivity(new Intent(this, Characters.class));
                 LevelChoice.setLevel(1);
@@ -328,6 +343,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 if (!chLevels[1]) {
                     unlockDialog(chLevels, 1, 1, 20);
                 } else {
+                    back = true;
                     finish();
                     startActivity(new Intent(this, Characters.class));
                     LevelChoice.setLevel(2);
@@ -340,6 +356,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     if (!chLevels[2]) {
                         unlockDialog(chLevels, 2, 1, 20);
                     } else {
+                        back = true;
                         finish();
                         startActivity(new Intent(this, Characters.class));
                         LevelChoice.setLevel(3);
@@ -354,6 +371,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     if (!chLevels[3]) {
                         unlockDialog(chLevels, 3, 1, 30);
                     } else {
+                        back = true;
                         finish();
                         startActivity(new Intent(this, Characters.class));
                         LevelChoice.setLevel(4);
@@ -368,6 +386,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     if (!chLevels[4]) {
                         unlockDialog(chLevels, 4, 1, 30);
                     } else {
+                        back = true;
                         finish();
                         startActivity(new Intent(this, Characters.class));
                         LevelChoice.setLevel(5);
@@ -382,17 +401,15 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 playSound(in);
                 warningDialog();
                 LevelChoice.setLevel(1);
-
-                //todo level 1 locations
                 break;
             case R.id.locLevel2:
                 playSound(in);
                 if (!locLevels[1]) {
                     unlockDialog(locLevels, 1, 2, 30);
                 } else {
+                    back = true;
                     finish();
                     startActivity(new Intent(this, Locations.class));
-                    //todo level 2 locations
                     LevelChoice.setLevel(2);
                 }
                 break;
@@ -402,9 +419,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     if (!locLevels[2]) {
                         unlockDialog(locLevels, 2, 2, 30);
                     } else {
+                        back = true;
                         finish();
                         startActivity(new Intent(this, Locations.class));
-                        //todo level 3 locations
                         LevelChoice.setLevel(3);
                     }
                 } else {
@@ -417,9 +434,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     if (!locLevels[3]) {
                         unlockDialog(locLevels, 3, 2, 60);
                     } else {
+                        back = true;
                         finish();
                         startActivity(new Intent(this, Locations.class));
-                        //todo level 4 locations
                         LevelChoice.setLevel(4);
                     }
                 } else {
@@ -432,9 +449,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     if (!locLevels[4]) {
                         unlockDialog(locLevels, 4, 2, 60);
                     } else {
+                        back = true;
                         finish();
                         startActivity(new Intent(this, Locations.class));
-                        //todo level 5 locations
                         LevelChoice.setLevel(5);
                     }
                 } else {
@@ -446,15 +463,18 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             case R.id.tiLevel1:
                 playSound(in);
                 LevelChoice.setLevel(1);
-                //todo level 1 titles
+                back = true;
+                finish();
+                startActivity(new Intent(this, Titles.class));
                 break;
             case R.id.tiLevel2:
                 playSound(in);
                 if (!tiLevels[1]) {
                     unlockDialog(tiLevels, 1, 3, 20);
                 } else {
+                    back = true;
                     finish();
-                    //todo level 2 titles
+                    startActivity(new Intent(this, Titles.class));
                     LevelChoice.setLevel(2);
                 }
                 break;
@@ -464,8 +484,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     if (!tiLevels[2]) {
                         unlockDialog(tiLevels, 2, 3, 20);
                     } else {
+                        back = true;
                         finish();
-                        //todo level 3 titles
+                        startActivity(new Intent(this, Titles.class));
                         LevelChoice.setLevel(3);
                     }
                 } else {
@@ -478,8 +499,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     if (!tiLevels[3]) {
                         unlockDialog(tiLevels, 3, 3, 30);
                     } else {
+                        back = true;
                         finish();
-                        //todo level 4 titles
+                        startActivity(new Intent(this, Titles.class));
                         LevelChoice.setLevel(4);
                     }
                 } else {
@@ -492,8 +514,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     if (!tiLevels[4]) {
                         unlockDialog(tiLevels, 4, 3, 30);
                     } else {
+                        back = true;
                         finish();
-                        //todo level 5 titles
+                        startActivity(new Intent(this, Titles.class));
                         LevelChoice.setLevel(5);
                     }
                 } else {
@@ -505,15 +528,17 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             case R.id.itLevel1:
                 playSound(in);
                 LevelChoice.setLevel(1);
-                //todo level 1 items
+                back = true;
+                startActivity(new Intent(this, Items.class));
                 break;
             case R.id.itLevel2:
                 playSound(in);
                 if (!itLevels[1]) {
                     unlockDialog(itLevels, 1, 4, 30);
                 } else {
+                    back = true;
                     finish();
-                    //todo level 2 items
+                    startActivity(new Intent(this, Items.class));
                     LevelChoice.setLevel(2);
                 }
                 break;
@@ -523,8 +548,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     if (!itLevels[2]) {
                         unlockDialog(itLevels, 2, 4, 30);
                     } else {
+                        back = true;
                         finish();
-                        //todo level 3 items
+                        startActivity(new Intent(this, Items.class));
                         LevelChoice.setLevel(3);
                     }
                 } else {
@@ -537,8 +563,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     if (!itLevels[3]) {
                         unlockDialog(itLevels, 3, 4, 40);
                     } else {
+                        back = true;
                         finish();
-                        //todo level 4 items
+                        startActivity(new Intent(this, Items.class));
                         LevelChoice.setLevel(4);
                     }
                 } else {
@@ -551,61 +578,15 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     if (!itLevels[4]) {
                         unlockDialog(itLevels, 4, 4, 40);
                     } else {
+                        back = true;
                         finish();
-                        //todo level 5 items
+                        startActivity(new Intent(this, Items.class));
                         LevelChoice.setLevel(5);
                     }
                 } else {
                     Toast.makeText(this, getString(R.string.levelPrevious), Toast.LENGTH_SHORT).show();
                 }
                 break;
-
-//            //Events levels
-//            case R.id.evLevel1:
-//                playSound(in);
-//                LevelChoice.setLevel(1);
-//
-//                break;
-//            case R.id.evLevel2:
-//                playSound(in);
-//                if (!evLevels[1]) {
-//                    unlockDialog(evLevels, 1, 5);
-//                } else {
-//                    finish();
-//
-//                    LevelChoice.setLevel(2);
-//                }
-//                break;
-//            case R.id.evLevel3:
-//                playSound(in);
-//                if (!evLevels[2]) {
-//                    unlockDialog(evLevels, 2, 5);
-//                } else {
-//                    finish();
-//
-//                    LevelChoice.setLevel(3);
-//                }
-//                break;
-//            case R.id.evLevel4:
-//                playSound(in);
-//                if (!evLevels[3]) {
-//                    unlockDialog(evLevels, 3, 5);
-//                } else {
-//                    finish();
-//
-//                    LevelChoice.setLevel(4);
-//                }
-//                break;
-//            case R.id.evLevel5:
-//                playSound(in);
-//                if (!evLevels[4]) {
-//                    unlockDialog(evLevels, 4, 5);
-//                } else {
-//                    finish();
-//
-//                    LevelChoice.setLevel(5);
-//                }
-//                break;
 
         }
         refreshScore();
@@ -679,6 +660,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         ok.setOnClickListener(v -> {
             ok.setAnimation(animation);
             playSound(in);
+            back = true;
             finish();
             startActivity(new Intent(this, Locations.class));
         });
@@ -756,6 +738,30 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             if (!Locations.isFirstSessionLocLvl4())
                 level4.setBackgroundResource(R.drawable.btn_1_passed);
             if (!Locations.isFirstSessionLocLvl5())
+                level5.setBackgroundResource(R.drawable.btn_1_passed);
+        }
+        else if (obj.getType().equals("ti")) {
+            if (!Titles.isFirstSessionTiLvl1())
+                level1.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Titles.isFirstSessionTiLvl2())
+                level2.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Titles.isFirstSessionTiLvl3())
+                level3.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Titles.isFirstSessionTiLvl4())
+                level4.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Titles.isFirstSessionTiLvl5())
+                level5.setBackgroundResource(R.drawable.btn_1_passed);
+        }
+        else if (obj.getType().equals("it")) {
+            if (!Items.isFirstSessionItLvl1())
+                level1.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Items.isFirstSessionItLvl2())
+                level2.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Items.isFirstSessionItLvl3())
+                level3.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Items.isFirstSessionItLvl4())
+                level4.setBackgroundResource(R.drawable.btn_1_passed);
+            if (!Items.isFirstSessionItLvl5())
                 level5.setBackgroundResource(R.drawable.btn_1_passed);
         }
 

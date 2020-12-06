@@ -31,7 +31,6 @@ import com.rlytachi.animequiz.MyContextWrapper;
 import com.rlytachi.animequiz.PromoStorage;
 import com.rlytachi.animequiz.R;
 import com.rlytachi.animequiz.Score;
-import com.rlytachi.animequiz.Settings;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -44,16 +43,16 @@ import static com.rlytachi.animequiz.Settings.in;
 import static com.rlytachi.animequiz.Settings.out;
 import static com.rlytachi.animequiz.Settings.playSound;
 
-public class Characters extends AppCompatActivity {
+public class Items extends AppCompatActivity {
 
     //Shared Preferences
     public static final String APP_PREFERENCES = "mySettings";
     public static final String APP_PREFERENCES_LANG = "myLanguage";
-    public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS_1 = "firstSessionCharacters1";
-    public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS_2 = "firstSessionCharacters2";
-    public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3 = "firstSessionCharacters3";
-    public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4 = "firstSessionCharacters4";
-    public static final String APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5 = "firstSessionCharacters5";
+    public static final String APP_PREFERENCES_FIRST_SESSION_ITEMS_1 = "firstSessionItems1";
+    public static final String APP_PREFERENCES_FIRST_SESSION_ITEMS_2 = "firstSessionItems2";
+    public static final String APP_PREFERENCES_FIRST_SESSION_ITEMS_3 = "firstSessionItems3";
+    public static final String APP_PREFERENCES_FIRST_SESSION_ITEMS_4 = "firstSessionItems4";
+    public static final String APP_PREFERENCES_FIRST_SESSION_ITEMS_5 = "firstSessionItems5";
     public static final int PROMO_VIEW_TARGET = 3;
     public InterstitialAd interstitialAd;
 
@@ -66,11 +65,11 @@ public class Characters extends AppCompatActivity {
     int seconds = -1;
     int scoreEarnedSession = 0;
     int promoViewCount = 0;
-    static boolean firstSessionChLvl1 = true;
-    static boolean firstSessionChLvl2 = true;
-    static boolean firstSessionChLvl3 = true;
-    static boolean firstSessionChLvl4 = true;
-    static boolean firstSessionChLvl5 = true;
+    static boolean firstSessionItLvl1 = true;
+    static boolean firstSessionItLvl2 = true;
+    static boolean firstSessionItLvl3 = true;
+    static boolean firstSessionItLvl4 = true;
+    static boolean firstSessionItLvl5 = true;
 
     boolean back = false;
     boolean finished = false;
@@ -82,12 +81,12 @@ public class Characters extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_characters);
+        setContentView(R.layout.activity_items);
 
-        promoDialog = new Dialog(Characters.this);
-        helpDialog = new Dialog(Characters.this);
-        winDialog = new Dialog(Characters.this);
-        lossDialog = new Dialog(Characters.this);
+        promoDialog = new Dialog(Items.this);
+        helpDialog = new Dialog(Items.this);
+        winDialog = new Dialog(Items.this);
+        lossDialog = new Dialog(Items.this);
 
         MobileAds.initialize(this);
         interstitialAd = new InterstitialAd(this);
@@ -102,7 +101,7 @@ public class Characters extends AppCompatActivity {
                 playSound(out);
                 back = true;
                 finish();
-                startActivity(new Intent(Characters.this, Game.class));
+                startActivity(new Intent(Items.this, Game.class));
             }
         });
 
@@ -114,7 +113,7 @@ public class Characters extends AppCompatActivity {
         if (buttonsEvent.isInterrupted()) buttonsEvent.interrupt();
         else buttonsEvent.start();
 
-        Animation animHeart = AnimationUtils.loadAnimation(Characters.this, R.anim.anim_btn);
+        Animation animHeart = AnimationUtils.loadAnimation(Items.this, R.anim.anim_btn);
         final ImageView heart1 = findViewById(R.id.heart1);
         final ImageView heart2 = findViewById(R.id.heart2);
         final ImageView heart3 = findViewById(R.id.heart3);
@@ -184,16 +183,16 @@ public class Characters extends AppCompatActivity {
         back = true;
         saveAction();
         finish();
-        startActivity(new Intent(Characters.this, Game.class));
+        startActivity(new Intent(Items.this, Game.class));
     }
 
 
     @Override
     protected void onPause() {
-        if(!back) {
+        if(!back){
             langUpdate();
             finish();
-            startActivity(new Intent(Characters.this, Characters.class));
+            startActivity(new Intent(Items.this, Items.class));
         }
 
         if (!finishedByWin)
@@ -231,11 +230,11 @@ public class Characters extends AppCompatActivity {
     public void saveAction() {
         SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = mShared.edit();
-        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_1, isFirstSessionChLvl1());
-        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_2, isFirstSessionChLvl2());
-        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3, isFirstSessionChLvl3());
-        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4, isFirstSessionChLvl4());
-        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5, isFirstSessionChLvl5());
+        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_ITEMS_1, isFirstSessionItLvl1());
+        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_ITEMS_2, isFirstSessionItLvl2());
+        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_ITEMS_3, isFirstSessionItLvl3());
+        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_ITEMS_4, isFirstSessionItLvl4());
+        editor.putBoolean(APP_PREFERENCES_FIRST_SESSION_ITEMS_5, isFirstSessionItLvl5());
         editor.putInt(Game.APP_PREFERENCES_GLOBAL_SCORE, Score.getScore());
         editor.putString(APP_PREFERENCES_LANG, Language.getLang());
 
@@ -248,21 +247,21 @@ public class Characters extends AppCompatActivity {
 
     public void loadAction() {
         SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_1)) {
-            setFirstSessionChLvl1(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_1, false));
-        } else setFirstSessionChLvl1(true);
-        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_2)) {
-            setFirstSessionChLvl2(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_2, false));
-        } else setFirstSessionChLvl2(true);
-        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3)) {
-            setFirstSessionChLvl3(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_3, false));
-        } else setFirstSessionChLvl3(true);
-        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4)) {
-            setFirstSessionChLvl4(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_4, false));
-        } else setFirstSessionChLvl4(true);
-        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5)) {
-            setFirstSessionChLvl5(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_CHARACTERS_5, false));
-        } else setFirstSessionChLvl5(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_ITEMS_1)) {
+            setFirstSessionItLvl1(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_ITEMS_1, false));
+        } else setFirstSessionItLvl1(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_ITEMS_2)) {
+            setFirstSessionItLvl2(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_ITEMS_2, false));
+        } else setFirstSessionItLvl2(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_ITEMS_3)) {
+            setFirstSessionItLvl3(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_ITEMS_3, false));
+        } else setFirstSessionItLvl3(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_ITEMS_4)) {
+            setFirstSessionItLvl4(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_ITEMS_4, false));
+        } else setFirstSessionItLvl4(true);
+        if (mShared.contains(APP_PREFERENCES_FIRST_SESSION_ITEMS_5)) {
+            setFirstSessionItLvl5(mShared.getBoolean(APP_PREFERENCES_FIRST_SESSION_ITEMS_5, false));
+        } else setFirstSessionItLvl5(true);
 
         String[] temp = new String[PromoStorage.getPromoStorage().length];
         for (int i = 0; i < PromoStorage.getPromoStorage().length; i++) {
@@ -315,24 +314,24 @@ public class Characters extends AppCompatActivity {
             final TextView earnedView = winDialog.findViewById(R.id.earned);
 
             if (LevelChoice.getLevel() == 1) {
-                if (!isFirstSessionChLvl1()) scoreEarnedSession = 2;
-                setFirstSessionChLvl1(false);
+                if (!isFirstSessionItLvl1()) scoreEarnedSession = 2;
+                setFirstSessionItLvl1(false);
             }
             if (LevelChoice.getLevel() == 2) {
-                if (!isFirstSessionChLvl2()) scoreEarnedSession = 2;
-                setFirstSessionChLvl2(false);
+                if (!isFirstSessionItLvl2()) scoreEarnedSession = 2;
+                setFirstSessionItLvl2(false);
             }
             if (LevelChoice.getLevel() == 3) {
-                if (!isFirstSessionChLvl3()) scoreEarnedSession = 2;
-                setFirstSessionChLvl3(false);
+                if (!isFirstSessionItLvl3()) scoreEarnedSession = 2;
+                setFirstSessionItLvl3(false);
             }
             if (LevelChoice.getLevel() == 4) {
-                if (!isFirstSessionChLvl4()) scoreEarnedSession = 2;
-                setFirstSessionChLvl4(false);
+                if (!isFirstSessionItLvl4()) scoreEarnedSession = 2;
+                setFirstSessionItLvl4(false);
             }
             if (LevelChoice.getLevel() == 5) {
-                if (!isFirstSessionChLvl5()) scoreEarnedSession = 2;
-                setFirstSessionChLvl5(false);
+                if (!isFirstSessionItLvl5()) scoreEarnedSession = 2;
+                setFirstSessionItLvl5(false);
             }
 
             earnedView.setText(getString(R.string.earned) + " " + scoreEarnedSession + " " + getString(R.string.scores));
@@ -345,10 +344,10 @@ public class Characters extends AppCompatActivity {
                     interstitialAd.show();
                 } else {
                     playSound(out);
-                    back = true;
                     winDialog.dismiss();
+                    back = true;
                     finish();
-                    startActivity(new Intent(Characters.this, Game.class));
+                    startActivity(new Intent(Items.this, Game.class));
                 }
             });
         } catch (RuntimeException ignore) {
@@ -376,7 +375,7 @@ public class Characters extends AppCompatActivity {
                 lossDialog.dismiss();
                 back = true;
                 finish();
-                startActivity(new Intent(Characters.this, Game.class));
+                startActivity(new Intent(Items.this, Game.class));
             }
         });
     }
@@ -392,7 +391,7 @@ public class Characters extends AppCompatActivity {
         }
 
 
-        Animation animButton = AnimationUtils.loadAnimation(Characters.this, R.anim.anim_btn);
+        Animation animButton = AnimationUtils.loadAnimation(Items.this, R.anim.anim_btn);
         Animation animEnd = AnimationUtils.loadAnimation(this, R.anim.anim_end);
         final Button getHelpBtn = helpDialog.findViewById(R.id.takeHelpBtn);
         final Button getHeartBtn = helpDialog.findViewById(R.id.takeHeartBtn);
@@ -522,44 +521,44 @@ public class Characters extends AppCompatActivity {
         this.id = id;
     }
 
-    public static boolean isFirstSessionChLvl1() {
-        return firstSessionChLvl1;
+    public static boolean isFirstSessionItLvl1() {
+        return firstSessionItLvl1;
     }
 
-    public static void setFirstSessionChLvl1(boolean firstSessionChLvl1) {
-        Characters.firstSessionChLvl1 = firstSessionChLvl1;
+    public static void setFirstSessionItLvl1(boolean firstSessionItLvl1) {
+        Items.firstSessionItLvl1 = firstSessionItLvl1;
     }
 
-    public static boolean isFirstSessionChLvl2() {
-        return firstSessionChLvl2;
+    public static boolean isFirstSessionItLvl2() {
+        return firstSessionItLvl2;
     }
 
-    public static void setFirstSessionChLvl2(boolean firstSessionChLvl2) {
-        Characters.firstSessionChLvl2 = firstSessionChLvl2;
+    public static void setFirstSessionItLvl2(boolean firstSessionItLvl2) {
+        Items.firstSessionItLvl2 = firstSessionItLvl2;
     }
 
-    public static boolean isFirstSessionChLvl3() {
-        return firstSessionChLvl3;
+    public static boolean isFirstSessionItLvl3() {
+        return firstSessionItLvl3;
     }
 
-    public static void setFirstSessionChLvl3(boolean firstSessionChLvl3) {
-        Characters.firstSessionChLvl3 = firstSessionChLvl3;
+    public static void setFirstSessionItLvl3(boolean firstSessionItLvl3) {
+        Items.firstSessionItLvl3 = firstSessionItLvl3;
     }
 
-    public static boolean isFirstSessionChLvl4() {
-        return firstSessionChLvl4;
+    public static boolean isFirstSessionItLvl4() {
+        return firstSessionItLvl4;
     }
 
-    public static void setFirstSessionChLvl4(boolean firstSessionChLvl4) {
-        Characters.firstSessionChLvl4 = firstSessionChLvl4;
+    public static void setFirstSessionItLvl4(boolean firstSessionItLvl4) {
+        Items.firstSessionItLvl4 = firstSessionItLvl4;
     }
 
-    public static boolean isFirstSessionChLvl5() {
-        return firstSessionChLvl5;
+    public static boolean isFirstSessionItLvl5() {
+        return firstSessionItLvl5;
     }
 
-    public static void setFirstSessionChLvl5(boolean firstSessionChLvl5) {
-        Characters.firstSessionChLvl5 = firstSessionChLvl5;
+    public static void setFirstSessionItLvl5(boolean firstSessionItLvl5) {
+        Items.firstSessionItLvl5 = firstSessionItLvl5;
     }
 
     public void nextQuestion() {
@@ -659,7 +658,7 @@ public class Characters extends AppCompatActivity {
     public class myTimer extends CountDownTimer {
         final TextView timer = findViewById(R.id.timerTextView);
         final TextView info = findViewById(R.id.informationText);
-        Animation animEnd = AnimationUtils.loadAnimation(Characters.this, R.anim.anim_end);
+        Animation animEnd = AnimationUtils.loadAnimation(Items.this, R.anim.anim_end);
 
         //Конструктор таймера
         public myTimer(long millisInFuture, long countDownInterval) {
@@ -744,19 +743,19 @@ public class Characters extends AppCompatActivity {
 
         public void firstEarn() {
             if (LevelChoice.getLevel() == 1) {
-                if (isFirstSessionChLvl1()) scoreEarnedSession++;
+                if (isFirstSessionItLvl1()) scoreEarnedSession++;
             }
             if (LevelChoice.getLevel() == 2) {
-                if (isFirstSessionChLvl2()) scoreEarnedSession++;
+                if (isFirstSessionItLvl2()) scoreEarnedSession++;
             }
             if (LevelChoice.getLevel() == 3) {
-                if (isFirstSessionChLvl3()) scoreEarnedSession++;
+                if (isFirstSessionItLvl3()) scoreEarnedSession++;
             }
             if (LevelChoice.getLevel() == 4) {
-                if (isFirstSessionChLvl4()) scoreEarnedSession++;
+                if (isFirstSessionItLvl4()) scoreEarnedSession++;
             }
             if (LevelChoice.getLevel() == 5) {
-                if (isFirstSessionChLvl5()) scoreEarnedSession++;
+                if (isFirstSessionItLvl5()) scoreEarnedSession++;
             }
         }
 
@@ -764,7 +763,7 @@ public class Characters extends AppCompatActivity {
         @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(View v) {
-            Animation animation = AnimationUtils.loadAnimation(Characters.this, R.anim.anim_btn);
+            Animation animation = AnimationUtils.loadAnimation(Items.this, R.anim.anim_btn);
             btn1.setAnimation(animation);
             btn2.setAnimation(animation);
             btn3.setAnimation(animation);
@@ -776,7 +775,7 @@ public class Characters extends AppCompatActivity {
                     playSound(out);
                     back = true;
                     finish();
-                    startActivity(new Intent(Characters.this, Game.class));
+                    startActivity(new Intent(Items.this, Game.class));
                     myTimer.onFinish();
                     break;
 

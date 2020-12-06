@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Аниме викторина</string>
     <string name="main_text">Anime Quiz</string>
+    <string name="version">Версия:</string>
     <string name="logo">Логотип</string>
     <string name="settings">Настройки</string>
     <string name="game">Игра</string>
@@ -10,6 +11,7 @@
     <string name="lang">Язык</string>
     <string name="rus">Русский</string>
     <string name="eng">Английский</string>
+    <string name="jap">Японский</string>
     <string name="sounds">Звуки</string>
     <string name="music">Музыка</string>
     <string name="on">Включить</string>

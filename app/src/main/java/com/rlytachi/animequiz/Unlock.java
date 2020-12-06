@@ -29,6 +29,7 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
     public static final String APP_PREFERENCES_UNLOCK_STATUS = "unlockStatus";
     BillingProcessor billingProcessor = null;
     static Boolean unlocked = false;
+    boolean back = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,7 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
         final ImageView backBtn = findViewById(R.id.unlockBackView);
         backBtn.setOnClickListener(v -> {
             Settings.playSound(out);
+            back = true;
             finish();
             startActivity(new Intent(this, Game.class));
         });
@@ -81,6 +83,17 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    @Override
+    protected void onPause() {
+        if (!back) {
+            langUpdate();
+            finish();
+            startActivity(new Intent(Unlock.this, Unlock.class));
+        }
+
+        super.onPause();
     }
 
     @Override
@@ -97,6 +110,7 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
     public void onBackPressed() {
         super.onBackPressed();
         playSound(out);
+        back = true;
         finish();
         startActivity(new Intent(Unlock.this, Game.class));
     }
@@ -126,6 +140,8 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
             System.out.println(Language.getLang());
             if (Language.getLang().equals("ru")) {
                 MyContextWrapper.wrap(getBaseContext(), "ru");
+            } else if (Language.getLang().equals("ja")) {
+                MyContextWrapper.wrap(getBaseContext(), "ja");
             } else {
                 MyContextWrapper.wrap(getBaseContext(), "en");
             }

@@ -19,6 +19,8 @@ import static com.rlytachi.animequiz.Settings.playSound;
 
 public class Share extends AppCompatActivity {
 
+    boolean back = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,7 @@ public class Share extends AppCompatActivity {
         final ImageView backButton = findViewById(R.id.backViewShare);
         backButton.setOnClickListener(v -> {
             playSound(out);
+            back = true;
             finish();
             startActivity(new Intent(Share.this, MainActivity.class));
         });
@@ -64,8 +67,20 @@ public class Share extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         playSound(out);
+        back = true;
         finish();
         startActivity(new Intent(Share.this, MainActivity.class));
+    }
+
+    @Override
+    protected void onPause() {
+        if (!back) {
+            langUpdate();
+            finish();
+            startActivity(new Intent(Share.this, Share.class));
+        }
+
+        super.onPause();
     }
 
     public void langUpdate() {
@@ -73,6 +88,8 @@ public class Share extends AppCompatActivity {
             System.out.println(Language.getLang());
             if (Language.getLang().equals("ru")) {
                 MyContextWrapper.wrap(getBaseContext(), "ru");
+            } else if (Language.getLang().equals("ja")) {
+                MyContextWrapper.wrap(getBaseContext(), "ja");
             } else {
                 MyContextWrapper.wrap(getBaseContext(), "en");
             }

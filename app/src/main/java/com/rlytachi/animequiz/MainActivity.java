@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             System.out.println(Language.getLang());
             if (Language.getLang().equals("ru")) {
                 MyContextWrapper.wrap(getBaseContext(), "ru");
+            } else if (Language.getLang().equals("ja")) {
+                MyContextWrapper.wrap(getBaseContext(), "ja");
             } else {
                 MyContextWrapper.wrap(getBaseContext(), "en");
             }

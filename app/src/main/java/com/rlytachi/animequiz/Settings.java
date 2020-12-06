@@ -7,6 +7,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -16,12 +18,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+
+import org.w3c.dom.Text;
 
 import java.util.Locale;
 
@@ -38,6 +43,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
     private static boolean music = true;
     public static MediaPlayer in, out;
     Dialog confirmDialog;
+    boolean back = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +73,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         final ImageView back = findViewById(R.id.settingsBackView);
         final RadioButton langBtn1 = findViewById(R.id.langRadio1);
         final RadioButton langBtn2 = findViewById(R.id.langRadio2);
+        final RadioButton langBtn3 = findViewById(R.id.langRadio3);
 
         final RadioButton soundsBtn1 = findViewById(R.id.soundsRadio1);
         final RadioButton soundsBtn2 = findViewById(R.id.soundsRadio2);
@@ -78,6 +85,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
 
         langBtn1.setOnClickListener(this);
         langBtn2.setOnClickListener(this);
+        langBtn3.setOnClickListener(this);
         soundsBtn1.setOnClickListener(this);
         soundsBtn2.setOnClickListener(this);
         musicBtn1.setOnClickListener(this);
@@ -89,15 +97,20 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         if (Language.getLang().equals("ru")) {
             langBtn1.setChecked(true);
             MyContextWrapper.wrap(getBaseContext(), "ru");
+        } else if (Language.getLang().equals("ja")) {
+            langBtn3.setChecked(true);
+            MyContextWrapper.wrap(getBaseContext(), "ja");
         } else {
             langBtn2.setChecked(true);
             MyContextWrapper.wrap(getBaseContext(), "en");
         }
+
         if (Settings.getSounds()) {
             soundsBtn1.setChecked(true);
         } else {
             soundsBtn2.setChecked(true);
         }
+
         if (Settings.getMusic()) {
             musicBtn1.setChecked(true);
         } else {
@@ -105,6 +118,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         }
         saveAction();
         langUpdate();
+        getVersion();
     }
 
     @Override
@@ -114,6 +128,12 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     protected void onPause() {
+        if (!back) {
+            langUpdate();
+            finish();
+            startActivity(new Intent(Settings.this, Settings.class));
+        }
+
         try {
             if (confirmDialog.isShowing())
                 confirmDialog.dismiss();
@@ -133,6 +153,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
     public void onBackPressed() {
         super.onBackPressed();
         playSound(out);
+        back = true;
         finish();
         startActivity(new Intent(Settings.this, MainActivity.class));
     }
@@ -146,6 +167,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.settingsBackView:
                 playSound(out);
+                back = true;
                 finish();
                 startActivity(new Intent(Settings.this, MainActivity.class));
 
@@ -161,6 +183,14 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
             case R.id.langRadio2:
                 playSound(out);
                 MyContextWrapper.wrap(getBaseContext(), "en");
+
+                saveAction();
+                finish();
+                startActivity(new Intent(Settings.this, Settings.class));
+                break;
+            case R.id.langRadio3:
+                playSound(out);
+                MyContextWrapper.wrap(getBaseContext(), "ja");
 
                 saveAction();
                 finish();
@@ -195,6 +225,18 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
                 dialogConfirm();
                 break;
 
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void getVersion() {
+        final TextView versionView = findViewById(R.id.versionView);
+        try {
+            PackageInfo pInfo = getBaseContext().getPackageManager().getPackageInfo(getPackageName(), 0);
+            String version = pInfo.versionName;
+            versionView.setText(getText(R.string.version) + " " + version);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -285,6 +327,8 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
             System.out.println(Language.getLang());
             if (Language.getLang().equals("ru")) {
                 MyContextWrapper.wrap(getBaseContext(), "ru");
+            } else if (Language.getLang().equals("ja")) {
+                MyContextWrapper.wrap(getBaseContext(), "ja");
             } else {
                 MyContextWrapper.wrap(getBaseContext(), "en");
             }

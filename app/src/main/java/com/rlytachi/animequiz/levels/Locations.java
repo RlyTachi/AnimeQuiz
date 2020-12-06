@@ -71,6 +71,7 @@ public class Locations extends AppCompatActivity {
     static boolean firstSessionLocLvl4 = true;
     static boolean firstSessionLocLvl5 = true;
 
+    boolean back = false;
     boolean finished = false;
     boolean finishedByWin = false;
     boolean timesUp = false;
@@ -98,6 +99,7 @@ public class Locations extends AppCompatActivity {
             public void onAdClosed() {
                 super.onAdClosed();
                 playSound(out);
+                back = true;
                 finish();
                 startActivity(new Intent(Locations.this, Game.class));
             }
@@ -173,6 +175,7 @@ public class Locations extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         playSound(out);
+        back = true;
         saveAction();
         finish();
         startActivity(new Intent(Locations.this, Game.class));
@@ -180,6 +183,12 @@ public class Locations extends AppCompatActivity {
 
     @Override
     protected void onPause() {
+        if(!back) {
+            langUpdate();
+            finish();
+            startActivity(new Intent(Locations.this, Locations.class));
+        }
+
         if (!finishedByWin)
             lossDialog();
 
@@ -203,6 +212,8 @@ public class Locations extends AppCompatActivity {
             System.out.println(Language.getLang());
             if (Language.getLang().equals("ru")) {
                 MyContextWrapper.wrap(getBaseContext(), "ru");
+            } else if (Language.getLang().equals("ja")) {
+                MyContextWrapper.wrap(getBaseContext(), "ja");
             } else {
                 MyContextWrapper.wrap(getBaseContext(), "en");
             }
@@ -326,6 +337,7 @@ public class Locations extends AppCompatActivity {
                 else {
                     playSound(out);
                     winDialog.dismiss();
+                    back = true;
                     finish();
                     startActivity(new Intent(Locations.this, Game.class));
                 }
@@ -351,6 +363,7 @@ public class Locations extends AppCompatActivity {
             else {
                 playSound(out);
                 lossDialog.dismiss();
+                back = true;
                 finish();
                 startActivity(new Intent(Locations.this, Game.class));
             }
@@ -747,6 +760,7 @@ public class Locations extends AppCompatActivity {
                 //Назад
                 case R.id.backView:
                     playSound(out);
+                    back = true;
                     finish();
                     startActivity(new Intent(Locations.this, Game.class));
                     myTimer.onFinish();

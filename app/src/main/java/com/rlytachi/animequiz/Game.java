@@ -48,7 +48,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     LevelChoice loc = new LevelChoice("loc");
     LevelChoice ti = new LevelChoice("ti");
     LevelChoice it = new LevelChoice("it");
-    LevelChoice ev = new LevelChoice("ev");
+    //    LevelChoice ev = new LevelChoice("ev");
     Boolean[] chLevels = ch.getLevels();
     Boolean[] locLevels = loc.getLevels();
     Boolean[] tiLevels = ti.getLevels();
@@ -148,8 +148,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         startActivity(new Intent(Game.this, MainActivity.class));
     }
 
-    public void updateAfterPurchase(){
-        if(Unlock.isFirstUnlockUpdate()){
+    public void updateAfterPurchase() {
+        if (Unlock.isFirstUnlockUpdate()) {
             finish();
             startActivity(new Intent(Game.this, Game.class));
             dialog(false, R.layout.activity_characters_levels, R.id.chLevel1, R.id.chLevel2, R.id.chLevel3, R.id.chLevel4, R.id.chLevel5, R.id.chScoreTextView, ch);
@@ -362,14 +362,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     dialog(true, R.layout.activity_items_levels, R.id.itLevel1, R.id.itLevel2, R.id.itLevel3, R.id.itLevel4, R.id.itLevel5, R.id.itScoreTextView, it);
                 }
                 break;
-//            case R.id.eventsLayout:
-//                events.setAnimation(animButton);
-//                events.startAnimation(animButton);
-//                playSound(in);
-//                if (!this.isFinishing()) {
-//                    dialog(true, R.layout.activity_events_levels, R.id.evLevel1, R.id.evLevel2, R.id.evLevel3, R.id.evLevel4, R.id.evLevel5, R.id.evScoreTextView, ev);
-//                }
-//                break;
 
             //Characters levels
             case R.id.chLevel1:
@@ -637,7 +629,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     }
 
     @SuppressLint("SetTextI18n")
-    public boolean unlockDialog(Boolean[] levels, int index, int type, int cost) {
+    public void unlockDialog(Boolean[] levels, int index, int type, int cost) {
         langUpdate();
         unlockDialog = new Dialog(Game.this);
         unlockDialog.setContentView(R.layout.activity_unlock_action);
@@ -687,7 +679,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 startActivity(new Intent(this, Unlock.class));
             }
         });
-        return true;
     }
 
     public void warningDialog() {
@@ -761,50 +752,55 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             obj.setLevels(new Boolean[]{true, true, true, true, true});
         }
 
-        if (obj.getType().equals("ch")) {
-            if (!Characters.isFirstSessionChLvl1())
-                level1.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Characters.isFirstSessionChLvl2())
-                level2.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Characters.isFirstSessionChLvl3())
-                level3.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Characters.isFirstSessionChLvl4())
-                level4.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Characters.isFirstSessionChLvl5())
-                level5.setBackgroundResource(R.drawable.btn_1_passed);
-        } else if (obj.getType().equals("loc")) {
-            if (!Locations.isFirstSessionLocLvl1())
-                level1.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Locations.isFirstSessionLocLvl2())
-                level2.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Locations.isFirstSessionLocLvl3())
-                level3.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Locations.isFirstSessionLocLvl4())
-                level4.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Locations.isFirstSessionLocLvl5())
-                level5.setBackgroundResource(R.drawable.btn_1_passed);
-        } else if (obj.getType().equals("ti")) {
-            if (!Titles.isFirstSessionTiLvl1())
-                level1.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Titles.isFirstSessionTiLvl2())
-                level2.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Titles.isFirstSessionTiLvl3())
-                level3.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Titles.isFirstSessionTiLvl4())
-                level4.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Titles.isFirstSessionTiLvl5())
-                level5.setBackgroundResource(R.drawable.btn_1_passed);
-        } else if (obj.getType().equals("it")) {
-            if (!Items.isFirstSessionItLvl1())
-                level1.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Items.isFirstSessionItLvl2())
-                level2.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Items.isFirstSessionItLvl3())
-                level3.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Items.isFirstSessionItLvl4())
-                level4.setBackgroundResource(R.drawable.btn_1_passed);
-            if (!Items.isFirstSessionItLvl5())
-                level5.setBackgroundResource(R.drawable.btn_1_passed);
+        switch (obj.getType()) {
+            case "ch":
+                if (!Characters.isFirstSessionChLvl1())
+                    level1.setBackgroundResource(R.drawable.btn_1_passed);
+                if (!Characters.isFirstSessionChLvl2())
+                    level2.setBackgroundResource(R.drawable.btn_1_passed);
+                if (!Characters.isFirstSessionChLvl3())
+                    level3.setBackgroundResource(R.drawable.btn_1_passed);
+                if (!Characters.isFirstSessionChLvl4())
+                    level4.setBackgroundResource(R.drawable.btn_1_passed);
+                if (!Characters.isFirstSessionChLvl5())
+                    level5.setBackgroundResource(R.drawable.btn_1_passed);
+                break;
+            case "loc":
+                if (!Locations.isFirstSessionLocLvl1())
+                    level1.setBackgroundResource(R.drawable.btn_1_passed);
+                if (!Locations.isFirstSessionLocLvl2())
+                    level2.setBackgroundResource(R.drawable.btn_1_passed);
+                if (!Locations.isFirstSessionLocLvl3())
+                    level3.setBackgroundResource(R.drawable.btn_1_passed);
+                if (!Locations.isFirstSessionLocLvl4())
+                    level4.setBackgroundResource(R.drawable.btn_1_passed);
+                if (!Locations.isFirstSessionLocLvl5())
+                    level5.setBackgroundResource(R.drawable.btn_1_passed);
+                break;
+            case "ti":
+                if (!Titles.isFirstSessionTiLvl1())
+                    level1.setBackgroundResource(R.drawable.btn_1_passed);
+                if (!Titles.isFirstSessionTiLvl2())
+                    level2.setBackgroundResource(R.drawable.btn_1_passed);
+                if (!Titles.isFirstSessionTiLvl3())
+                    level3.setBackgroundResource(R.drawable.btn_1_passed);
+                if (!Titles.isFirstSessionTiLvl4())
+                    level4.setBackgroundResource(R.drawable.btn_1_passed);
+                if (!Titles.isFirstSessionTiLvl5())
+                    level5.setBackgroundResource(R.drawable.btn_1_passed);
+                break;
+            case "it":
+                if (!Items.isFirstSessionItLvl1())
+                    level1.setBackgroundResource(R.drawable.btn_1_passed);
+                if (!Items.isFirstSessionItLvl2())
+                    level2.setBackgroundResource(R.drawable.btn_1_passed);
+                if (!Items.isFirstSessionItLvl3())
+                    level3.setBackgroundResource(R.drawable.btn_1_passed);
+                if (!Items.isFirstSessionItLvl4())
+                    level4.setBackgroundResource(R.drawable.btn_1_passed);
+                if (!Items.isFirstSessionItLvl5())
+                    level5.setBackgroundResource(R.drawable.btn_1_passed);
+                break;
         }
 
         score.setText(getString(R.string.unlocked) + " " + unlockedButton + "/" + BUTTON_COUNT);

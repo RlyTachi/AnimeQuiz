@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".levels.Characters">
+
+    <LinearLayout
+        android:id="@+id/mainCharactersLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/topMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/backView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="start|center"
+                android:layout_margin="3dp"
+                android:layout_weight="0"
+                android:contentDescription="@string/back"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:id="@+id/mainTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/pixel"
+                android:gravity="center"
+                android:text="@string/items"
+                android:textSize="60sp" />
+
+            <ImageView
+                android:id="@+id/helpView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="start|center"
+                android:layout_margin="3dp"
+                android:layout_weight="0"
+                android:contentDescription="@string/back"
+                android:src="@drawable/help" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/backWall"
+                android:layout_width="wrap_content"
+                android:layout_height="400dp"
+                android:background="@color/text" />
+
+            <ImageView
+                android:id="@+id/characterView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:contentDescription="@string/characters" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:progressDrawable="@drawable/progress_style" />
+
+            <LinearLayout
+                android:id="@+id/hearts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/heart1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="30dp"
+                    android:layout_weight="0"
+                    android:contentDescription="@string/heart"
+                    app:srcCompat="@drawable/heart" />
+
+                <ImageView
+                    android:id="@+id/heart2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="30dp"
+                    android:layout_weight="0"
+                    android:contentDescription="@string/heart"
+                    app:srcCompat="@drawable/heart" />
+
+                <ImageView
+                    android:id="@+id/heart3"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="30dp"
+                    android:layout_weight="0"
+                    android:contentDescription="@string/heart"
+                    app:srcCompat="@drawable/heart" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/answerTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:fontFamily="@font/pixel"
+            android:gravity="center"
+            android:text="@string/itAnswer"
+            android:textSize="65sp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btnCh1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginBottom="80dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_1"
+                    android:fontFamily="@font/pixel"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text=""
+                    android:textColor="@color/background"
+                    android:textSize="60sp" />
+
+                <Button
+                    android:id="@+id/btnCh2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_1"
+                    android:fontFamily="@font/pixel"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text=""
+                    android:textColor="@color/background"
+                    android:textSize="60sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btnCh3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_1"
+                    android:fontFamily="@font/pixel"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text=""
+                    android:textColor="@color/background"
+                    android:textSize="60sp" />
+
+                <Button
+                    android:id="@+id/btnCh4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_1"
+                    android:fontFamily="@font/pixel"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text=""
+                    android:textColor="@color/background"
+                    android:textSize="60sp" />
+            </TableRow>
+
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/informationText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:fontFamily="@font/pixel"
+            android:gravity="center"
+            android:text=""
+            android:textSize="70sp" />
+
+        <TextView
+            android:id="@+id/timerTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_weight="0"
+            android:fontFamily="@font/pixel"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/secondText"
+            android:textSize="65sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".Unlock">
+
+    <LinearLayout
+        android:id="@+id/topMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="start"
+        android:orientation="horizontal"
+        tools:ignore="ExtraText">
+
+        <ImageView
+            android:id="@+id/unlockBackView"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="start|bottom"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/back"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/unlockTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:fontFamily="@font/pixel"
+            android:gravity="center"
+            android:text="@string/shop"
+            android:textSize="28sp" />
+
+        <ImageView
+            android:id="@+id/invisibleView"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="start|bottom"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:src="@drawable/back"
+            android:visibility="invisible" />
+        />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/pixel"
+        android:text="@string/scoreLeftAnswer"
+        android:textColor="@color/text"
+        android:textSize="27sp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/pixel"
+        android:text="@string/earnScoresByWatch"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/buttonWatch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_weight="0"
+        android:background="@drawable/btn_2"
+        android:fontFamily="@font/pixel"
+        android:text="@string/get"
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/pixel"
+        android:text="@string/unlockText"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/buttonBuy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_weight="0"
+        android:background="@drawable/btn_2"
+        android:fontFamily="@font/pixel"
+        android:text="@string/buy"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="1dp"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-7217958397153183/7940526044" />
+    </LinearLayout>
+</LinearLayout>

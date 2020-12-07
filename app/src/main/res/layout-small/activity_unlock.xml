@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".Unlock">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/topMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="start"
+                android:orientation="horizontal"
+                tools:ignore="ExtraText">
+
+                <ImageView
+                    android:id="@+id/unlockBackView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
+                    android:layout_gravity="start|bottom"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/back"
+                    android:src="@drawable/back" />
+
+                <TextView
+                    android:id="@+id/unlockTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0"
+                    android:fontFamily="@font/pixel"
+                    android:gravity="center"
+                    android:text="@string/shop"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/invisibleView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
+                    android:layout_gravity="start|bottom"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/back"
+                    android:visibility="invisible" />
+                />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/pixel"
+                android:text="@string/scoreLeftAnswer"
+                android:textColor="@color/text"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/pixel"
+                android:text="@string/earnScoresByWatch"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/buttonWatch"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="0"
+                android:background="@drawable/btn_2"
+                android:fontFamily="@font/pixel"
+                android:padding="5dp"
+                android:text="@string/get"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/pixel"
+                android:text="@string/unlockText"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/buttonBuy"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="0"
+                android:background="@drawable/btn_2"
+                android:fontFamily="@font/pixel"
+                android:padding="5dp"
+                android:text="@string/buy"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1">
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="1dp"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-7217958397153183/7940526044" />
+    </LinearLayout>
+
+
+</LinearLayout>

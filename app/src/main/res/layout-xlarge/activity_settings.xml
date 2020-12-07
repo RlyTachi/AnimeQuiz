@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".Settings">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:id="@+id/topMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="start"
+            android:orientation="horizontal"
+            tools:ignore="ExtraText">
+
+            <ImageView
+                android:id="@+id/settingsBackView"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_gravity="start|bottom"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/back"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:id="@+id/settingsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0"
+                android:fontFamily="@font/pixel"
+                android:gravity="center"
+                android:text="@string/settings"
+                android:textSize="80sp" />
+
+            <ImageView
+                android:id="@+id/invisibleView"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_gravity="start|bottom"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:src="@drawable/back"
+                android:visibility="invisible" />
+            />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/settingsMainLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/langView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="60dp"
+                        android:layout_marginEnd="60dp"
+                        android:layout_marginBottom="30dp"
+                        android:fontFamily="@font/pixel"
+                        android:gravity="start"
+                        android:text="@string/lang"
+                        android:textSize="75sp" />
+
+                    <RadioGroup
+                        android:id="@+id/langGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/langRadio1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="15dp"
+                            android:fontFamily="@font/pixel"
+                            android:padding="15dp"
+                            android:text="@string/rus"
+                            android:textSize="60sp" />
+
+                        <RadioButton
+                            android:id="@+id/langRadio2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="15dp"
+                            android:fontFamily="@font/pixel"
+                            android:padding="15dp"
+                            android:text="@string/eng"
+                            android:textSize="60sp" />
+
+                        <RadioButton
+                            android:id="@+id/langRadio3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="15dp"
+                            android:fontFamily="@font/pixel"
+                            android:padding="15dp"
+                            android:text="@string/jap"
+                            android:textSize="60sp" />
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/soundsView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="60dp"
+                        android:layout_marginEnd="60dp"
+                        android:layout_marginBottom="30dp"
+                        android:fontFamily="@font/pixel"
+                        android:gravity="start"
+                        android:text="@string/sounds"
+                        android:textSize="75sp" />
+
+                    <RadioGroup
+                        android:id="@+id/soundsGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/soundsRadio1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="15dp"
+                            android:fontFamily="@font/pixel"
+                            android:padding="15dp"
+                            android:text="@string/on"
+                            android:textSize="60sp" />
+
+                        <RadioButton
+                            android:id="@+id/soundsRadio2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="15dp"
+                            android:fontFamily="@font/pixel"
+                            android:padding="15dp"
+                            android:text="@string/off"
+                            android:textSize="60sp" />
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/musicView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="60dp"
+                        android:layout_marginEnd="60dp"
+                        android:layout_marginBottom="30dp"
+                        android:fontFamily="@font/pixel"
+                        android:gravity="start"
+                        android:text="@string/music"
+                        android:textSize="75sp" />
+
+                    <RadioGroup
+                        android:id="@+id/musicGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/musicRadio1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="15dp"
+                            android:fontFamily="@font/pixel"
+                            android:padding="15dp"
+                            android:text="@string/on"
+                            android:textSize="60sp" />
+
+                        <RadioButton
+                            android:id="@+id/musicRadio2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="15dp"
+                            android:fontFamily="@font/pixel"
+                            android:padding="15dp"
+                            android:text="@string/off"
+                            android:textSize="60sp" />
+                    </RadioGroup>
+
+                    <Button
+                        android:id="@+id/clearSaveBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/btn_2"
+                        android:fontFamily="@font/pixel"
+                        android:padding="10dp"
+                        android:text="@string/clearSave"
+                        android:textSize="60sp" />
+
+                    <TextView
+                        android:id="@+id/settingsStatusView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:fontFamily="@font/pixel"
+                        android:gravity="start"
+                        android:text="@string/saved"
+                        android:textSize="55sp"
+                        android:visibility="invisible" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/versionView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_margin="15dp"
+                    android:fontFamily="@font/pixel"
+                    android:gravity="center"
+                    android:text="@string/version"
+                    android:textSize="60sp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:gravity="bottom">
+
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="1dp"
+                ads:adSize="BANNER"
+                ads:adUnitId="ca-app-pub-7217958397153183/7940526044" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

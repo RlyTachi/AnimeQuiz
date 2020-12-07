@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="5dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/unlockTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/pixel"
+            android:gravity="center"
+            android:text="@string/unlockLevel"
+            android:textColor="@color/text"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/unlockScoreLeftView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/pixel"
+            android:gravity="center"
+            android:text="@string/scoreLeft"
+            android:textColor="@color/secondText"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/unlockBtn"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_1"
+            android:fontFamily="@font/pixel"
+            android:gravity="center"
+            android:text="@string/unlock"
+            android:textColor="@color/text"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/unlockNotEnoughView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pixel"
+            android:gravity="center"
+            android:text="@string/notEnough"
+            android:textColor="@color/text"
+            android:textSize="12sp"
+            android:visibility="invisible" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

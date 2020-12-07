@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/background">
+
+        <ImageView
+            android:id="@+id/logoView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="75dp"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/applogo" />
+
+        <TextView
+            android:id="@+id/mainTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/main_text"
+            android:layout_marginTop="10dp"
+            android:textSize="52sp"
+            android:textColor="@color/text"
+            android:fontFamily="@font/pixel"/>
+
+        <LinearLayout
+            android:id="@+id/menuLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:id="@+id/settingsView"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:contentDescription="@string/settings"
+                android:src="@drawable/settings" />
+
+            <ImageView
+                android:id="@+id/startView"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/game"
+                android:src="@drawable/play" />
+
+            <ImageView
+                android:id="@+id/shareView"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:contentDescription="@string/share"
+                android:src="@drawable/share" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

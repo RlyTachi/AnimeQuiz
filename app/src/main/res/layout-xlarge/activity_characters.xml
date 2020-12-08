@@ -22,8 +22,8 @@
 
             <ImageView
                 android:id="@+id/backView"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_gravity="start|center"
                 android:layout_margin="3dp"
                 android:layout_weight="0"
@@ -39,12 +39,12 @@
                 android:fontFamily="@font/pixel"
                 android:gravity="center"
                 android:text="@string/characters"
-                android:textSize="60sp" />
+                android:textSize="50sp" />
 
             <ImageView
                 android:id="@+id/helpView"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_gravity="start|center"
                 android:layout_margin="3dp"
                 android:layout_weight="0"
@@ -60,7 +60,7 @@
             <View
                 android:id="@+id/backWall"
                 android:layout_width="wrap_content"
-                android:layout_height="400dp"
+                android:layout_height="350dp"
                 android:background="@color/text" />
 
             <ImageView
@@ -79,7 +79,7 @@
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="13dp"
                 android:layout_gravity="center"
                 android:progressDrawable="@drawable/progress_style" />
 
@@ -92,8 +92,8 @@
 
                 <ImageView
                     android:id="@+id/heart1"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_gravity="center"
                     android:layout_margin="30dp"
                     android:layout_weight="0"
@@ -102,8 +102,8 @@
 
                 <ImageView
                     android:id="@+id/heart2"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_gravity="center"
                     android:layout_margin="30dp"
                     android:layout_weight="0"
@@ -112,8 +112,8 @@
 
                 <ImageView
                     android:id="@+id/heart3"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_gravity="center"
                     android:layout_margin="30dp"
                     android:layout_weight="0"
@@ -131,7 +131,7 @@
             android:fontFamily="@font/pixel"
             android:gravity="center"
             android:text="@string/chAnswer"
-            android:textSize="65sp" />
+            android:textSize="50sp" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -160,7 +160,7 @@
                     android:paddingEnd="10dp"
                     android:text=""
                     android:textColor="@color/background"
-                    android:textSize="60sp" />
+                    android:textSize="46sp" />
 
                 <Button
                     android:id="@+id/btnCh2"
@@ -174,7 +174,7 @@
                     android:paddingEnd="10dp"
                     android:text=""
                     android:textColor="@color/background"
-                    android:textSize="60sp" />
+                    android:textSize="46sp" />
             </TableRow>
 
             <TableRow
@@ -194,7 +194,7 @@
                     android:paddingEnd="10dp"
                     android:text=""
                     android:textColor="@color/background"
-                    android:textSize="60sp" />
+                    android:textSize="46sp" />
 
                 <Button
                     android:id="@+id/btnCh4"
@@ -208,7 +208,7 @@
                     android:paddingEnd="10dp"
                     android:text=""
                     android:textColor="@color/background"
-                    android:textSize="60sp" />
+                    android:textSize="46sp" />
             </TableRow>
 
         </TableLayout>
@@ -222,7 +222,7 @@
             android:fontFamily="@font/pixel"
             android:gravity="center"
             android:text=""
-            android:textSize="60sp" />
+            android:textSize="56sp" />
 
         <TextView
             android:id="@+id/timerTextView"
@@ -235,6 +235,6 @@
             android:gravity="center"
             android:text=""
             android:textColor="@color/secondText"
-            android:textSize="60sp" />
+            android:textSize="56sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

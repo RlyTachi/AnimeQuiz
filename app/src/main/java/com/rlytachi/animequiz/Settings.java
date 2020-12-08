@@ -42,6 +42,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
     public static MediaPlayer in, out;
     Dialog confirmDialog;
     boolean back = false;
+    static boolean cleared = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -284,6 +285,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         editor.apply();
         Score.reset();
         PromoStorage.reset();
+        setCleared(true);
         saveAction();
     }
 
@@ -332,6 +334,14 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
             }
         } catch (Exception ignore) {
         }
+    }
+
+    public static boolean isCleared() {
+        return cleared;
+    }
+
+    public static void setCleared(boolean cleared) {
+        Settings.cleared = cleared;
     }
 
     public static boolean getSounds() {

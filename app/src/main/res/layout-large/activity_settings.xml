@@ -17,8 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
             android:gravity="start"
             android:orientation="horizontal"
             tools:ignore="ExtraText">
@@ -26,7 +26,7 @@
             <ImageView
                 android:id="@+id/settingsBackView"
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_gravity="start|center"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
@@ -42,7 +42,7 @@
                 android:fontFamily="@font/pixel"
                 android:gravity="center"
                 android:text="@string/settings"
-                android:textSize="50sp" />
+                android:textSize="42sp" />
 
             <ImageView
                 android:id="@+id/invisibleView"
@@ -80,11 +80,10 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="60dp"
                         android:layout_marginEnd="60dp"
-                        android:layout_marginBottom="10dp"
                         android:fontFamily="@font/pixel"
                         android:gravity="start"
                         android:text="@string/lang"
-                        android:textSize="50sp" />
+                        android:textSize="42sp" />
 
                     <RadioGroup
                         android:id="@+id/langGroup"
@@ -98,9 +97,9 @@
                             android:layout_marginStart="60dp"
                             android:layout_marginEnd="20dp"
                             android:fontFamily="@font/pixel"
-                            android:padding="15dp"
+                            android:padding="10dp"
                             android:text="@string/rus"
-                            android:textSize="40sp" />
+                            android:textSize="34sp" />
 
                         <RadioButton
                             android:id="@+id/langRadio2"
@@ -109,9 +108,9 @@
                             android:layout_marginStart="60dp"
                             android:layout_marginEnd="20dp"
                             android:fontFamily="@font/pixel"
-                            android:padding="15dp"
+                            android:padding="10dp"
                             android:text="@string/eng"
-                            android:textSize="40sp" />
+                            android:textSize="34sp" />
 
                         <RadioButton
                             android:id="@+id/langRadio3"
@@ -120,9 +119,9 @@
                             android:layout_marginStart="60dp"
                             android:layout_marginEnd="20dp"
                             android:fontFamily="@font/pixel"
-                            android:padding="15dp"
+                            android:padding="10dp"
                             android:text="@string/jap"
-                            android:textSize="40sp" />
+                            android:textSize="34sp" />
                     </RadioGroup>
 
                     <TextView
@@ -135,7 +134,7 @@
                         android:fontFamily="@font/pixel"
                         android:gravity="start"
                         android:text="@string/sounds"
-                        android:textSize="50sp" />
+                        android:textSize="42sp" />
 
                     <RadioGroup
                         android:id="@+id/soundsGroup"
@@ -149,9 +148,9 @@
                             android:layout_marginStart="60dp"
                             android:layout_marginEnd="20dp"
                             android:fontFamily="@font/pixel"
-                            android:padding="15dp"
+                            android:padding="10dp"
                             android:text="@string/on"
-                            android:textSize="40sp" />
+                            android:textSize="34sp" />
 
                         <RadioButton
                             android:id="@+id/soundsRadio2"
@@ -160,9 +159,9 @@
                             android:layout_marginStart="60dp"
                             android:layout_marginEnd="20dp"
                             android:fontFamily="@font/pixel"
-                            android:padding="15dp"
+                            android:padding="10dp"
                             android:text="@string/off"
-                            android:textSize="40sp" />
+                            android:textSize="34sp" />
                     </RadioGroup>
 
                     <TextView
@@ -175,7 +174,7 @@
                         android:fontFamily="@font/pixel"
                         android:gravity="start"
                         android:text="@string/music"
-                        android:textSize="50sp" />
+                        android:textSize="42sp" />
 
                     <RadioGroup
                         android:id="@+id/musicGroup"
@@ -188,11 +187,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="60dp"
                             android:layout_marginEnd="20dp"
-                            android:layout_marginBottom="15dp"
                             android:fontFamily="@font/pixel"
-                            android:padding="15dp"
+                            android:padding="10dp"
                             android:text="@string/on"
-                            android:textSize="40sp" />
+                            android:textSize="34sp" />
 
                         <RadioButton
                             android:id="@+id/musicRadio2"
@@ -202,17 +200,17 @@
                             android:layout_marginEnd="20dp"
                             android:layout_marginBottom="15dp"
                             android:fontFamily="@font/pixel"
-                            android:padding="15dp"
+                            android:padding="10dp"
                             android:text="@string/off"
-                            android:textSize="40sp" />
+                            android:textSize="34sp" />
                     </RadioGroup>
 
                     <Button
                         android:id="@+id/clearSaveBtn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginEnd="50dp"
                         android:background="@drawable/btn_2"
                         android:fontFamily="@font/pixel"
                         android:padding="10dp"
@@ -225,12 +223,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginEnd="20dp"
                         android:fontFamily="@font/pixel"
                         android:gravity="start"
                         android:text="@string/saved"
-                        android:textSize="55sp"
+                        android:textSize="30sp"
                         android:visibility="invisible" />
 
 
@@ -243,7 +241,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_margin="15dp"
+            android:layout_margin="5dp"
             android:fontFamily="@font/pixel"
             android:gravity="center"
             android:text="@string/version"
@@ -261,7 +259,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginBottom="1dp"
-                ads:adSize="BANNER"
+                ads:adSize="600x75"
                 ads:adUnitId="ca-app-pub-7217958397153183/7940526044" />
         </LinearLayout>
     </LinearLayout>

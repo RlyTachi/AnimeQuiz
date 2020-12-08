@@ -16,12 +16,12 @@
             android:id="@+id/choiceText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
+            android:layout_margin="20dp"
             android:fontFamily="@font/pixel"
             android:gravity="center"
             android:text="@string/availableLevels"
             android:textColor="@color/text"
-            android:textSize="60sp" />
+            android:textSize="32sp" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -36,68 +36,68 @@
                     android:id="@+id/chLevel1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    android:layout_margin="15dp"
                     android:background="@drawable/btn_1"
                     android:fontFamily="@font/pixel"
-                    android:padding="20dp"
+                    android:padding="15dp"
                     android:text="@string/level1"
-                    android:textSize="50sp" />
+                    android:textSize="24sp" />
 
                 <Button
                     android:id="@+id/chLevel2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    android:layout_margin="15dp"
                     android:background="@drawable/btn_1_locked"
                     android:fontFamily="@font/pixel"
-                    android:padding="20dp"
+                    android:padding="15dp"
                     android:text="@string/level2"
-                    android:textSize="50sp" />
+                    android:textSize="24sp" />
 
                 <Button
                     android:id="@+id/chLevel3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    android:layout_margin="15dp"
                     android:background="@drawable/btn_1_locked"
                     android:fontFamily="@font/pixel"
-                    android:padding="20dp"
+                    android:padding="15dp"
                     android:text="@string/level3"
-                    android:textSize="50sp" />
+                    android:textSize="24sp" />
 
                 <Button
                     android:id="@+id/chLevel4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    android:layout_margin="15dp"
                     android:background="@drawable/btn_1_locked"
                     android:fontFamily="@font/pixel"
-                    android:padding="20dp"
+                    android:padding="15dp"
                     android:text="@string/level4"
-                    android:textSize="50sp" />
+                    android:textSize="24sp" />
 
                 <Button
                     android:id="@+id/chLevel5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    android:layout_margin="15dp"
                     android:background="@drawable/btn_1_locked"
                     android:fontFamily="@font/pixel"
-                    android:padding="20dp"
+                    android:padding="15dp"
                     android:text="@string/level5"
-                    android:textSize="50sp" />
+                    android:textSize="24sp" />
 
                 <Button
                     android:id="@+id/soon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    android:layout_margin="15dp"
                     android:background="@drawable/btn_1_locked"
                     android:enabled="false"
                     android:fontFamily="@font/pixel"
-                    android:padding="20dp"
+                    android:padding="15dp"
                     android:text="@string/soon"
-                    android:textSize="50sp" />
+                    android:textSize="24sp" />
             </LinearLayout>
         </ScrollView>
 

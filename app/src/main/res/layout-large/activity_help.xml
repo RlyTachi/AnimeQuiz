@@ -24,7 +24,7 @@
             android:gravity="center"
             android:text="@string/help"
             android:textColor="@color/text"
-            android:textSize="60sp" />
+            android:textSize="32sp" />
 
         <TextView
             android:id="@+id/costHelpView"
@@ -34,7 +34,7 @@
             android:gravity="center"
             android:text="@string/costHelp"
             android:textColor="@color/secondText"
-            android:textSize="50sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/scoreLeftView"
@@ -45,7 +45,7 @@
             android:gravity="center"
             android:text="@string/scoreLeft"
             android:textColor="@color/secondText"
-            android:textSize="45sp" />
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/takeHelpBtn"
@@ -56,11 +56,10 @@
             android:background="@drawable/btn_1"
             android:fontFamily="@font/pixel"
             android:gravity="center"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
+            android:padding="15dp"
             android:text="@string/takeHelp"
             android:textColor="@color/text"
-            android:textSize="35sp" />
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/takeHeartBtn"
@@ -71,11 +70,10 @@
             android:background="@drawable/btn_1"
             android:fontFamily="@font/pixel"
             android:gravity="center"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
+            android:padding="15sp"
             android:text="@string/takeHeath"
             android:textColor="@color/text"
-            android:textSize="35sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/notEnoughView"
@@ -86,7 +84,7 @@
             android:gravity="center"
             android:text="@string/notEnough"
             android:textColor="@color/text"
-            android:textSize="60sp"
+            android:textSize="20sp"
             android:visibility="invisible" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

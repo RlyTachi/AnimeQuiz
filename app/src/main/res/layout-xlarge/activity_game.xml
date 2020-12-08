@@ -29,15 +29,18 @@
                     android:id="@+id/charactersLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/layout_1"
                     android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:padding="15dp">
 
                     <ImageView
                         android:id="@+id/chView1"
-                        android:layout_width="600dp"
-                        android:layout_height="250dp"
+                        android:layout_width="250dp"
+                        android:layout_height="100dp"
                         android:layout_weight="1"
                         android:contentDescription="@string/characters"
                         android:src="@drawable/characterslogo" />
@@ -58,7 +61,7 @@
                             android:gravity="bottom|center"
                             android:text="@string/characters"
                             android:textColor="@color/text"
-                            android:textSize="60sp" />
+                            android:textSize="34sp" />
 
                         <TextView
                             android:id="@+id/chScoreTextView"
@@ -69,7 +72,7 @@
                             android:fontFamily="@font/pixel"
                             android:text="@string/unlocked"
                             android:textColor="@color/secondText"
-                            android:textSize="54sp" />
+                            android:textSize="28sp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -78,15 +81,17 @@
                     android:id="@+id/locationsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/layout_1"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:padding="15dp">
 
                     <ImageView
                         android:id="@+id/locView1"
-                        android:layout_width="600dp"
-                        android:layout_height="250dp"
+                        android:layout_width="250dp"
+                        android:layout_height="100dp"
                         android:layout_weight="1"
                         android:contentDescription="@string/locations"
                         android:src="@drawable/locationslogo" />
@@ -107,7 +112,7 @@
                             android:gravity="bottom|center"
                             android:text="@string/locations"
                             android:textColor="@color/text"
-                            android:textSize="60sp" />
+                            android:textSize="34sp" />
 
                         <TextView
                             android:id="@+id/locScoreTextView"
@@ -118,7 +123,7 @@
                             android:fontFamily="@font/pixel"
                             android:text="@string/unlocked"
                             android:textColor="@color/secondText"
-                            android:textSize="54sp" />
+                            android:textSize="28sp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -126,15 +131,17 @@
                     android:id="@+id/titlesLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/layout_1"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:padding="15dp">
 
                     <ImageView
                         android:id="@+id/tiView1"
-                        android:layout_width="600dp"
-                        android:layout_height="250dp"
+                        android:layout_width="250dp"
+                        android:layout_height="100dp"
                         android:layout_weight="1"
                         android:contentDescription="@string/titles"
                         android:src="@drawable/titleslogo" />
@@ -155,7 +162,7 @@
                             android:gravity="bottom|center"
                             android:text="@string/titles"
                             android:textColor="@color/text"
-                            android:textSize="60sp" />
+                            android:textSize="34sp" />
 
                         <TextView
                             android:id="@+id/tiScoreTextView"
@@ -166,7 +173,7 @@
                             android:fontFamily="@font/pixel"
                             android:text="@string/unlocked"
                             android:textColor="@color/secondText"
-                            android:textSize="54sp" />
+                            android:textSize="28sp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -174,15 +181,17 @@
                     android:id="@+id/itemsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/layout_1"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:padding="15dp">
 
                     <ImageView
                         android:id="@+id/itView1"
-                        android:layout_width="600dp"
-                        android:layout_height="250dp"
+                        android:layout_width="250dp"
+                        android:layout_height="100dp"
                         android:layout_weight="1"
                         android:contentDescription="@string/titles"
                         android:src="@drawable/characterslogo" />
@@ -203,7 +212,7 @@
                             android:gravity="bottom|center"
                             android:text="@string/items"
                             android:textColor="@color/text"
-                            android:textSize="60sp" />
+                            android:textSize="34sp" />
 
                         <TextView
                             android:id="@+id/itScoreTextView"
@@ -214,7 +223,7 @@
                             android:fontFamily="@font/pixel"
                             android:text="@string/unlocked"
                             android:textColor="@color/secondText"
-                            android:textSize="54sp" />
+                            android:textSize="28sp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -222,15 +231,17 @@
                     android:id="@+id/eventsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/layout_1"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:padding="15dp">
 
                     <ImageView
                         android:id="@+id/evView1"
-                        android:layout_width="600dp"
-                        android:layout_height="250dp"
+                        android:layout_width="250dp"
+                        android:layout_height="100dp"
                         android:layout_weight="1"
                         android:contentDescription="@string/titles"
                         android:src="@drawable/soonlogo" />
@@ -251,7 +262,7 @@
                             android:gravity="center"
                             android:text="@string/soon"
                             android:textColor="@color/text"
-                            android:textSize="60sp" />
+                            android:textSize="34sp" />
 
                         <!--                        <TextView-->
                         <!--                            android:id="@+id/evScoreTextView"-->
@@ -278,8 +289,8 @@
 
             <ImageView
                 android:id="@+id/backView"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="start|bottom"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
@@ -295,12 +306,12 @@
                 android:fontFamily="@font/pixel"
                 android:gravity="center"
                 android:text="@string/scores"
-                android:textSize="60sp" />
+                android:textSize="34sp" />
 
             <ImageView
                 android:id="@+id/unlockView"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="end|bottom"
                 android:layout_margin="3dp"
                 android:layout_weight="1"

@@ -18,12 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-           android:layout_margin="30dp"
+            android:layout_margin="30dp"
             android:fontFamily="@font/pixel"
             android:gravity="center"
             android:text="@string/warningDifficult"
             android:textColor="@color/text"
-            android:textSize="60sp" />
+            android:textSize="36sp" />
 
         <Button
             android:id="@+id/ok"
@@ -33,7 +33,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:textSize="55sp"
+            android:textSize="30sp"
             android:background="@drawable/btn_2"
             android:fontFamily="@font/pixel"
             android:gravity="center"
@@ -46,7 +46,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:textSize="55sp"
+            android:textSize="30sp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/btn_2"
             android:fontFamily="@font/pixel"

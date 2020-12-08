@@ -59,17 +59,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.settingsView:
                 Settings.playSound(in);
                 finish();
-                startActivity(new Intent(this, Settings.class));
+                startActivity(new Intent(MainActivity.this, Settings.class));
                 break;
             case R.id.startView:
                 Settings.playSound(in);
                 finish();
-                startActivity(new Intent(this, Game.class));
+                startActivity(new Intent(MainActivity.this, Game.class));
                 break;
             case R.id.shareView:
                 Settings.playSound(in);
                 finish();
-                startActivity(new Intent(this, Share.class));
+                startActivity(new Intent(MainActivity.this, Share.class));
                 break;
 
         }

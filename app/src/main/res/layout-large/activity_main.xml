@@ -29,7 +29,7 @@
             android:layout_gravity="center"
             android:text="@string/main_text"
             android:layout_marginTop="10dp"
-            android:textSize="80sp"
+            android:textSize="76sp"
             android:textColor="@color/text"
             android:fontFamily="@font/pixel"/>
 
@@ -44,7 +44,7 @@
             <ImageView
                 android:id="@+id/settingsView"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
+                android:layout_height="140dp"
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
                 android:contentDescription="@string/settings"
@@ -53,7 +53,7 @@
             <ImageView
                 android:id="@+id/startView"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="190dp"
                 android:layout_weight="1"
                 android:contentDescription="@string/game"
                 android:src="@drawable/play" />
@@ -61,7 +61,7 @@
             <ImageView
                 android:id="@+id/shareView"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
+                android:layout_height="140dp"
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
                 android:contentDescription="@string/share"

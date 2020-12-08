@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="25dp"
+        android:padding="30dp"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -24,7 +24,7 @@
             android:gravity="center"
             android:text="@string/unlockLevel"
             android:textColor="@color/text"
-            android:textSize="60sp" />
+            android:textSize="40sp" />
 
 
         <TextView
@@ -36,7 +36,7 @@
             android:gravity="center"
             android:text="@string/scoreLeft"
             android:textColor="@color/secondText"
-            android:textSize="55sp" />
+            android:textSize="36sp" />
 
         <Button
             android:id="@+id/unlockBtn"
@@ -49,7 +49,7 @@
             android:gravity="center"
             android:text="@string/unlock"
             android:textColor="@color/text"
-            android:textSize="40sp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/unlockNotEnoughView"
@@ -59,7 +59,7 @@
             android:gravity="center"
             android:text="@string/notEnough"
             android:textColor="@color/text"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:visibility="invisible" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

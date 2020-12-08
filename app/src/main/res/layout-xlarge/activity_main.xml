@@ -16,7 +16,7 @@
         <ImageView
             android:id="@+id/logoView"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="512dp"
             android:layout_gravity="center"
             android:layout_marginTop="75dp"
             android:contentDescription="@string/logo"
@@ -29,7 +29,7 @@
             android:layout_gravity="center"
             android:text="@string/main_text"
             android:layout_marginTop="10dp"
-            android:textSize="150sp"
+            android:textSize="80sp"
             android:textColor="@color/text"
             android:fontFamily="@font/pixel"/>
 
@@ -53,7 +53,7 @@
             <ImageView
                 android:id="@+id/startView"
                 android:layout_width="0dp"
-                android:layout_height="300dp"
+                android:layout_height="350dp"
                 android:layout_weight="1"
                 android:contentDescription="@string/game"
                 android:src="@drawable/play" />

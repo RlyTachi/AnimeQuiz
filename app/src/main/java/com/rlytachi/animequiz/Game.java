@@ -110,6 +110,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         dialog(false, R.layout.activity_titles_levels, R.id.tiLevel1, R.id.tiLevel2, R.id.tiLevel3, R.id.tiLevel4, R.id.tiLevel5, R.id.tiScoreTextView, ti);
         dialog(false, R.layout.activity_items_levels, R.id.itLevel1, R.id.itLevel2, R.id.itLevel3, R.id.itLevel4, R.id.itLevel5, R.id.itScoreTextView, it);
         // dialog(false, R.layout.activity_events_levels, R.id.evLevel1, R.id.evLevel2, R.id.evLevel3, R.id.evLevel4, R.id.evLevel5, R.id.evScoreTextView, ev);
+        updateAfterPurchase();
     }
 
     @Override
@@ -594,7 +595,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.itLevel4:
                 playSound(in);
-                if (tiLevels[2]) {
+                if (itLevels[2]) {
                     if (!itLevels[3]) {
                         unlockDialog(itLevels, 3, 4, 40);
                     } else {
@@ -801,6 +802,15 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 if (!Items.isFirstSessionItLvl5())
                     level5.setBackgroundResource(R.drawable.btn_1_passed);
                 break;
+        }
+
+        if(isCleared()){
+            setCleared(false);
+            level1.setBackgroundResource(R.drawable.btn_1);
+            level2.setBackgroundResource(R.drawable.btn_1);
+            level3.setBackgroundResource(R.drawable.btn_1);
+            level4.setBackgroundResource(R.drawable.btn_1);
+            level5.setBackgroundResource(R.drawable.btn_1);
         }
 
         score.setText(getString(R.string.unlocked) + " " + unlockedButton + "/" + BUTTON_COUNT);

@@ -10,34 +10,36 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="20dp">
+        android:layout_margin="20dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="30dp"
+            android:layout_margin="25dp"
             android:fontFamily="@font/pixel"
             android:gravity="center"
+            android:padding="10dp"
             android:text="@string/loss"
             android:textColor="@color/text"
-            android:textSize="70sp" />
+            android:textSize="36sp" />
 
         <Button
             android:id="@+id/ok"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/btn_2"
-            android:fontFamily="@font/pixel"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_2"
+            android:fontFamily="@font/pixel"
             android:gravity="center"
+            android:padding="10dp"
             android:text="@string/again"
-            android:textSize="60sp"
-            android:textColor="@color/text" />
+            android:textColor="@color/text"
+            android:textSize="30sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

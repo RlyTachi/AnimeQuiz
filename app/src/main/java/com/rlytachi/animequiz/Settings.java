@@ -77,6 +77,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         final RadioButton soundsBtn1 = findViewById(R.id.soundsRadio1);
         final RadioButton soundsBtn2 = findViewById(R.id.soundsRadio2);
 
+        final TextView musicText = findViewById(R.id.musicView);
         final RadioButton musicBtn1 = findViewById(R.id.musicRadio1);
         final RadioButton musicBtn2 = findViewById(R.id.musicRadio2);
 
@@ -91,6 +92,10 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         musicBtn2.setOnClickListener(this);
         back.setOnClickListener(this);
         clearSaveBtn.setOnClickListener(this);
+
+        musicText.setEnabled(false);
+        musicBtn1.setEnabled(false);
+        musicBtn2.setEnabled(false);
 
         loadAction();
         if (Language.getLang().equals("ru")) {
@@ -198,7 +203,6 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
             case R.id.soundsRadio1:
                 playSound(in);
                 Settings.setSounds(true);
-                Score.addScore(20);
                 saveAction();
                 break;
             case R.id.soundsRadio2:

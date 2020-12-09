@@ -194,7 +194,7 @@
                         android:layout_height="100dp"
                         android:layout_weight="1"
                         android:contentDescription="@string/titles"
-                        android:src="@drawable/characterslogo" />
+                        android:src="@drawable/itemslogo" />
 
                     <LinearLayout
                         android:id="@+id/itTextLayout"

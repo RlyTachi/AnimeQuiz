@@ -73,4 +73,8 @@
     <string name="level3">Уровень 3</string>
     <string name="level4">Уровень 4</string>
     <string name="level5">Уровень 5</string>
+    <string name="akiko">акико</string>
+    <string name="beatrice">биатрис</string>
+    <string name="bruno">бруно</string>
+    <string name="nextUpdate">Ждите следующее обновление!</string>
 </resources>

@@ -73,4 +73,8 @@
     <string name="level3">Level 3</string>
     <string name="level4">Level 4</string>
     <string name="level5">Level 5</string>
+    <string name="akiko">akiko</string>
+    <string name="beatrice">beatrice</string>
+    <string name="bruno">bruno</string>
+    <string name="nextUpdate">Look forward to the next update!</string>
 </resources>

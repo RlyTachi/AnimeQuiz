@@ -16,7 +16,8 @@
             android:id="@+id/settingsMainLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:id="@+id/topMenu"
@@ -232,6 +233,7 @@
             android:layout_gravity="bottom"
             android:layout_margin="15dp"
             android:fontFamily="@font/pixel"
+            android:layout_weight="0"
             android:gravity="center"
             android:text="@string/version"
             android:textSize="20sp" />

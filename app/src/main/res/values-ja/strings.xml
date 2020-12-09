@@ -73,4 +73,8 @@
     <string name="level3">レベル3</string>
     <string name="level4">レベル4</string>
     <string name="level5">レベル5</string>
+    <string name="akiko">晶子</string>
+    <string name="beatrice">ベアトリス</string>
+    <string name="bruno">ブルーノ</string>
+    <string name="nextUpdate">次のアップデートを楽しみにしています！</string>
 </resources>

@@ -55,8 +55,8 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
             buy.startAnimation(animButton);
             //TODO purchase
 
-            setUnlocked(true);
-            setFirstUnlockUpdate(true);
+//            setUnlocked(true);
+//            setFirstUnlockUpdate(true);
         });
 
         final Button get = findViewById(R.id.buttonWatch);
@@ -66,7 +66,7 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
             get.startAnimation(animButton);
             //TODO watch ad
 
-            setUnlocked(false);
+//            setUnlocked(false);
         });
 
         final ImageView backBtn = findViewById(R.id.unlockBackView);

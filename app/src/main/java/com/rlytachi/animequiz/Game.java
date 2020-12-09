@@ -360,7 +360,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 items.startAnimation(animButton);
                 playSound(in);
                 if (!this.isFinishing()) {
-                    dialog(true, R.layout.activity_items_levels, R.id.itLevel1, R.id.itLevel2, R.id.itLevel3, R.id.itLevel4, R.id.itLevel5, R.id.itScoreTextView, it);
+                    Toast.makeText(this, getString(R.string.nextUpdate), Toast.LENGTH_LONG).show();
+                   // dialog(true, R.layout.activity_items_levels, R.id.itLevel1, R.id.itLevel2, R.id.itLevel3, R.id.itLevel4, R.id.itLevel5, R.id.itScoreTextView, it);
                 }
                 break;
 
@@ -814,5 +815,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         }
 
         score.setText(getString(R.string.unlocked) + " " + unlockedButton + "/" + BUTTON_COUNT);
+        if (obj.getType().equals("it")) score.setText(getString(R.string.unlocked) + " " + 0 + "/" + 0);
     }
 }

@@ -24,7 +24,10 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.jaeger.library.StatusBarUtil;
+import com.rlytachi.animequiz.levels.Characters;
 
 import java.util.Locale;
 
@@ -49,14 +52,19 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         StatusBarUtil.setTransparent(this);
-        MobileAds.initialize(this);
-        AdView adView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
 
-        interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId("ca-app-pub-7217958397153183/4052170352");
-        interstitialAd.loadAd(adRequest);
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        AdView adView = findViewById(R.id.adView);
+        adView.loadAd(new AdRequest.Builder().build());
+
+        interstitialAd = new InterstitialAd(Settings.this);
+        interstitialAd.setAdUnitId("ca-app-pub-7217958397153183/7940526044");
+        interstitialAd.loadAd(new AdRequest.Builder().build());
 
         interstitialAd.setAdListener(new AdListener() {
             @Override
@@ -179,22 +187,26 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
 
             case R.id.langRadio1:
                 playSound(in);
-                MyContextWrapper.wrap(getBaseContext(), "ru");
+                Language.setLocationRu();
+             //   MyContextWrapper.wrap(getBaseContext(), "ru");
+
                 saveAction();
                 finish();
                 startActivity(new Intent(Settings.this, Settings.class));
                 break;
             case R.id.langRadio2:
-                playSound(out);
-                MyContextWrapper.wrap(getBaseContext(), "en");
+                playSound(in);
+                Language.setLocationEn();
+              //  MyContextWrapper.wrap(getBaseContext(), "en");
 
                 saveAction();
                 finish();
                 startActivity(new Intent(Settings.this, Settings.class));
                 break;
             case R.id.langRadio3:
-                playSound(out);
-                MyContextWrapper.wrap(getBaseContext(), "ja");
+                playSound(in);
+                Language.setLocationJa();
+               // MyContextWrapper.wrap(getBaseContext(), "ja");
 
                 saveAction();
                 finish();

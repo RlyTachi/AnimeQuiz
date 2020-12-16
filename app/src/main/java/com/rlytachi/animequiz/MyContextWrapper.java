@@ -14,7 +14,7 @@ public class MyContextWrapper extends ContextWrapper {
         super(base);
     }
 
-    @SuppressWarnings("deprecation")
+//    @SuppressWarnings("deprecation")
     public static ContextWrapper wrap(Context context, String language) {
         Configuration config = context.getResources().getConfiguration();
         Locale sysLocale = null;
@@ -37,7 +37,7 @@ public class MyContextWrapper extends ContextWrapper {
         return new MyContextWrapper(context);
     }
 
-    @SuppressWarnings("deprecation")
+//    @SuppressWarnings("deprecation")
     public static Locale getSystemLocaleLegacy(Configuration config) {
         return config.locale;
     }
@@ -47,7 +47,7 @@ public class MyContextWrapper extends ContextWrapper {
         return config.getLocales().get(0);
     }
 
-    @SuppressWarnings("deprecation")
+//    @SuppressWarnings("deprecation")
     public static void setSystemLocaleLegacy(Configuration config, Locale locale) {
         config.locale = locale;
     }

@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -17,13 +18,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.jaeger.library.StatusBarUtil;
 import com.rlytachi.animequiz.Game;
 import com.rlytachi.animequiz.Language;
@@ -86,25 +91,51 @@ public class Characters extends AppCompatActivity {
         winDialog = new Dialog(Characters.this);
         lossDialog = new Dialog(Characters.this);
 
-        MobileAds.initialize(this);
-        interstitialAd = new InterstitialAd(this);
+        in = MediaPlayer.create(this, R.raw.in);
+        out = MediaPlayer.create(this, R.raw.out);
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        interstitialAd = new InterstitialAd(Characters.this);
         interstitialAd.setAdUnitId("ca-app-pub-7217958397153183/4052170352");
-        AdRequest adRequest = new AdRequest.Builder().build();
-        interstitialAd.loadAd(adRequest);
+        interstitialAd.loadAd(new AdRequest.Builder().build());
 
         interstitialAd.setAdListener(new AdListener() {
             @Override
+            public void onAdLoaded() {
+
+                Log.println(Log.INFO, "AD", "interstitialAd is loaded");
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                interstitialAd.loadAd(new AdRequest.Builder().build());
+
+
+                Log.println(Log.ERROR, "AD", "interstitialAd is failed to load");
+            }
+
+            @Override
+            public void onAdOpened() {
+                Log.println(Log.INFO, "AD", "interstitialAd is opened");
+            }
+
+            @Override
             public void onAdClosed() {
-                super.onAdClosed();
                 playSound(out);
                 back = true;
                 finish();
                 startActivity(new Intent(Characters.this, Game.class));
+                super.onAdClosed();
+
+                Log.println(Log.INFO, "AD", "interstitialAd is closed");
+                interstitialAd.loadAd(new AdRequest.Builder().build());
             }
         });
-
-        in = MediaPlayer.create(this, R.raw.in);
-        out = MediaPlayer.create(this, R.raw.out);
 
         loadAction();
         ButtonsEvent buttonsEvent = new ButtonsEvent();
@@ -187,7 +218,7 @@ public class Characters extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        if(!back) {
+        if (!back) {
             langUpdate();
             finish();
             startActivity(new Intent(Characters.this, Characters.class));
@@ -335,6 +366,7 @@ public class Characters extends AppCompatActivity {
             earnedView.setText(getString(R.string.earned) + " " + scoreEarnedSession + " " + getString(R.string.scores));
             Score.addScore(scoreEarnedSession);
 
+            back = true;
             saveAction();
             okButton.setOnClickListener(v -> {
                 if (interstitialAd.isLoaded()) {
@@ -361,6 +393,7 @@ public class Characters extends AppCompatActivity {
             lossDialog.show();
         }
 
+        back = true;
         lossDialog.setCancelable(false);
         scoreEarnedSession = 0;
         final Button okButton = lossDialog.findViewById(R.id.ok);

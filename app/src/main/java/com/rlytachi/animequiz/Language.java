@@ -36,6 +36,16 @@ public class Language {
         return configuration;
     }
 
+    @Deprecated
+    public static Configuration setLocationJa() {
+        Locale localeJa = new Locale("ja");
+        Locale.setDefault(localeJa);
+        Configuration configuration = new Configuration();
+        configuration.locale = localeJa;
+        lang = "ja";
+        return configuration;
+    }
+
     /*
             try {
             System.out.println(Language.getLang());

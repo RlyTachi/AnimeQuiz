@@ -122,12 +122,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         }
 
         try {
-            if (unlockDialog.isShowing())
-                unlockDialog.dismiss();
-            if (dialog.isShowing())
-                dialog.dismiss();
-            if (warning.isShowing())
-                warning.dismiss();
+            dialog.dismiss();
+            warning.dismiss();
+            unlockDialog.dismiss();
         } catch (NullPointerException ignore) {
         }
         super.onPause();
@@ -361,7 +358,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 playSound(in);
                 if (!this.isFinishing()) {
                     Toast.makeText(this, getString(R.string.nextUpdate), Toast.LENGTH_LONG).show();
-                   // dialog(true, R.layout.activity_items_levels, R.id.itLevel1, R.id.itLevel2, R.id.itLevel3, R.id.itLevel4, R.id.itLevel5, R.id.itScoreTextView, it);
+                    // dialog(true, R.layout.activity_items_levels, R.id.itLevel1, R.id.itLevel2, R.id.itLevel3, R.id.itLevel4, R.id.itLevel5, R.id.itScoreTextView, it);
                 }
                 break;
 
@@ -805,7 +802,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 break;
         }
 
-        if(isCleared()){
+        if (isCleared()) {
             setCleared(false);
             level1.setBackgroundResource(R.drawable.btn_1);
             level2.setBackgroundResource(R.drawable.btn_1);
@@ -815,6 +812,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         }
 
         score.setText(getString(R.string.unlocked) + " " + unlockedButton + "/" + BUTTON_COUNT);
-        if (obj.getType().equals("it")) score.setText(getString(R.string.unlocked) + " " + 0 + "/" + 0);
+        if (obj.getType().equals("it"))
+            score.setText(getString(R.string.unlocked) + " " + 0 + "/" + 0);
     }
 }

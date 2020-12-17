@@ -27,6 +27,7 @@ import com.rlytachi.animequiz.levels.Titles;
 import java.util.Locale;
 
 import static com.rlytachi.animequiz.Settings.*;
+import static com.rlytachi.animequiz.Unlock.APP_PREFERENCES_UNLOCK_STATUS;
 import static com.rlytachi.animequiz.levels.Characters.*;
 import static com.rlytachi.animequiz.levels.Locations.*;
 import static com.rlytachi.animequiz.levels.Titles.*;
@@ -200,6 +201,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
     public void loadAction() {
         SharedPreferences mShared = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
+        Unlock.setUnlocked(mShared.getBoolean(APP_PREFERENCES_UNLOCK_STATUS, Unlock.getUnlocked()));
+
         if (mShared.contains(APP_PREFERENCES_GLOBAL_SCORE)) {
             score = mShared.getInt(APP_PREFERENCES_GLOBAL_SCORE, Score.getScore());
             Score.setScore(score);

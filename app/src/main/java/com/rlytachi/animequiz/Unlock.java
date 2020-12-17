@@ -37,7 +37,7 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
     public static final String APP_PREFERENCES_UNLOCK_STATUS = "unlockStatus";
     BillingProcessor billingProcessor = null;
     private RewardedAd rewardedAd;
-    static Boolean unlocked = false;
+    static Boolean unlocked;
     static boolean firstUnlockUpdate = false;
     boolean back = false;
 
@@ -48,6 +48,8 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
         StatusBarUtil.setTransparent(this);
         in = MediaPlayer.create(this, R.raw.in);
         out = MediaPlayer.create(this, R.raw.out);
+        langUpdate();
+        loadAction();
 
         MobileAds.initialize(this);
         AdView adView = findViewById(R.id.adView3);
@@ -81,8 +83,9 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
             buy.startAnimation(animButton);
 
             back = true;
-            billingProcessor.consumePurchase("unlock_all");
-            billingProcessor.purchase(Unlock.this, "unlock_all");
+            if (billingProcessor.isPurchased("unlock_all"))
+                billingProcessor.consumePurchase("unlock_all");
+            billingProcessor.purchase(this, "unlock_all");
 
         });
 
@@ -137,9 +140,6 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
             finish();
             startActivity(new Intent(this, Game.class));
         });
-
-        langUpdate();
-        loadAction();
     }
 
     @Override
@@ -149,6 +149,10 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
 
     @Override
     protected void onPause() {
+        if (billingProcessor.isPurchased("unlock_all")) {
+            purchaseUnlockAll();
+        }
+
         if (!back) {
             langUpdate();
             finish();
@@ -166,6 +170,7 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
 
         if (billingProcessor != null)
             billingProcessor.release();
+
         langUpdate();
         saveAction();
         super.onDestroy();
@@ -174,6 +179,10 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        if (billingProcessor.isPurchased("unlock_all")) {
+            purchaseUnlockAll();
+        }
+
         playSound(out);
         back = true;
         finish();
@@ -183,18 +192,21 @@ public class Unlock extends AppCompatActivity implements BillingProcessor.IBilli
     @Override
     public void onProductPurchased(String productId, TransactionDetails details) {
         purchaseUnlockAll();
+        Log.i("BP", "Purchased");
     }
 
     @Override
     public void onPurchaseHistoryRestored() {
         Toast.makeText(this, "Restored", Toast.LENGTH_SHORT).show();
-        Log.i("BP", "Restored");
     }
 
     @Override
     public void onBillingError(int errorCode, Throwable error) {
         Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
         Log.e("BP", "Error");
+
+        billingProcessor.release();
+        billingProcessor.initialize();
     }
 
     @Override

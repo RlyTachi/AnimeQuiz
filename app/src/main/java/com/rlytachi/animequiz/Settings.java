@@ -32,6 +32,9 @@ import com.rlytachi.animequiz.levels.Characters;
 import java.util.Locale;
 
 import static com.rlytachi.animequiz.PromoStorage.APP_PREFERENCES_PROMO_CODES;
+import static com.rlytachi.animequiz.Unlock.APP_PREFERENCES_UNLOCK_STATUS;
+import static com.rlytachi.animequiz.Unlock.getUnlocked;
+import static com.rlytachi.animequiz.Unlock.setUnlocked;
 
 public class Settings extends AppCompatActivity implements View.OnClickListener {
 
@@ -69,8 +72,9 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         interstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
-                super.onAdClosed();
+                finish();
                 startActivity(new Intent(Settings.this, MainActivity.class));
+                super.onAdClosed();
             }
         });
 
@@ -187,8 +191,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
 
             case R.id.langRadio1:
                 playSound(in);
-                Language.setLocationRu();
-             //   MyContextWrapper.wrap(getBaseContext(), "ru");
+                MyContextWrapper.wrap(getBaseContext(), "ru");
 
                 saveAction();
                 finish();
@@ -196,8 +199,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
                 break;
             case R.id.langRadio2:
                 playSound(in);
-                Language.setLocationEn();
-              //  MyContextWrapper.wrap(getBaseContext(), "en");
+                MyContextWrapper.wrap(getBaseContext(), "en");
 
                 saveAction();
                 finish();
@@ -205,8 +207,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
                 break;
             case R.id.langRadio3:
                 playSound(in);
-                Language.setLocationJa();
-               // MyContextWrapper.wrap(getBaseContext(), "ja");
+                MyContextWrapper.wrap(getBaseContext(), "ja");
 
                 saveAction();
                 finish();
@@ -268,6 +269,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         editor.putInt(Game.APP_PREFERENCES_GLOBAL_SCORE, Score.getScore());
         editor.putBoolean(APP_PREFERENCES_SOUNDS, getSounds());
         editor.putBoolean(APP_PREFERENCES_MUSIC, getMusic());
+        editor.putBoolean(APP_PREFERENCES_UNLOCK_STATUS, getUnlocked());
 
         for (int i = 0; i < PromoStorage.getPromoStorage().length; i++) {
             editor.putString(APP_PREFERENCES_PROMO_CODES[i], PromoStorage.getPromoStorage()[i]);
@@ -282,6 +284,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         Language.setLang(mShared.getString(APP_PREFERENCES_LANG, Locale.getDefault().getLanguage()));
         Settings.setSounds(mShared.getBoolean(APP_PREFERENCES_SOUNDS, Settings.getSounds()));
         Settings.setMusic(mShared.getBoolean(APP_PREFERENCES_MUSIC, Settings.getMusic()));
+        setUnlocked(mShared.getBoolean(APP_PREFERENCES_UNLOCK_STATUS, false));
 
         for (int i = 0; i < PromoStorage.getPromoStorage().length; i++) {
             if (mShared.contains(APP_PREFERENCES_PROMO_CODES[i])) {
@@ -302,7 +305,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         Score.reset();
         PromoStorage.reset();
         setCleared(true);
-        Unlock.setUnlocked(false);
+        setUnlocked(false);
         saveAction();
     }
 

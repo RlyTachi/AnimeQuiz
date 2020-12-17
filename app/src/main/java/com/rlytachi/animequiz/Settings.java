@@ -302,6 +302,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         Score.reset();
         PromoStorage.reset();
         setCleared(true);
+        Unlock.setUnlocked(false);
         saveAction();
     }
 
